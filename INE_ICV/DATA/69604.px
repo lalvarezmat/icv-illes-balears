@@ -1,0 +1,24 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Calidad";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Asalariados temporales por nacionalidad";
+CONTENTS="Asalariados tem";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Los datos de 2006 a 2020 están calculados según la base poblacional 2011. Des"
+"de 2021 se utiliza la base 2021";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nacionalidad";
+HEADING="Periodo";
+VALUES("Nacionalidad")="Total","Española","Extranjera (UE)","Extranjera (Resto del mundo)";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006";
+UNITS="%";
+DATA=15.9 17.2 21.3 25.3 24.1 26.3 26.8 26.7 26.1 25.1 24.0 23.1 23.4 25.1 24.7 25.2 29.1 31.6 34.0 15.3 16.4 20.1 23.6 22.4 24.6 25.0 25.0 24.6 23.7 22.4 21.3 21.1 22.5 22.1 22.1 25.4 27.7 29.9 9.7 13.6 18.1 25.6 28.3 30.0 34.1 35.5 33.4 32.7 34.5 36.1
+ 38.4 41.8 38.9 41.2 48.0 52.9 39.5 23.2 25.3 33.9 41.8 40.6 43.6 45.1 43.1 41.3 39.9 38.9 38.2 40.5 42.8 41.9 44.7 51.0 54.8 61.8;

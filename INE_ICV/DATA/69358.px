@@ -1,0 +1,24 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones económicas";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Umbral de riesgo de pobreza después de transferencias sociales (<60% de la renta mediana equivalente) por tipo de hogar";
+CONTENTS="Umbral de riesgo de pobreza después de transferencias sociales (<60% de la renta mediana equivalente)";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Umbral de pobreza: es el 60% de la mediana de los ingresos anuales por unidad"
+" de consumo (escala OCDE modificada) de las personas. Los ingresos por unidad"
+" de consumo se obtienen dividiendo los ingresos totales del hogar entre el nú"
+"mero de unidades de consumo.";
+DECIMALS=0;
+SHOWDECIMALS=0;
+STUB="Tipo de hogar";
+HEADING="Periodo";
+VALUES("Tipo de hogar")="Hogares de una persona","Hogares de 2 adultos y 2 niños";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+UNITS="¤";
+DATA=11584.0 10990.0 10088.0 9535.0 9626.0 9009.0 8871.0 8522.0 8209.0 8011.0 7961.0 8114.0 8321.0 8358.0 8763.0 8877.0 8379.0 24327.0 23078.0 21185.0 20024.0 20215.0 18919.0 18629.0 17896.0 17238.0 16823.0 16719.0 17040.0 17473.0 17551.0 18402.0 18641.0 17597.0;

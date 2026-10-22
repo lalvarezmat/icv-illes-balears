@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad económica";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Riqueza neta de los hogares por número de miembros del hogar";
+CONTENTS="Riqueza neta de los hogares";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Riqueza neta del hogar";
+HEADING="Número de miembros del hogar","Periodo";
+VALUES("Riqueza neta del hogar")="Media","Mediana";
+VALUES("Número de miembros del hogar")="Uno","Dos","Tres","Cuatro","Cinco o más";
+VALUES("Periodo")="2022","2020","2017","2014","2011","2008","2005";
+UNITS="Miles ¤";
+DATA=210.4 218.5 207.3 231.5 222.6 254.6 229.5 369.7 407.2 374.6 342.3 377.1 395.6 321.5 269.4 256.6 231.2 272.4 286.0 363.0 366.9 286.2 310.2 305.8 285.2 336.9 412.1 434.6 699.0 355.3 348.7 288.4 345.2 356.8 415.9 96.0 103.6 94.3 112.3 144.1 158.0 152.5 185.2 185.6 169.7 171.3 211.2 235.2 227.8 140.6
+ 136.2 125.7 129.9 182.4 233.0 257.5 154.5 142.5 161.5 145.1 185.2 256.4 288.6 136.5 112.9 117.2 136.6 167.2 185.6 258.2;

@@ -1,0 +1,31 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Instituciones y servicios públicos";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Confianza en el sistema político por comunidad autónoma";
+CONTENTS="Confianza en el sistema político";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Comunidad autónoma";
+HEADING="Grado de confianza","Periodo";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Grado de confianza")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Confianza media";
+VALUES("Periodo")="2013";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%, Número medio";
+DATA=81.7 14.5 3.1 0.6 1.9 83.0 12.8 3.0 1.2 1.8 83.3 13.0 3.1 0.6 1.8 78.6 17.8 3.2 0.3 2.0 75.6 19.8 4.0 0.6 2.4 70.5 25.8 3.3 0.4 2.7 91.7 6.5 1.7 0.2 1.5 85.8 12.9 1.2 0.1 1.7 79.7 16.0 3.7 0.6 1.9 83.1 13.5 2.7 0.6 1.8
+ 79.7 15.6 3.6 1.1 1.9 82.2 13.2 3.6 0.9 1.9 87.5 9.3 2.8 0.3 1.5 82.7 13.1 3.8 0.4 2.0 65.6 29.3 4.3 0.8 2.6 85.6 11.7 2.5 0.1 1.8 84.5 12.9 2.6 0.0 1.6 78.4 16.6 4.6 0.4 2.1 77.4 16.2 5.4 0.9 2.0 71.5 24.5 4.0 0.0 2.8
+;

@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Posibilidad de pedir ayuda a familiares, amigos o vecinos por nivel de educación";
+CONTENTS="Posibilidad de pedir ayuda a familiares, amigos o vecinos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Ruptura de serie por diferente pregunta en 2018: 'Posibilidad de pedir ayuda "
+"material'";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Periodo")="2022","2018","2015","2013";
+UNITS="%";
+DATA=93.1 89.2 96.5 95.8 91.3 86.5 95.5 94.2 92.5 89.8 96.8 96.4 95.5 92.9 98.2 98.3;

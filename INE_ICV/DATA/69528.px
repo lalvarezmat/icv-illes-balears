@@ -1,0 +1,21 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad económica";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Incapacidad de hacer frente a gastos económicos imprevistos por sexo";
+CONTENTS="Incapacidad de hacer frente a gastos económicos imprevistos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=35.8 37.1 35.5 33.4 35.4 33.9 35.9 36.6 38.7 39.8 42.6 42.1 42.1 37.6 38.7 36.5 29.9 30.8 32.5 34.5 39.6 35.2 36.3 34.6 32.6 34.1 32.5 34.6 35.4 37.8 39.3 42.0 42.1 41.4 36.7 37.7 35.6 29.1 29.5 31.5 33.4 39.0 36.5 37.8 36.4 34.2 36.5 35.3 37.2 37.8
+ 39.5 40.2 43.3 42.2 42.8 38.5 39.6 37.4 30.7 32.0 33.5 35.7 40.2;

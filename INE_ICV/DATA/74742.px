@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Sentimientos y emociones";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Sentimiento de felicidad en las 4 últimas semanas por nacionalidad";
+CONTENTS="Sentimiento de felicidad en las 4 últimas semanas";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Muy a menudo incluye: 'Siempre', 'Casi siempre'. Alguna vez incluye : 'Alguna"
+"s veces', 'Solo alguna vez'";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nacionalidad";
+HEADING="Frecuencia","Periodo";
+VALUES("Nacionalidad")="Total","Española","Extranjera (UE)","Extranjera (Resto del mundo)";
+VALUES("Frecuencia")="Algunas veces","Muy a menudo","Nunca";
+VALUES("Periodo")="2022","2018","2013";
+UNITS="%";
+DATA=30.8 26.7 34.8 67.3 71.5 63.2 1.9 1.9 2.0 30.8 27.0 34.5 67.3 71.2 63.5 1.9 1.9 2.1 29.8 21.6 33.3 68.0 76.5 65.2 2.1 2.0 1.5 31.6 24.4 39.8 66.7 74.4 58.6 1.8 1.2 1.6;

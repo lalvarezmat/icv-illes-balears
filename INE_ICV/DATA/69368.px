@@ -1,0 +1,21 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones económicas";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Tasa de riesgo de pobreza con umbral fijo en el año 2008 por sexo";
+CONTENTS="Tasa de riesgo de pobreza con umbral fijo en el año 2008";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+UNITS="%";
+DATA=18.7 20.1 20.5 22.8 21.8 24.9 25.5 26.5 29.2 29.9 30.9 28.1 25.9 23.7 20.6 19.7 19.8 17.9 19.4 19.8 22.2 20.9 23.8 24.4 25.5 28.9 29.8 30.4 28.3 25.4 22.8 19.9 18.7 18.4 19.5 20.7 21.1 23.4 22.6 25.8 26.7 27.6 29.4 30.0 31.4 27.9 26.4 24.6 21.1 20.6
+ 21.2;

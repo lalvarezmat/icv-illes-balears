@@ -1,0 +1,24 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Cantidad";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Empleo involuntario a tiempo parcial por nacionalidad";
+CONTENTS="Empleo involuntario a tiempo parcial";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Los datos de 2006 a 2020 están calculados según la base poblacional 2011. Des"
+"de 2021 se utiliza la base 2021";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nacionalidad";
+HEADING="Periodo";
+VALUES("Nacionalidad")="Total","Española","Extranjera (UE)","Extranjera (Resto del mundo)";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006";
+UNITS="%";
+DATA=45.6 48.3 49.9 52.8 51.4 52.1 54.0 58.0 61.0 62.4 62.9 62.3 60.4 55.2 49.6 43.5 35.4 32.7 33.2 42.4 45.4 47.5 50.2 48.9 49.9 52.1 56.2 59.3 60.0 60.7 59.3 54.7 49.1 45.0 38.6 30.7 28.8 30.4 45.2 49.6 49.2 55.9 55.0 52.1 57.0 62.7 68.0 70.1 69.5 66.4
+ 66.3 68.4 67.0 63.5 54.6 47.6 21.0 62.6 64.6 65.4 70.3 71.2 70.1 68.1 71.1 72.9 78.8 77.6 78.6 78.0 75.1 73.9 69.8 54.3 50.4 53.9;

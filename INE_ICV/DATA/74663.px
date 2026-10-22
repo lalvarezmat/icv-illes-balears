@@ -1,0 +1,24 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Participación ciudadana";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas que han participado en actividades de carácter político por ámbito geográfico";
+CONTENTS="Personas que han participado en actividades de carácter político";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Ámbito geográfico";
+HEADING="Actividad","Periodo";
+VALUES("Ámbito geográfico")="España","Unión Europea";
+VALUES("Actividad")="Actividades de voluntariado organizado",
+"Actividades de voluntariado no organizado","Activismo ciudadano";
+VALUES("Periodo")="2022","2015";
+CODES("Ámbito geográfico")="null","null";
+MAP("Ámbito geográfico")="";
+UNITS="%";
+DATA=8.9 10.7 5.9 10.6 5.6 7.9 12.3 18.9 14.3 22.5 8.1 12.1;

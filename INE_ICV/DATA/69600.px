@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Calidad";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Asalariados temporales por ámbito geográfico";
+CONTENTS="Asalariados tem";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 15 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Ámbito geográfico";
+HEADING="Periodo";
+VALUES("Ámbito geográfico")="España","Unión Europea";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006";
+CODES("Ámbito geográfico")="null","null";
+MAP("Ámbito geográfico")="";
+UNITS="%";
+DATA=16.0 17.3 21.4 25.4 24.2 26.3 26.9 26.8 26.1 25.2 24.0 23.2 23.4 25.2 24.8 25.3 29.2 31.6 34.0 12.8 13.4 14.1 14.1 13.5 15.0 15.5 15.7 15.6 15.4 15.2 14.8 14.9 15.3 15.2 14.8 15.5 16.0 15.9;

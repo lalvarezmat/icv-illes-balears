@@ -1,0 +1,27 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Índice de masa corporal por nivel de educación";
+CONTENTS="Índice de masa cor";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población 18 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Masa corporal","Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Masa corporal")="Peso insuficiente (IMC < 18,5 kg/m2)",
+"Normopeso (18,5 kg/m2 <= IMC < 25 kg/m2)",
+"Sobrepeso (25 kg/m2 <= IMC < 30 kg/m2)","Obesidad (IMC >= 30 kg/m2)";
+VALUES("Periodo")="2023","2022","2020","2017","2014","2012","2009";
+UNITS="%";
+DATA=1.7 2.3 2.1 2.2 2.2 2.2 2.1 43.3 43.7 44.3 43.3 45.2 44.2 44.3 39.8 34.3 37.6 37.1 35.7 36.7 37.7 15.2 14.1 16.0 17.4 16.9 17.0 16.0 1.3 1.4 1.5 1.4 1.6 1.9 1.8 33.9 33.7 34.9 35.8 36.2 36.2 36.7 45.2 38.8 42.1 40.5 39.5 40.0 40.2 19.6
+ 18.8 21.5 22.3 22.8 21.9 21.3 1.9 3.0 2.7 3.3 3.4 2.7 2.5 45.3 47.5 48.6 47.3 50.1 50.1 50.7 39.4 31.6 35.8 35.0 34.2 33.8 36.1 13.4 12.5 13.0 14.4 12.3 13.4 10.7 2.1 2.7 2.5 2.6 2.5 2.1 2.3 53.7 52.3 55.1 53.3 57.9 56.0 54.4 33.4 31.1
+ 32.3 32.7 30.0 32.0 33.6 10.8 10.0 10.1 11.4 9.6 9.8 9.6;

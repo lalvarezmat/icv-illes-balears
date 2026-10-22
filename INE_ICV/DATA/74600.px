@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Tener alguien con quien hablar de temas personales por edad";
+CONTENTS="Tener alguien con quien hablar de temas personales";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Ruptura de serie por diferente pregunta en 2018";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Periodo";
+VALUES("Edad")="Total","De 16 a 24 años","De 25 a 34 años","De 35 a 49 años","De 50 a 64 años",
+"De 65 y más años";
+VALUES("Periodo")="2018","2015","2013";
+UNITS="%";
+DATA=94.5 97.8 97.6 96.3 99.0 99.1 95.3 98.6 98.8 95.0 97.9 97.7 94.0 97.5 96.8 93.1 96.6 96.5;

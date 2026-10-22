@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones materiales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Población de 18 y más años con gasto elevado en vivienda por nivel de educación";
+CONTENTS="Población de 18 y más años con gasto elevado en vivienda";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+UNITS="%";
+DATA=7.3 7.6 8.6 9.2 7.7 8.0 8.4 9.1 9.4 9.6 10.3 9.7 9.9 9.2 8.9 9.4 8.5 6.9 7.7 8.9 9.6 7.6 7.6 8.7 9.2 9.8 9.9 10.5 10.0 9.9 9.1 8.4 8.8 7.6 8.9 9.7 10.6 11.5 9.6 10.3 10.5 11.1 10.3 11.3 12.0 11.6 12.5 11.1 12.0 12.3
+ 12.6 6.5 6.1 7.0 7.0 6.5 6.9 6.4 7.3 7.9 7.7 8.6 7.5 7.8 7.9 7.5 8.1 6.9;

@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Satisfacción global con la vida";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Satisfacción alta o muy alta con su vida en la actualidad (de las personas de 18 y más años) por nivel de educación";
+CONTENTS="Satisfacción alta o muy alta con su vida en la actualidad (de las personas de 18 y más años)";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Alta o muy alta es la valoración de 7 a 10";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Periodo")="2024","2023","2022","2021","2018","2013";
+UNITS="%";
+DATA=71.1 72.2 70.0 71.0 74.3 63.2 63.5 65.0 61.7 62.5 65.2 53.9 72.9 74.1 71.4 72.5 77.9 69.2 78.2 78.8 78.3 80.2 85.7 75.9;

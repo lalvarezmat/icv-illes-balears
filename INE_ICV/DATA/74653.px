@@ -1,0 +1,31 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Instituciones y servicios públicos";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Confianza en la policía por comunidad autónoma";
+CONTENTS="Confianza en la policía";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Comunidad autónoma";
+HEADING="Grado de confianza","Periodo";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Grado de confianza")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Confianza media";
+VALUES("Periodo")="2013";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%, Número medio";
+DATA=26.0 37.5 28.3 8.2 5.4 30.6 37.0 24.9 7.5 5.1 25.8 33.3 31.2 9.8 5.6 19.0 41.4 28.6 11.1 5.9 19.6 38.9 28.8 12.7 5.9 27.1 44.6 20.8 7.5 5.3 26.2 34.1 35.9 3.9 5.5 21.1 43.4 28.6 7.0 5.6 24.1 35.9 31.2 8.8 5.6 26.4 40.1 26.2 7.4 5.3
+ 21.3 34.0 33.7 11.1 5.8 26.1 36.7 27.6 9.6 5.5 36.0 32.4 26.3 5.3 5.1 21.3 35.6 33.5 9.6 5.8 21.0 40.4 29.6 9.0 5.6 30.8 34.6 29.5 5.1 5.2 35.3 40.1 20.5 4.1 4.7 17.4 36.0 38.6 8.0 6.0 29.9 35.2 26.6 8.3 5.1 20.3 47.4 27.2 5.1 5.6
+;

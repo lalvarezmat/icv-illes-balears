@@ -1,0 +1,27 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Participación ciudadana";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas que han participado en actividades de carácter político por grado de urbanización";
+CONTENTS="Personas que han participado en actividades de carácter político";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Participación en actividades de partidos políticos, en una manifestación, en "
+"peticiones escritas a políticos o a medios de comunicación, etc. Se incluye l"
+"a participación a través de internet y se excluye la votación en procesos ele"
+"ctorales";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Participación","Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Participación")="Sí","No, porque no está interesado","No, por falta de tiempo",
+"No, por otras razones";
+VALUES("Periodo")="2022","2015";
+UNITS="%";
+DATA=5.6 7.9 64.4 52.5 4.1 4.7 25.9 34.9 6.3 8.9 63.0 50.9 4.4 5.0 26.2 35.2 4.7 8.1 66.3 54.0 3.9 5.2 25.1 32.7 5.0 5.6 65.2 54.5 3.5 3.6 26.2 36.2;

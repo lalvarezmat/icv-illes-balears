@@ -1,0 +1,25 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Frecuencia de las reuniones con amigos por ámbito geográfico";
+CONTENTS="Frecuencia de las reuniones con amigos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"En los últimos 12 meses";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Ámbito geográfico";
+HEADING="Nivel de frecuencia","Periodo";
+VALUES("Ámbito geográfico")="España","Unión Europea";
+VALUES("Nivel de frecuencia")="Diaria","Semanal pero no diaria","Varias veces al mes pero no semanal",
+"Una vez al mes","Al menos una vez al año pero menos de una vez por mes","Nunca";
+VALUES("Periodo")="2022","2015";
+CODES("Ámbito geográfico")="null","null";
+MAP("Ámbito geográfico")="";
+UNITS="%";
+DATA=13.8 25.3 36.9 43.0 19.5 13.9 12.4 7.9 10.3 5.1 7.1 4.8 ".." 15.2 ".." 36.8 ".." 23.0 ".." 12.5 ".." 7.6 ".." 4.9;

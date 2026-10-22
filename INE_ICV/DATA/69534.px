@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad económica";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Incapacidad de hacer frente a gastos económicos imprevistos por grado de urbanización";
+CONTENTS="Incapacidad de hacer frente a gastos económicos imprevistos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=35.8 37.1 35.5 33.4 35.4 33.9 35.9 36.6 38.7 39.8 42.6 42.1 42.1 37.6 38.7 36.5 29.9 30.8 32.5 34.5 39.6 35.3 37.0 34.9 33.3 34.4 32.1 33.5 36.7 36.7 37.5 40.9 40.6 40.6 37.2 36.3 35.4 30.0 29.7 30.4 33.3 37.0 38.3 39.5 37.9 35.5 36.7 34.7 37.8 35.4
+ 40.0 41.0 44.0 42.8 45.1 41.5 42.1 41.0 32.2 34.2 36.7 35.4 44.5 31.9 31.4 32.0 29.2 36.1 36.6 39.0 37.4 41.5 43.2 44.9 44.4 42.2 35.3 40.4 34.8 28.0 30.1 33.5 36.2 41.1;

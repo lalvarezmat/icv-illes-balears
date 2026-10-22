@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Confianza alta o muy alta en los demás por edad";
+CONTENTS="Confianza alta o muy alta en los demás";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"La confianza 'alta o muy alta'  corresponde a los valores de 7 a 10 puntos";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Periodo";
+VALUES("Edad")="Total","De 16 a 24 años","De 25 a 34 años","De 35 a 49 años","De 50 a 64 años",
+"De 65 y más años";
+VALUES("Periodo")="2024","2023","2022","2021","2018","2013";
+UNITS="%";
+DATA=50.3 52.7 52.9 52.3 59.8 51.9 59.2 61.9 62.6 61.3 66.8 61.7 50.9 52.9 54.7 51.6 61.6 53.0 48.3 49.9 49.2 51.4 60.0 50.9 46.8 49.8 50.4 49.6 57.5 49.2 52.0 55.0 54.3 52.8 58.0 50.4;

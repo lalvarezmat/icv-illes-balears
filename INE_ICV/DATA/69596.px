@@ -1,0 +1,29 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Calidad";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Ocupados con jornadas largas semanales por número de horas y nivel de educación";
+CONTENTS="Ocupados con jornadas largas semanales";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Los datos de 2006 a 2020 están calculados según la base poblacional 2011. Des"
+"de 2021 se utiliza la base 2021";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Número de horas","Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Número de horas")="De 40 a 48 horas","De 49 y más horas";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006";
+UNITS="%";
+DATA=41.7 41.7 41.9 40.7 39.9 44.3 44.4 42.9 43.1 42.0 41.3 40.8 41.3 43.1 43.2 43.3 44.9 44.3 44.6 6.1 6.3 6.9 6.6 5.9 7.2 8.1 8.3 8.9 9.6 10.2 10.6 10.1 10.4 10.8 10.8 11.4 11.6 12.1 46.9 46.6 46.6 45.0 43.8 49.0 48.7 46.6 46.9 45.3 44.2 43.9
+ 44.7 47.0 47.0 46.9 48.6 47.9 48.1 7.5 7.7 8.2 7.9 6.7 8.8 9.6 9.9 10.2 10.9 11.6 11.7 11.6 11.6 12.3 12.2 12.7 12.7 13.7 42.4 42.1 42.2 41.4 40.1 45.3 45.3 43.9 44.6 43.4 41.9 41.5 42.5 44.0 44.8 44.5 45.7 44.7 45.3 6.0 6.1 6.8 6.2 5.2
+ 7.0 7.8 8.1 8.6 9.5 10.1 10.2 9.5 10.1 10.4 10.3 11.2 11.9 11.7 38.0 38.3 38.6 37.5 37.1 40.3 40.6 39.4 39.3 38.6 38.4 37.7 37.5 38.7 38.2 38.5 39.8 39.3 39.6 5.4 5.5 6.0 6.0 5.8 6.1 7.0 7.1 8.1 8.6 9.1 9.9 9.0 9.4 9.6 9.5 9.7
+ 9.9 10.1;

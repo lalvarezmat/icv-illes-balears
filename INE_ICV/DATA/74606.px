@@ -1,0 +1,31 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Confianza alta o muy alta en los demás por comunidad autónoma";
+CONTENTS="Confianza alta o muy alta en los demás";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"La confianza 'alta o muy alta'  corresponde a los valores de 7 a 10 puntos";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Comunidad autónoma";
+HEADING="Periodo";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Periodo")="2024","2023","2022","2021","2018","2013";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%";
+DATA=50.3 52.7 52.9 52.3 59.8 51.9 48.4 49.5 51.1 49.8 52.0 56.8 50.3 53.4 54.1 54.1 58.0 56.4 45.5 50.2 50.2 45.4 60.1 56.5 55.1 56.2 50.7 52.6 72.8 52.2 48.0 48.5 50.1 47.7 55.0 36.6 46.1 52.6 51.9 50.7 67.7 58.9 47.4 52.2 50.9 53.1 64.1 42.6 44.8 49.4
+ 52.1 49.8 57.3 47.2 51.5 54.3 52.5 53.4 60.8 58.6 52.2 54.9 56.2 54.3 65.3 54.0 47.3 53.1 48.0 54.1 45.1 48.9 47.3 49.8 51.9 51.0 70.2 33.5 53.1 55.2 54.6 55.9 61.6 53.7 47.5 49.8 49.4 45.2 55.2 43.0 60.1 60.8 62.6 59.2 66.1 64.6 56.8 58.3 58.3 55.3
+ 58.8 50.0 51.9 54.5 56.9 53.8 64.6 61.0 45.3 49.2 48.8 42.0 40.4 43.5 51.5 57.9 52.1 55.5 69.8 50.5;

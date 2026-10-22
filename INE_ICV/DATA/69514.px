@@ -1,0 +1,21 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones materiales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Satisfacción con la vivienda por grado de urbanización";
+CONTENTS="Satisfacción con la vivienda";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Nivel de satisfacción","Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Nivel de satisfacción")="Muy insatisfecho","Algo insatisfecho","Satisfecho","Muy satisfecho";
+VALUES("Periodo")="2023","2012";
+UNITS="%";
+DATA=4.5 4.2 12.3 7.8 63.9 60.2 19.3 27.8 4.9 5.5 13.8 9.1 62.8 60.8 18.4 24.6 4.0 2.9 11.3 6.6 65.2 59.1 19.5 31.4 4.0 2.9 8.4 6.3 65.4 59.8 22.2 31.0;

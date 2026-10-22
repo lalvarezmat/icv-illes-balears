@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Entorno ambiental";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Satisfacción con el entorno en que vive por edad";
+CONTENTS="Satisfacción con el entorno en que vive";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Edad")="Total","De 16 a 24 años","De 25 a 34 años","De 35 a 49 años","De 50 a 64 años",
+"De 65 y más años";
+VALUES("Grado de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2013";
+UNITS="%, Número medio";
+DATA=7.9 21.3 47.1 23.7 7.2 7.9 21.2 49.5 21.3 7.1 8.7 23.2 45.8 22.3 7.1 8.8 21.1 47.0 23.2 7.1 8.1 20.8 48.5 22.5 7.2 5.7 20.6 45.7 28.1 7.4;

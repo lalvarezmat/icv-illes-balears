@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Tener alguien con quien hablar de temas personales por deciles de renta";
+CONTENTS="Tener alguien con quien hablar de temas personales";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Ruptura de serie por diferente pregunta en 2018";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de renta";
+HEADING="Periodo";
+VALUES("Nivel de renta")="Total","Primer decil","Segundo decil","Tercer decil","Cuarto decil","Quinto decil",
+"Sexto decil","Septimo decil","Octavo decil","Noveno decil","Décimo decil";
+VALUES("Periodo")="2018","2015","2013";
+UNITS="%";
+DATA=94.5 97.8 97.6 89.0 96.6 96.6 92.6 96.3 97.3 92.7 95.7 96.7 93.9 97.2 96.4 95.0 98.2 97.0 96.9 97.2 97.7 95.9 98.6 98.0 96.0 98.8 98.7 96.2 99.1 98.7 96.4 99.6 98.5;

@@ -1,0 +1,25 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Calidad";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Ocupados grado de urbanización y grado de satisfacción con su trabajo actual";
+CONTENTS="Ocupados grado de urbanización y grado de satisfacción con su trabajo actual";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Los datos de 2006 a 2020 están calculados según la base poblacional 2011. Des"
+"de 2021 se utiliza la base 2021";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Grado de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2023","2018","2013";
+UNITS="%, Número medio";
+DATA=7.3 6.4 10.1 20.9 20.4 26.4 46.8 47.6 44.2 25.1 25.6 19.4 7.3 7.3 6.9 7.8 6.6 11.2 21.0 20.0 25.9 46.9 49.1 43.9 24.3 24.2 19.0 7.2 7.3 6.9 6.9 6.4 8.8 21.0 20.7 26.2 46.3 45.1 44.9 25.8 27.7 20.0 7.3 7.4 7.0 6.0 5.7 8.8 20.4 20.8
+ 27.4 47.3 46.8 44.0 26.4 26.7 19.8 7.4 7.4 7.0;

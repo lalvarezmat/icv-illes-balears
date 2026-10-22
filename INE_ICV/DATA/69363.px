@@ -1,0 +1,28 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones económicas";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Tasa de riesgo de pobreza después de transferencias sociales por umbral y sexo";
+CONTENTS="Tasa de riesgo de pobreza después de transferencias sociales";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Base 2013: nueva metodología de cálculo en los ingresos del hogar, combinando"
+" información del informante con ficheros administrativos.";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Umbral de renta","Sexo";
+HEADING="Periodo";
+VALUES("Umbral de renta")="Inferior al 40% de la renta mediana equivalente",
+"Inferior al 50% de la renta mediana equivalente",
+"Inferior al 60% de la renta mediana equivalente",
+"Inferior al 70% de la renta mediana equivalente";
+VALUES("Sexo")="Hombres","Mujeres";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+UNITS="%";
+DATA=8.2 8.0 8.7 10.1 9.6 8.9 9.1 10.2 10.7 11.5 10.7 9.8 9.6 8.5 8.6 7.8 7.3 8.5 8.6 9.1 10.3 9.5 9.5 9.2 10.8 10.7 10.8 10.6 8.9 9.7 8.8 9.0 8.3 7.5 12.9 12.8 13.4 14.9 14.3 13.2 14.3 15.3 15.5 16.3 16.1 14.4 14.4 13.4 13.7 12.9
+ 12.3 13.5 13.3 14.1 15.3 14.8 13.9 15.0 16.1 15.4 15.6 15.7 13.4 14.3 14.2 13.9 13.5 13.8 18.9 19.5 19.8 21.1 20.2 20.2 20.9 21.0 22.6 22.5 22.4 20.9 20.7 19.9 20.1 19.4 18.4 20.4 20.8 21.1 22.2 21.7 21.1 22.2 22.2 22.1 21.8 22.1 19.9 20.9 21.4 21.3
+ 21.3 21.2 25.6 25.8 26.2 27.5 26.8 27.4 27.7 28.1 29.6 29.1 29.1 28.8 28.4 27.1 26.4 26.3 25.8 27.6 27.9 28.6 29.4 29.1 29.3 30.1 30.3 30.2 29.3 30.3 28.4 29.4 29.1 28.0 29.1 28.8;

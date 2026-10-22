@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Posibilidad de pedir ayuda a familiares, amigos o vecinos por grado de urbanización";
+CONTENTS="Posibilidad de pedir ayuda a familiares, amigos o vecinos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Ruptura de serie por diferente pregunta en 2018: 'Posibilidad de pedir ayuda "
+"material'";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Periodo")="2022","2018","2015","2013";
+UNITS="%";
+DATA=93.1 89.3 96.6 95.8 93.0 87.7 96.6 95.8 92.6 90.3 96.5 95.2 94.6 91.8 96.8 96.5;

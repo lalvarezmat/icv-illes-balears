@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Instituciones y servicios públicos";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Confianza en la policía por deciles de renta";
+CONTENTS="Confianza en la policía";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de renta";
+HEADING="Grado de confianza","Periodo";
+VALUES("Nivel de renta")="Total","Primer decil","Segundo decil","Tercer decil","Cuarto decil","Quinto decil",
+"Sexto decil","Septimo decil","Octavo decil","Noveno decil","Décimo decil";
+VALUES("Grado de confianza")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Confianza media";
+VALUES("Periodo")="2013";
+UNITS="%, Número medio";
+DATA=26.0 37.5 28.3 8.2 5.4 34.0 35.1 22.7 8.1 4.9 29.7 36.7 24.6 9.0 5.2 27.8 37.2 25.4 9.5 5.3 28.3 34.7 28.3 8.7 5.4 24.6 39.8 27.5 8.1 5.5 26.6 38.1 27.7 7.6 5.3 23.4 40.7 28.5 7.4 5.6 23.6 35.1 31.8 9.5 5.7 22.5 39.5 32.0 6.1 5.6
+ 20.6 38.2 33.2 8.0 5.8;

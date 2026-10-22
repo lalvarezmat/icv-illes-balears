@@ -1,0 +1,39 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones materiales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Población de 16 y más años con carencias materiales (al menos 3, 4 conceptos) por número de conceptos y nacionalidad";
+CONTENTS="Población de 16 y más años con carencias materiales (al menos 3, 4 conceptos)";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Conceptos considerados:#<ul><li>No puede permitirse ir de vacaciones al menos"
+" una semana al año;</li><li>No puede permitirse una comida de carne, pollo o "
+"pescado al menos cada dos días;</li><li>No puede permitirse mantener la vivie"
+"nda con una temperatura adecuada;</li><li>No tiene capacidad para afrontar ga"
+"stos imprevistos;</li><li>Ha tenido retrasos en el pago de gastos relacionado"
+"s con la vivienda principal (hipoteca o alquiler, recibos de gas, comunidad.."
+".) o en compras a plazos en los últimos 12 meses;</li><li>No puede permitirse"
+" disponer de un automóvil;</li><li>No puede permitirse disponer de un teléfon"
+"o;</li><li>No puede permitirse disponer de un televisor en color;</li><li>No "
+"puede permitirse disponer de una lavadora.</li></ul>##A partir de ECV2021 se "
+"dejan de recoger los conceptos:#<ul><li>No puede permitirse disponer de un te"
+"léfono,</li><li>No puede permitirse disponer de un televisor en color</li><li"
+"> y No puede permitirse disponer de una lavadora</li></ul>#asumiéndose que el"
+" hogar no tiene carencia en esos conceptos.#";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nacionalidad";
+HEADING="Número de conceptos","Periodo";
+VALUES("Nacionalidad")="Total","Española","Extranjera (UE)","Extranjera (Resto del mundo)";
+VALUES("Número de conceptos")="Carencia material (carencia en al menos 3 conceptos)",
+"Carencia material severa (carencia en al menos 4 conceptos)";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=17.8 18.7 17.2 16.7 16.3 11.7 13.6 12.5 14.6 15.7 17.1 15.8 15.8 12.7 14.2 12.7 10.0 10.8 12.1 11.4 14.0 8.1 8.6 7.6 7.0 6.5 4.4 5.2 4.9 5.6 5.9 6.6 5.7 5.5 4.4 4.5 4.1 3.2 3.4 3.8 3.7 4.7 15.3 16.7 15.2 14.7 14.1 10.0 12.3 11.3
+ 13.1 13.8 15.2 13.2 13.4 10.3 11.6 9.9 7.6 9.2 10.1 10.2 12.8 6.6 7.3 6.2 5.7 5.1 3.6 4.4 4.2 4.7 4.9 5.5 4.4 4.4 3.4 3.4 2.9 2.2 3.0 3.1 3.0 4.0 24.3 24.4 20.7 21.3 23.3 19.0 17.9 15.9 25.2 30.0 30.2 25.2 21.6 18.6 22.3 22.2
+ 16.2 13.6 16.0 18.2 20.8 11.5 10.8 8.9 9.9 11.8 7.8 10.3 5.4 14.9 12.3 13.0 9.3 6.3 6.7 2.1 6.7 2.4 8.0 5.7 9.1 10.2 40.1 42.5 43.9 41.6 44.6 33.7 34.0 31.5 36.7 43.6 44.0 45.4 41.4 39.8 41.7 41.9 35.8 31.0 41.2 30.2 37.2 22.1 25.5 27.6
+ 23.3 23.5 15.9 16.1 17.2 15.7 20.0 22.1 20.8 19.0 15.6 19.3 17.7 15.8 7.6 13.5 13.1 15.9;

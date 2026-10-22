@@ -1,0 +1,31 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Posibilidad de pedir ayuda a familiares, amigos o vecinos por comunidad autónoma";
+CONTENTS="Posibilidad de pedir ayuda a familiares, amigos o vecinos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Ruptura de serie por diferente pregunta en 2018: 'Posibilidad de pedir ayuda "
+"material'";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Comunidad autónoma";
+HEADING="Periodo";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Periodo")="2022","2018","2015","2013";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%";
+DATA=93.1 89.3 96.6 93.1 93.3 90.8 96.4 93.3 94.7 93.3 98.4 94.7 93.7 88.9 97.1 93.7 91.2 95.0 98.6 91.2 91.1 85.0 94.2 91.1 92.6 94.8 98.2 92.6 94.4 93.5 97.1 94.4 91.1 86.2 97.4 91.1 92.2 86.9 95.0 92.2 93.9 89.3 96.1 93.9 94.6 92.8 97.0 94.6 93.7 94.1
+ 97.4 93.7 93.0 87.6 98.2 93.0 91.5 88.5 92.7 91.5 94.6 87.5 97.7 94.6 95.0 85.7 98.1 95.0 95.1 91.3 98.0 95.1 87.0 98.9 92.0 87.0 89.2 96.5 99.3 89.2;

@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Posibilidad de pedir ayuda a familiares, amigos o vecinos por sexo";
+CONTENTS="Posibilidad de pedir ayuda a familiares, amigos o vecinos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Ruptura de serie por diferente pregunta en 2018: 'Posibilidad de pedir ayuda "
+"material'";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Periodo")="2022","2018","2015","2013";
+UNITS="%";
+DATA=93.1 89.3 96.6 95.8 92.7 89.2 96.4 95.5 93.4 89.5 96.8 96.2;

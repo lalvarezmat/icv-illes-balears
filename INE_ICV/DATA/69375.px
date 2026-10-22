@@ -1,0 +1,33 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones económicas";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Población y tasa de riesgo de pobreza con umbral fijo en el año 2008 por umbral y riesgo de pobreza";
+CONTENTS="Población y tasa de riesgo de pobreza con umbral fijo en el año 2008";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Umbral de renta";
+HEADING="Riesgo de pobreza","Periodo";
+VALUES("Umbral de renta")="Inferior al 40% de la renta mediana equivalente",
+"Inferior al 50% de la renta mediana equivalente",
+"Inferior al 60% de la renta mediana equivalente",
+"Inferior al 70% de la renta mediana equivalente";
+VALUES("Riesgo de pobreza")=
+"Población en riesgo de pobreza según tasa de riesgo de pobreza con umbral fijo en el 2008",
+"Población en riesgo de pobreza según tasa de riesgo de pobreza con umbral de cada año",
+"Tasa de riesgo de pobreza con umbral fijo año 2008",
+"Tasa de riesgo de pobreza con umbral de cada año";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+UNITS="Miles Personas, %";
+DATA=3783.5 3902.0 4188.3 4952.5 4647.8 4951.7 5080.9 5844.1 6205.8 6710.9 6778.1 5622.8 5255.6 4524.1 4036.1 3595.6 3361.5 4034.6 3939.9 4177.9 4773.2 4463.1 4272.0 4238.0 4841.0 4917.2 5128.8 4889.8 4316.5 4461.6 3998.9 4067.2 3710.7 3361.5 7.8 8.2 8.9 10.6 9.9 10.6 11.0 12.7 13.5 14.6 14.7 12.2 11.3 9.8 8.8 7.8
+ 7.4 8.4 8.3 8.9 10.2 9.5 9.2 9.2 10.5 10.7 11.2 10.6 9.3 9.6 8.6 8.8 8.1 7.4 6064.6 6150.1 6467.5 7484.5 7134.5 7750.3 8109.6 8592.0 9594.0 9985.3 10168.4 8558.8 8288.5 7249.0 6279.0 5868.7 5933.8 6370.5 6185.4 6445.5 7087.7 6841.6 6316.5 6756.5 7232.6 7113.8 7323.9 7310.9 6422.1 6655.2 6367.3 6357.8
+ 6044.5 5933.8 12.6 13.0 13.8 16.0 15.2 16.7 17.6 18.7 20.9 21.7 22.1 18.5 17.9 15.7 13.6 12.8 13.1 13.2 13.1 13.7 15.1 14.6 13.6 14.6 15.7 15.5 15.9 15.9 13.9 14.4 13.8 13.8 13.2 13.1 9030.4 9508.0 9601.0 10700.2 10207.7 11562.5 11799.2 12210.2 13397.3 13749.3 14210.0 12992.8 11999.0 10951.1
+ 9472.9 9026.4 8996.9 9494.8 9567.1 9584.7 10159.8 9829.3 9610.4 9949.6 9950.1 10268.9 10178.1 10218.4 9424.9 9656.3 9549.9 9550.6 9342.0 8996.9 18.7 20.1 20.5 22.8 21.8 24.9 25.5 26.5 29.2 29.9 30.9 28.1 25.9 23.7 20.6 19.7 19.8 19.7 20.2 20.4 21.7 21.0 20.7 21.5 21.6 22.3 22.1 22.2 20.4 20.8
+ 20.6 20.7 20.4 19.8 12306.5 12656.8 12904.4 13998.1 13523.3 15200.7 15298.4 15641.7 17006.2 17617.5 18015.3 16926.9 15569.1 14576.6 12395.6 12288.4 12376.7 12856.1 12730.7 12868.4 13357.1 13099.5 13205.5 13356.8 13454.2 13750.1 13420.6 13651.1 13219.1 13395.4 13002.9 12536.7 12710.8 12376.7 25.5 26.7 27.5 29.9 28.8 32.7 33.1 34.0 37.0 38.3 39.2 36.6
+ 33.6 31.5 26.9 26.8 27.3 26.6 26.9 27.5 28.5 27.9 28.4 28.9 29.2 29.9 29.2 29.7 28.6 28.9 28.1 27.2 27.7 27.3;

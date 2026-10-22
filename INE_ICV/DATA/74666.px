@@ -1,0 +1,32 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Participación ciudadana";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas que han participado en actividades de carácter político por tipo de hogar";
+CONTENTS="Personas que han participado en actividades de carácter político";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Participación en actividades de partidos políticos, en una manifestación, en "
+"peticiones escritas a políticos o a medios de comunicación, etc. Se incluye l"
+"a participación a través de internet y se excluye la votación en procesos ele"
+"ctorales";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Tipo de hogar";
+HEADING="Participación","Periodo";
+VALUES("Tipo de hogar")="Total","Adulto solo menor de 65 años","Hombre (solo menor de 65 años)",
+"Mujer (sola menor de 65 años)","Adulto solo de 65 o más años",
+"Hombre (solo de 65 y más años)","Mujer (sola de 65 y más años)",
+"Adulto solo con hijos dependientes","Dos adultos ambos menores de 65 años",
+"Dos adultos, al menos uno de 65 y más años",
+"Dos o más adultos con hijos dependientes","Otros hogares";
+VALUES("Participación")="Sí","No, porque no está interesado","No, por falta de tiempo",
+"No, por otras razones";
+VALUES("Periodo")="2022","2015";
+UNITS="%";
+DATA=5.6 7.9 64.4 52.5 4.1 4.7 25.9 34.9 8.1 15.0 62.6 48.1 5.1 6.2 24.2 30.6 6.9 15.3 65.0 47.3 4.9 5.5 23.2 31.9 9.9 14.7 58.9 49.4 5.3 7.3 25.9 28.7 4.5 2.5 64.2 48.7 0.4 1.1 30.9 47.7 4.9 3.9 65.2 45.5 0.2 0.6 29.7 50.0 4.4 1.9
+ 63.8 50.1 0.5 1.3 31.4 46.6 7.8 8.8 63.7 54.8 6.1 8.2 22.4 28.2 6.9 10.4 62.9 55.4 4.9 4.8 25.3 29.4 5.3 4.7 61.6 50.2 1.4 2.4 31.7 42.8 5.1 8.0 66.5 53.6 5.5 6.1 22.9 32.4 5.0 6.8 63.7 52.3 3.3 3.6 28.0 37.3;

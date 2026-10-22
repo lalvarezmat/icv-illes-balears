@@ -1,0 +1,26 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Índice de masa corporal por ámbito geográfico";
+CONTENTS="Índice de masa cor";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Sobrepeso, se refiere a la categoría de Eurostat 'Pre-Obese'"
+"Población 18 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Ámbito geográfico";
+HEADING="Masa corporal","Periodo";
+VALUES("Ámbito geográfico")="España","Unión Europea";
+VALUES("Masa corporal")="Peso insuficiente (IMC < 18,5 kg/m2)",
+"Normopeso (18,5 kg/m2 <= IMC < 25 kg/m2)",
+"Sobrepeso (25 kg/m2 <= IMC < 30 kg/m2)","Obesidad (IMC >= 30 kg/m2)";
+VALUES("Periodo")="2019","2014";
+CODES("Ámbito geográfico")="null","null";
+MAP("Ámbito geográfico")="";
+UNITS="%";
+DATA=2.0 2.2 44.3 45.4 37.8 35.7 16.0 16.7 2.5 2.3 44.8 46.6 36.2 35.7 16.5 15.4;

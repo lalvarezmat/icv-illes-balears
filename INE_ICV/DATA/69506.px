@@ -1,0 +1,31 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones materiales";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Satisfacción con la vivienda por comunidad autónoma";
+CONTENTS="Satisfacción con la vivienda";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Comunidad autónoma";
+HEADING="Nivel de satisfacción","Periodo";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Nivel de satisfacción")="Muy insatisfecho","Algo insatisfecho","Satisfecho","Muy satisfecho";
+VALUES("Periodo")="2023","2012";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%";
+DATA=4.5 4.2 12.3 7.8 63.9 60.2 19.3 27.8 4.9 2.2 12.0 5.6 62.0 56.9 21.1 35.3 4.2 1.8 12.4 4.8 60.9 73.9 22.6 19.5 4.1 3.2 10.5 3.2 68.0 60.6 17.4 33.0 4.8 3.9 11.6 10.4 59.1 63.7 24.5 22.0 5.4 5.6 11.4 8.9 67.4 48.4 15.8 37.2 3.8 2.7
+ 11.4 4.4 65.7 48.2 19.1 44.8 4.3 2.9 9.8 7.1 67.6 69.8 18.4 20.3 4.5 3.3 8.2 5.8 67.8 65.7 19.5 25.3 5.0 2.2 13.8 10.7 61.5 64.8 19.7 22.3 3.7 3.7 11.3 7.4 65.4 53.8 19.6 35.2 4.1 1.7 10.4 6.4 65.7 65.4 19.8 26.5 3.9 2.0 10.8 4.1
+ 70.8 62.7 14.5 31.2 4.9 12.1 15.8 12.3 60.3 55.6 19.0 20.1 3.4 1.1 12.6 6.6 69.1 61.3 14.8 31.0 4.4 0.8 11.1 7.8 63.4 59.9 21.0 31.5 3.3 7.7 11.4 6.0 66.0 64.3 19.2 22.0 4.2 3.1 9.0 4.4 64.0 67.5 22.8 25.0 5.1 13.1 16.5 28.5 60.2 51.1
+ 18.1 7.3 5.3 0.0 18.3 1.2 57.8 62.5 18.6 36.3;

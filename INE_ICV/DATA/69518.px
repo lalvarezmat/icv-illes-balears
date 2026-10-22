@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad económica";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Riqueza neta de los hogares por situación laboral";
+CONTENTS="Riqueza neta de los hogares";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Riqueza neta del hogar","Situación laboral";
+HEADING="Periodo";
+VALUES("Riqueza neta del hogar")="Media","Mediana";
+VALUES("Situación laboral")="Empleado por cuenta ajena","Empleado por cuenta propia","Jubilado",
+"Otro tipo de inactivo o parado";
+VALUES("Periodo")="2022","2020","2017","2014","2011","2008","2005";
+UNITS="Miles ¤";
+DATA=194.2 205.7 183.3 193.7 229.7 284.1 285.7 708.4 771.8 630.4 617.4 713.8 792.3 815.5 449.1 422.5 424.4 409.2 382.8 419.0 330.7 156.9 143.3 153.4 172.5 184.3 231.3 235.2 105.0 116.0 101.9 109.1 158.1 208.2 211.0 235.6 251.7 265.1 303.2 365.5 403.5 503.8 231.3 234.2 204.7 216.8 238.4 269.0 255.2 68.1
+ 61.7 83.5 88.5 119.8 144.4 146.0;

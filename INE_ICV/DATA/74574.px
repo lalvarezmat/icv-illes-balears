@@ -1,0 +1,25 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Frecuencia de las reuniones con amigos por nivel de educación";
+CONTENTS="Frecuencia de las reuniones con amigos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"En los últimos 12 meses";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Nivel de frecuencia","Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Nivel de frecuencia")="Diaria","Semanal pero no diaria","Varias veces al mes pero no semanal",
+"Una vez al mes","Al menos una vez al año pero menos de una vez por mes","Nunca";
+VALUES("Periodo")="2022","2015";
+UNITS="%";
+DATA=13.8 24.3 36.9 43.4 19.5 14.2 12.4 8.0 10.3 5.2 7.1 4.9 18.1 25.8 33.2 37.3 15.6 13.3 10.9 8.5 10.3 7.0 11.8 8.1 13.9 26.9 38.7 45.3 19.4 14.8 12.3 7.1 10.5 3.9 5.2 2.0 8.4 19.9 40.2 52.5 24.3 15.2 14.2 7.8 10.2 3.1 2.8 1.4;

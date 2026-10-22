@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Ejercicio físico regular y sedentarismo en el tiempo libre por sexo";
+CONTENTS="Ejercicio físico regular y sedentarismo en el tiempo libre";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 15 y más años"
+"En 2022 ruptura de serie por diferente fuente, diferente pregunta y población"
+" de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Tipo de ejercicio","Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Tipo de ejercicio")="Ejercicio fisico regular","Sedentarismo";
+VALUES("Periodo")="2023","2022","2020","2017","2014","2012";
+UNITS="%";
+DATA=29.8 37.7 26.5 25.9 25.1 22.4 30.5 27.4 36.4 37.8 36.7 44.4 35.3 39.7 31.4 31.6 31.8 29.8 26.6 25.7 32.3 33.5 31.1 38.8 24.6 35.7 21.9 20.4 18.6 15.3 34.2 29.1 40.3 41.9 42.0 49.8;

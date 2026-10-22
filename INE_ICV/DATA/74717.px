@@ -1,0 +1,31 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Entorno ambiental";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Satisfacción con el entorno en que vive por comunidad autónoma";
+CONTENTS="Satisfacción con el entorno en que vive";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Comunidad autónoma";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Grado de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2013";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%, Número medio";
+DATA=7.9 21.3 47.1 23.7 7.2 12.3 23.1 37.9 26.7 7.0 4.8 15.7 52.7 26.8 7.6 3.0 14.0 52.7 30.4 7.7 5.4 17.0 43.8 33.9 7.6 7.5 21.9 51.8 18.8 7.1 4.1 15.2 54.9 25.8 7.6 4.3 18.3 53.1 24.3 7.4 6.9 16.9 47.7 28.5 7.4 5.6 23.4 49.7 21.3 7.2
+ 7.3 21.0 47.8 23.9 7.2 7.0 19.5 50.2 23.3 7.3 12.8 31.8 40.0 15.4 6.6 8.6 21.8 47.9 21.7 7.1 11.5 17.0 52.2 19.3 7.0 3.2 11.4 53.0 32.4 7.8 4.3 17.6 51.8 26.3 7.5 4.3 19.1 52.1 24.4 7.4 17.5 28.0 39.7 14.8 6.3 12.3 24.5 45.4 17.8 6.8
+;

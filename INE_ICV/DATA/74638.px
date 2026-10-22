@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Instituciones y servicios públicos";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Confianza en el sistema político por edad";
+CONTENTS="Confianza en el sistema político";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Grado de confianza","Periodo";
+VALUES("Edad")="Total","De 16 a 24 años","De 25 a 34 años","De 35 a 49 años","De 50 a 64 años",
+"De 65 y más años";
+VALUES("Grado de confianza")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Confianza media";
+VALUES("Periodo")="2013";
+UNITS="%, Número medio";
+DATA=81.7 14.5 3.1 0.6 1.9 80.2 15.7 3.1 1.0 2.0 83.8 13.1 2.6 0.5 1.8 84.3 12.6 2.6 0.4 1.7 83.7 13.0 2.8 0.5 1.8 74.5 19.6 4.7 1.1 2.3;

@@ -1,0 +1,25 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Sentimientos y emociones";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Sentimiento de felicidad en las 4 últimas semanas por ámbito geográfico";
+CONTENTS="Sentimiento de felicidad en las 4 últimas semanas";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Muy a menudo incluye: 'Always', 'Most of the time'. Alguna vez incluye : 'Som"
+"etimes', 'Rarely'"
+"Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Ámbito geográfico";
+HEADING="Frecuencia","Periodo";
+VALUES("Ámbito geográfico")="España","Unión Europea";
+VALUES("Frecuencia")="Algunas veces","Muy a menudo","Nunca";
+VALUES("Periodo")="2022","2018","2013";
+CODES("Ámbito geográfico")="null","null";
+MAP("Ámbito geográfico")="";
+UNITS="%";
+DATA=30.8 26.7 34.1 67.3 71.5 64.0 1.9 1.9 1.9 32.5 34.0 37.9 64.0 62.4 57.5 1.7 2.0 2.8;

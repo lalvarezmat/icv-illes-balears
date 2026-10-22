@@ -1,0 +1,31 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Satisfacción global con la vida";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Satisfacción alta o muy alta con su vida en la actualidad por comunidad autónoma";
+CONTENTS="Satisfacción alta o muy alta con su vida en la actualidad";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Alta o muy alta es la valoración de 7 a 10";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Comunidad autónoma";
+HEADING="Periodo";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Periodo")="2024","2023","2022","2021","2018","2013";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%";
+DATA=71.4 72.6 70.4 71.4 74.7 63.6 66.7 70.6 67.3 68.3 62.9 58.7 72.8 76.4 74.9 74.8 86.1 71.0 70.7 71.4 71.8 68.4 72.6 68.4 79.0 74.1 72.9 72.9 89.7 72.7 70.0 70.1 66.6 69.7 78.9 61.8 71.0 71.5 68.6 68.1 77.2 63.3 71.8 71.3 70.5 72.1 75.5 50.1 67.8 71.9
+ 66.9 69.1 75.5 66.7 71.5 74.0 71.7 74.4 80.3 67.1 73.4 73.6 71.1 71.9 77.9 69.5 74.0 74.7 68.0 75.2 83.8 59.1 69.2 67.3 64.8 69.0 64.4 45.3 73.9 73.0 73.2 73.1 77.1 67.2 70.5 73.3 70.0 66.4 66.9 67.3 79.1 80.0 77.9 78.6 82.0 75.8 75.6 75.8 76.1 73.4
+ 77.0 68.7 73.2 73.7 75.8 74.0 78.5 66.8 70.4 72.7 68.7 64.0 58.9 65.3 79.0 73.7 77.2 71.4 86.1 71.3;

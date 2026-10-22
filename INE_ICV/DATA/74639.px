@@ -1,0 +1,27 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Instituciones y servicios públicos";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Confianza en el sistema político por tipo de hogar";
+CONTENTS="Confianza en el sistema político";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Tipo de hogar";
+HEADING="Grado de confianza","Periodo";
+VALUES("Tipo de hogar")="Total","Adulto solo menor de 65 años","Hombre (solo menor de 65 años)",
+"Mujer (sola menor de 65 años)","Adulto solo de 65 o más años",
+"Hombre (solo de 65 y más años)","Mujer (sola de 65 y más años)",
+"Adulto solo con hijos dependientes","Dos adultos ambos menores de 65 años",
+"Dos adultos, al menos uno de 65 y más años",
+"Dos o más adultos con hijos dependientes","Otros hogares";
+VALUES("Grado de confianza")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Confianza media";
+VALUES("Periodo")="2013";
+UNITS="%, Número medio";
+DATA=81.7 14.5 3.1 0.6 1.9 84.7 11.9 2.2 1.1 1.7 83.8 13.4 2.0 0.8 1.8 86.2 9.6 2.7 1.5 1.6 74.4 18.9 6.0 0.7 2.3 78.3 15.2 6.3 0.2 2.2 72.9 20.3 5.9 0.9 2.4 85.4 10.6 3.3 0.7 1.7 84.6 13.0 2.1 0.2 1.8 75.2 19.4 4.4 1.0 2.2
+ 82.3 14.3 2.8 0.5 1.8 82.8 13.2 3.3 0.8 1.9;

@@ -1,0 +1,26 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Cantidad";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Empleo involuntario a tiempo parcial por nivel de educación";
+CONTENTS="Empleo involuntario a tiempo parcial";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Los datos de 2006 a 2020 están calculados según la base poblacional 2011. Des"
+"de 2021 se utiliza la base 2021";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006";
+UNITS="%";
+DATA=45.6 48.3 49.9 52.8 51.4 52.1 54.0 58.0 61.0 62.4 62.9 62.3 60.4 55.2 49.6 43.5 35.4 32.7 33.2 53.5 56.2 56.9 59.4 58.3 59.1 61.6 64.3 67.6 69.0 68.2 68.0 66.7 60.2 54.9 48.3 38.9 35.9 35.0 41.7 43.5 46.8 50.4 49.8 49.7 51.5 56.4 59.8 62.5 62.5 63.4
+ 57.8 54.5 45.6 41.3 35.6 31.3 30.5 41.9 45.0 45.9 48.7 46.5 47.1 48.2 52.2 54.6 54.7 57.1 54.6 54.4 48.8 45.5 38.3 29.7 28.9 33.0;

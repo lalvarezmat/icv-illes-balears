@@ -1,0 +1,28 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Resultados";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Esperanza de vida al nacer por ámbito geográfico y sexo";
+CONTENTS="Esperanza de vida al nacer";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="'Las cifras para España procedentes de Eurostat pueden presentar ligeras dife"
+"rencias respecto a las publicadas por el INE, debido a posibles imputaciones "
+"o a su carácter provisional.'";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Ámbito geográfico","Sexo";
+HEADING="Periodo";
+VALUES("Ámbito geográfico")="España","Unión Europea";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+CODES("Ámbito geográfico")="null","null";
+MAP("Ámbito geográfico")="";
+UNITS="Años";
+DATA=84.0 84.0 83.2 83.3 82.3 84.0 83.5 83.4 83.5 83.0 83.3 83.2 82.5 82.6 82.4 81.9 81.5 81.1 81.1 80.3 80.4 81.3 81.3 80.5 80.3 79.5 81.1 80.7 80.6 80.5 80.1 80.4 80.2 79.5 79.5 79.2 78.8 78.3 77.9 77.8 77.0 77.0 86.6 86.7 85.9 86.2 85.1 86.7 86.3 86.1
+ 86.3 85.7 86.2 86.1 85.5 85.6 85.5 85.0 84.6 84.4 84.4 83.6 83.7 81.7 81.4 80.6 80.1 80.4 81.3 81.0 80.9 80.9 80.5 80.8 80.5 80.2 80.1 79.8 79.5 79.3 79.1 78.9 78.4 78.3 79.2 78.7 77.9 77.2 77.5 78.5 78.2 78.1 78.0 77.7 77.9 77.5 77.1 77.0 76.7 76.4
+ 76.1 75.8 75.6 75.1 75.0 84.4 84.0 83.3 82.9 83.2 84.0 83.7 83.6 83.7 83.3 83.7 83.3 83.1 83.1 82.9 82.6 82.4 82.2 82.0 81.5 81.5;

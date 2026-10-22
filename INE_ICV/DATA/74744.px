@@ -1,0 +1,31 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Sentido y propósito de la vida";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Evaluación del sentido y propósito de la vida por comunidad autónoma";
+CONTENTS="Evaluación del sentido y propósito de la vida";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Comunidad autónoma";
+HEADING="Evaluación","Periodo";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Evaluación")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Valoración media";
+VALUES("Periodo")="2013";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%, Número medio";
+DATA=4.7 19.1 46.7 29.5 7.5 4.0 15.3 49.4 31.2 7.7 5.2 16.9 46.4 31.5 7.6 2.9 15.3 59.0 22.9 7.6 4.7 13.1 47.8 34.4 7.8 2.6 18.1 53.2 26.1 7.6 3.3 20.1 53.2 23.4 7.5 5.7 33.0 43.4 17.9 7.0 5.7 19.3 45.8 29.2 7.5 4.6 17.4 46.1 32.0 7.6
+ 4.4 13.5 45.3 36.8 7.8 4.0 23.1 41.7 31.2 7.6 5.1 38.8 38.9 17.2 6.9 6.2 21.7 45.9 26.2 7.3 5.0 12.0 32.9 50.1 8.2 5.4 14.6 55.1 24.9 7.5 4.5 14.8 52.9 27.8 7.6 4.4 16.1 50.5 29.1 7.5 5.6 10.0 24.4 60.0 8.5 3.2 21.0 45.9 29.9 7.6
+;

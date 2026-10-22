@@ -1,0 +1,21 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones materiales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Población con gasto elevado en vivienda por sexo";
+CONTENTS="Población con gasto elevado en vivienda";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+UNITS="%";
+DATA=7.8 8.2 9.2 9.9 8.2 8.5 8.9 9.8 10.1 10.3 10.9 10.3 10.7 10.0 9.7 10.3 9.4 7.6 8.0 8.8 9.7 7.7 8.3 8.3 9.4 9.9 10.4 11.0 10.6 10.6 9.9 9.3 10.3 9.4 7.9 8.4 9.6 10.0 8.6 8.8 9.4 10.2 10.4 10.2 10.9 10.1 10.8 10.1 10.0 10.4
+ 9.5;

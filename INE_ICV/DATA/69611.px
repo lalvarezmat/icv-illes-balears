@@ -1,0 +1,27 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Calidad";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Ocupados por deciles de renta y grado de satisfacción con su trabajo actual";
+CONTENTS="Ocupados";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Los datos de 2006 a 2020 están calculados según la base poblacional 2011. Des"
+"de 2021 se utiliza la base 2021";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de renta";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Nivel de renta")="Total","Primer decil","Segundo decil","Tercer decil","Cuarto decil","Quinto decil",
+"Sexto decil","Septimo decil","Octavo decil","Noveno decil","Décimo decil";
+VALUES("Grado de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2023","2018","2013";
+UNITS="%, Número medio";
+DATA=7.3 6.4 10.1 20.9 20.4 26.4 46.8 47.6 44.2 25.1 25.6 19.4 7.3 7.3 6.9 7.9 12.3 19.5 24.3 30.3 40.5 40.5 38.2 25.5 27.4 19.2 14.6 7.2 6.7 6.0 7.5 10.3 15.8 22.0 26.8 27.2 41.9 43.0 39.5 28.6 20.0 17.5 7.3 6.9 6.6 9.3 8.0 13.5 21.4 29.4
+ 27.9 41.7 44.9 42.4 27.6 17.6 16.1 7.1 6.9 6.6 9.0 7.4 10.6 23.7 25.0 31.0 40.9 42.8 39.4 26.4 24.8 19.0 7.1 7.2 6.7 7.8 7.1 10.5 22.0 19.6 27.6 46.9 47.0 42.9 23.3 26.3 19.0 7.1 7.3 6.8 7.3 7.4 10.2 22.6 20.9 25.6 44.9 50.0 44.4 25.2
+ 21.7 19.8 7.2 7.2 7.0 7.2 5.2 9.2 21.7 19.9 27.1 49.8 49.4 45.6 21.4 25.5 18.1 7.2 7.4 6.9 7.3 3.6 7.8 19.5 15.5 24.1 48.4 51.3 48.0 24.8 29.5 20.1 7.3 7.6 7.1 6.9 4.1 8.0 19.7 16.2 26.1 50.9 49.0 47.2 22.6 30.7 18.8 7.3 7.6 7.0
+ 4.2 4.6 6.9 16.3 14.0 19.6 52.6 50.8 49.0 26.9 30.6 24.5 7.5 7.7 7.3;

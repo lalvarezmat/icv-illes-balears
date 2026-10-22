@@ -1,0 +1,36 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones materiales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Población con carencias materiales al menos 4 conceptos por número de conceptos y ámbito geográfico";
+CONTENTS="Población con carencias materiales al menos 4 conceptos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Conceptos considerados:#<ul><li>No puede permitirse ir de vacaciones al menos"
+" una semana al año;</li><li>No puede permitirse una comida de carne, pollo o "
+"pescado al menos cada dos días;</li><li>No puede permitirse mantener la vivie"
+"nda con una temperatura adecuada;</li><li>No tiene capacidad para afrontar ga"
+"stos imprevistos;</li><li>Ha tenido retrasos en el pago de gastos relacionado"
+"s con la vivienda principal (hipoteca o alquiler, recibos de gas, comunidad.."
+".) o en compras a plazos en los últimos 12 meses;</li><li>No puede permitirse"
+" disponer de un automóvil;</li><li>No puede permitirse disponer de un teléfon"
+"o;</li><li>No puede permitirse disponer de un televisor en color;</li><li>No "
+"puede permitirse disponer de una lavadora.</li></ul>##A partir de ECV2021 se "
+"dejan de recoger los conceptos:#<ul><li>No puede permitirse disponer de un te"
+"léfono,</li><li>No puede permitirse disponer de un televisor en color</li><li"
+"> y No puede permitirse disponer de una lavadora</li></ul>#asumiéndose que el"
+" hogar no tiene carencia en esos conceptos.#";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Ámbito geográfico";
+HEADING="Periodo";
+VALUES("Ámbito geográfico")="España","Unión Europea";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+CODES("Ámbito geográfico")="null","null";
+MAP("Ámbito geográfico")="";
+UNITS="%";
+DATA=8.4 8.9 8.1 7.3 7.0 4.7 5.4 5.1 5.8 6.4 7.1 6.2 5.8 4.5 4.9 4.5 3.6 3.5 4.1 4.1 4.8 ".." ".." ".." ".." 5.9 5.5 6.1 6.9 7.9 8.4 9.1 9.8 10.2 9.4 8.9 ".." ".." ".." ".." ".." "..";

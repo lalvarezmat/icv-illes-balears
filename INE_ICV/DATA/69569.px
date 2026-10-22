@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Cantidad";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Empleo involuntario a tiempo parcial por ámbito geográfico";
+CONTENTS="Empleo involuntario a tiempo parcial";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 15 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Ámbito geográfico";
+HEADING="Periodo";
+VALUES("Ámbito geográfico")="España","Unión Europea";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006";
+CODES("Ámbito geográfico")="null","null";
+MAP("Ámbito geográfico")="";
+UNITS="%";
+DATA=45.8 48.1 50.1 53.0 51.4 53.6 55.3 60.3 61.3 62.6 63.3 62.6 60.6 55.3 49.6 43.7 35.5 32.8 33.4 17.1 18.3 19.7 22.1 23.2 24.4 25.8 27.4 28.7 30.0 30.4 29.7 28.2 26.7 27.0 25.7 24.5 24.0 24.6;

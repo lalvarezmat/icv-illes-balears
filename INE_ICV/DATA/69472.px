@@ -1,0 +1,38 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones materiales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Población con carencias materiales (al menos 3, 4 conceptos) por número de conceptos y sexo";
+CONTENTS="Población con carencias materiales (al menos 3, 4 conceptos)";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Conceptos considerados:#<ul><li>No puede permitirse ir de vacaciones al menos"
+" una semana al año;</li><li>No puede permitirse una comida de carne, pollo o "
+"pescado al menos cada dos días;</li><li>No puede permitirse mantener la vivie"
+"nda con una temperatura adecuada;</li><li>No tiene capacidad para afrontar ga"
+"stos imprevistos;</li><li>Ha tenido retrasos en el pago de gastos relacionado"
+"s con la vivienda principal (hipoteca o alquiler, recibos de gas, comunidad.."
+".) o en compras a plazos en los últimos 12 meses;</li><li>No puede permitirse"
+" disponer de un automóvil;</li><li>No puede permitirse disponer de un teléfon"
+"o;</li><li>No puede permitirse disponer de un televisor en color;</li><li>No "
+"puede permitirse disponer de una lavadora.</li></ul>##A partir de ECV2021 se "
+"dejan de recoger los conceptos:#<ul><li>No puede permitirse disponer de un te"
+"léfono,</li><li>No puede permitirse disponer de un televisor en color</li><li"
+"> y No puede permitirse disponer de una lavadora</li></ul>#asumiéndose que el"
+" hogar no tiene carencia en esos conceptos.#";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Número de conceptos","Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Número de conceptos")="Carencia material (carencia en al menos 3 conceptos)",
+"Carencia material severa (carencia en al menos 4 conceptos)";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=18.4 19.2 17.8 17.2 16.7 12.4 13.9 12.8 15.2 16.5 17.8 16.9 16.3 13.2 15.1 13.7 10.8 11.1 13.0 11.9 14.4 8.4 8.9 8.1 7.3 7.0 4.7 5.4 5.1 5.8 6.4 7.1 6.2 5.8 4.5 4.9 4.5 3.6 3.5 4.1 4.1 4.8 18.0 18.8 17.4 16.9 16.6 12.0 13.3 12.4
+ 14.7 16.3 17.7 17.0 16.6 13.0 14.5 13.8 10.7 10.9 12.5 11.6 14.3 8.3 8.9 7.8 7.2 6.9 4.6 5.3 4.9 5.3 6.6 7.0 6.3 6.2 4.5 4.7 4.6 3.7 3.5 4.2 4.0 4.8 18.7 19.5 18.3 17.5 16.9 12.7 14.4 13.2 15.7 16.6 17.9 16.8 16.1 13.3 15.7 13.6
+ 10.9 11.3 13.4 12.2 14.6 8.5 9.0 8.3 7.4 7.0 4.8 5.5 5.3 6.2 6.3 7.1 6.1 5.5 4.6 5.1 4.4 3.5 3.6 4.0 4.2 4.8;

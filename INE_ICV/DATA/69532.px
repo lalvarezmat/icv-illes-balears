@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad económica";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Incapacidad de hacer frente a gastos económicos imprevistos (18 y más años) por nivel de educación";
+CONTENTS="Incapacidad de hacer frente a gastos económicos imprevistos (18 y más años)";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=34.6 35.8 34.6 32.7 34.8 33.2 35.5 36.2 37.9 39.0 41.9 40.9 41.3 36.8 37.7 35.5 29.0 30.3 31.6 34.0 39.6 44.4 47.1 45.9 43.9 47.3 44.9 47.8 46.8 50.1 51.4 53.4 51.5 51.7 46.4 48.6 45.6 37.7 39.2 40.5 42.5 48.7 37.2 38.3 36.0 34.6 36.0 31.6 34.5 35.0
+ 34.7 36.2 40.5 38.7 38.0 33.4 33.3 31.9 24.5 25.5 25.3 28.9 33.6 21.4 21.5 20.7 17.9 18.1 17.0 17.6 20.0 19.3 19.3 22.3 22.4 23.0 19.2 18.4 16.4 13.6 13.9 15.5 17.5 22.1;

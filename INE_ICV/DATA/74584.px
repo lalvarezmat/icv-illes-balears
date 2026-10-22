@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Satisfacción con las relaciones personales por nacionalidad";
+CONTENTS="Satisfacción con las relaciones personales";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nacionalidad";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Nacionalidad")="Total","Española","Extranjera (UE)","Extranjera (Resto del mundo)";
+VALUES("Grado de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2022","2018","2013";
+UNITS="%, Número medio";
+DATA=3.2 1.9 3.5 14.0 8.5 14.9 46.6 41.3 45.6 36.2 48.3 36.0 7.9 8.2 7.8 3.1 1.9 3.2 13.8 8.0 14.4 47.0 40.9 46.0 36.0 49.2 36.4 7.9 8.3 7.8 4.6 1.6 5.9 13.9 11.8 14.3 37.5 45.8 43.7 44.0 40.9 36.0 8.0 7.9 7.7 3.9 2.4 5.9 17.2 14.1
+ 21.9 44.3 46.5 41.0 34.5 36.9 31.2 7.8 7.9 7.4;

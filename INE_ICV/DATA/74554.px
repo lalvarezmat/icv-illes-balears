@@ -1,0 +1,30 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Ocio";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas de 16 y más años que no han participado en actividades culturales o deportivas en los últimos 12 meses por ámbito geográfico y motivos";
+CONTENTS="Personas de 16 y más años que no han participado en actividades culturales o de";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Por el resto de razones incluye: : No tiene interés, No tiene tiempo, No hay "
+"actividades de este tipo cerca, Lo ve/experimenta por otros medios y Por otra"
+"s razones#"
+"Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Indicador de calidad de vida","Ámbito geográfico";
+HEADING="Razones","Periodo";
+VALUES("Indicador de calidad de vida")="Adultos que han ido al cine",
+"Adultos que han ido a espectáculos en directo tales como obras de teatro, conciertos, etc.",
+"Adultos que han visitado lugares de interés cultural tales como monumentos históricos, museos, etc.",
+"Adultos que han presenciado en directo acontecimientos deportivos";
+VALUES("Ámbito geográfico")="España","Unión Europea";
+VALUES("Razones")="Por el resto de razones","Por razones financieras";
+VALUES("Periodo")="2022","2015";
+CODES("Ámbito geográfico")="null","null";
+MAP("Ámbito geográfico")="";
+UNITS="%";
+DATA=87.9 73.3 12.0 26.7 ".." 82.8 ".." 17.1 83.8 74.3 16.3 25.8 ".." 81.6 ".." 18.4 86.5 78.6 13.4 21.5 ".." 85.0 ".." 15.0 90.6 81.3 9.4 18.7 ".." 89.2 ".." 10.8;

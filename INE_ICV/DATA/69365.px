@@ -1,0 +1,28 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones económicas";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Población y tasa de riesgo de pobreza después de transferencias sociales por umbral y riesgo de pobreza ";
+CONTENTS="Población y tasa de riesgo de pobreza después de transferencias sociales";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Base 2013: nueva metodología de cálculo en los ingresos del hogar, combinando"
+" información del informante con ficheros administrativos.";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Umbral de renta";
+HEADING="Riesgo de pobreza","Periodo";
+VALUES("Umbral de renta")="Inferior al 40% de la renta mediana equivalente",
+"Inferior al 50% de la renta mediana equivalente",
+"Inferior al 60% de la renta mediana equivalente",
+"Inferior al 70% de la renta mediana equivalente";
+VALUES("Riesgo de pobreza")="Tasa de riesgo de pobreza","Población en riesgo de pobreza";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+UNITS="%, Miles Personas";
+DATA=8.4 8.3 8.9 10.2 9.5 9.2 9.2 10.5 10.7 11.2 10.6 9.3 9.6 8.6 8.8 8.1 7.4 4034.6 3939.9 4177.9 4773.2 4463.1 4272.0 4238.0 4841.0 4917.2 5128.8 4889.8 4316.5 4461.6 3998.9 4067.2 3710.7 3361.5 13.2 13.1 13.7 15.1 14.6 13.6 14.6 15.7 15.5 15.9 15.9 13.9 14.4 13.8 13.8 13.2
+ 13.1 6370.5 6185.4 6445.5 7087.7 6841.6 6316.5 6756.5 7232.6 7113.8 7323.9 7310.9 6422.1 6655.2 6367.3 6357.8 6044.5 5933.8 19.7 20.2 20.4 21.7 21.0 20.7 21.5 21.6 22.3 22.1 22.2 20.4 20.8 20.6 20.7 20.4 19.8 9494.8 9567.1 9584.7 10159.8 9829.3 9610.4 9949.6 9950.1 10268.9 10178.1 10218.4 9424.9 9656.3 9549.9 9550.6
+ 9342.0 8996.9 26.6 26.9 27.5 28.5 27.9 28.4 28.9 29.2 29.9 29.2 29.7 28.6 28.9 28.1 27.2 27.7 27.3 12856.1 12730.7 12868.4 13357.1 13099.5 13205.5 13356.8 13454.2 13750.1 13420.6 13651.1 13219.1 13395.4 13002.9 12536.7 12710.8 12376.7;

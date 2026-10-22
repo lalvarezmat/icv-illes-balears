@@ -1,0 +1,24 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Competencias y habilidades";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Abandono educativo temprano de la población de 18 a 24 años por grado de urbanización";
+CONTENTS="Abandono educativo temprano de la población de 18 a 24 años";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Los datos de 2006 a 2020 están calculados según la base poblacional 2011. Des"
+"de 2021 se utiliza la base 2021";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=13.0 13.7 13.9 13.3 16.0 17.3 17.9 18.3 19.0 20.0 21.9 23.6 24.7 26.3 28.2 30.9 31.7 30.8 30.3 31.0 32.2 11.3 12.8 12.2 11.4 13.6 15.3 15.5 15.5 15.8 17.0 18.5 20.1 21.1 22.8 24.2 27.3 27.6 26.4 25.7 25.5 27.2 15.1 15.0 16.2 15.4 18.6 19.5 21.0 21.6
+ 20.0 20.5 23.6 24.9 26.3 29.4 31.5 34.2 36.7 34.8 34.1 34.8 35.5 14.6 14.4 15.1 15.5 19.6 19.6 19.7 20.8 23.8 24.6 26.3 28.4 29.6 30.0 32.5 34.7 34.8 35.9 36.1 38.2 38.5;

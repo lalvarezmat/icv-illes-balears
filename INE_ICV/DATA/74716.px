@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Acceso a zonas verdes y de recreo";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Satisfacción con las zonas verdes y áreas recreativas por grado de urbanización";
+CONTENTS="Satisfacción con las zonas verdes y áreas recreativas";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Grado de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2013";
+UNITS="%, Número medio";
+DATA=14.5 25.6 41.2 18.8 6.6 14.3 25.8 42.3 17.6 6.6 13.8 27.3 39.8 19.1 6.6 15.3 23.8 40.2 20.7 6.7;

@@ -1,0 +1,21 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Tener alguien con quien hablar de temas personales por sexo";
+CONTENTS="Tener alguien con quien hablar de temas personales";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Ruptura de serie por diferente pregunta en 2018";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Periodo")="2018","2015","2013";
+UNITS="%";
+DATA=94.4 97.8 97.6 94.5 97.5 97.3 94.3 98.0 97.8;

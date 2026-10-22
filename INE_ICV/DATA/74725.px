@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Entorno ambiental";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Satisfacción con el entorno en que vive por grado de urbanización";
+CONTENTS="Satisfacción con el entorno en que vive";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Grado de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2013";
+UNITS="%, Número medio";
+DATA=7.9 21.3 47.1 23.7 7.2 9.1 22.6 47.0 21.3 7.1 6.1 22.0 48.3 23.6 7.3 7.2 18.3 46.3 28.2 7.4;

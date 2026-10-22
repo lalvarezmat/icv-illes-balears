@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Confianza alta o muy alta en los demás por grado de urbanización";
+CONTENTS="Confianza alta o muy alta en los demás";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"La confianza 'alta o muy alta'  corresponde a los valores de 7 a 10 puntos";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Periodo")="2024","2023","2022","2021","2018","2013";
+UNITS="%";
+DATA=50.3 52.7 52.9 52.3 59.8 51.9 51.7 54.0 53.9 53.2 60.7 51.8 48.5 51.7 51.0 50.7 59.8 53.8 49.5 50.4 53.0 52.5 58.1 50.7;

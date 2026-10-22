@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones económicas";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Desigualdad (S80/S20) de las personas de 18 y más años por nivel de educación";
+CONTENTS="Desigualdad (S80/S20) de las personas de 18 y más años";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+UNITS="Número";
+DATA=5.2 5.3 5.4 5.9 5.6 5.7 5.9 6.3 6.3 6.5 6.6 6.1 6.2 6.0 5.8 5.6 5.4 4.4 4.2 4.5 5.1 5.0 4.7 4.9 4.8 4.8 4.9 5.0 4.9 5.1 4.8 4.7 4.8 4.6 4.3 4.5 4.6 4.9 4.6 4.7 5.1 5.7 5.9 6.3 6.4 5.7 5.4 5.2 4.9 4.7
+ 4.5 4.9 4.9 5.1 5.7 5.3 5.5 5.4 5.8 6.0 6.4 6.1 5.8 6.1 5.5 5.6 5.0 4.9;

@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad económica";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Retrasos en los pagos (población de 18 y más años) por nivel de educación";
+CONTENTS="Retrasos en los pagos (población de 18 y más años)";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=13.3 12.6 12.0 13.1 12.5 7.6 8.5 8.4 9.6 10.7 11.4 10.7 9.9 8.0 10.3 9.7 7.2 7.0 6.3 6.3 7.3 15.3 15.6 14.7 16.8 16.0 10.3 11.4 10.4 12.6 13.4 14.0 13.0 11.8 9.1 12.1 11.2 8.1 7.7 6.9 6.7 8.2 16.2 14.4 13.5 14.6 14.9 8.0 9.1 9.8
+ 9.4 11.6 11.5 10.9 10.6 8.6 11.7 11.3 7.8 8.3 6.7 6.8 7.5 8.8 7.9 7.9 7.6 6.6 3.2 3.7 4.2 4.6 5.1 6.9 6.2 5.6 5.2 5.4 5.1 4.6 3.9 4.6 4.9 4.8;

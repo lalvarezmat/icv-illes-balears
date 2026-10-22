@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Entorno ambiental";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Satisfacción con el entorno en que vive (de las personas de 18 y más años) por nivel de educación";
+CONTENTS="Satisfacción con el entorno en que vive (de las personas de 18 y más años)";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Grado de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2013";
+UNITS="%, Número medio";
+DATA=7.9 21.3 47.1 23.7 7.2 8.9 22.7 45.0 23.4 7.1 7.5 21.2 47.8 23.5 7.2 6.4 18.8 50.5 24.3 7.3;

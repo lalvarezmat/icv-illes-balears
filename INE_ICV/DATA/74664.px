@@ -1,0 +1,26 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Participación ciudadana";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas que han participado en actividades de carácter político por sexo";
+CONTENTS="Personas que han participado en actividades de carácter político";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Participación en actividades de partidos políticos, en una manifestación, en "
+"peticiones escritas a políticos o a medios de comunicación, etc. Se incluye l"
+"a participación a través de internet y se excluye la votación en procesos ele"
+"ctorales";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Participación","Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Participación")="Sí","No, porque no está interesado","No, por falta de tiempo",
+"No, por otras razones";
+VALUES("Periodo")="2022","2015";
+UNITS="%";
+DATA=5.6 7.9 64.4 52.5 4.1 4.7 25.9 34.9 5.6 8.4 64.2 51.9 4.2 4.8 25.9 34.8 5.6 7.3 64.5 53.1 4.0 4.6 25.8 35.0;

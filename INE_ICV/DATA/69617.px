@@ -1,0 +1,24 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Resultados";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Esperanza de vida al nacer por sexo";
+CONTENTS="Esperanza de vida al nacer";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Los resultados de 2012 a 2021 se han actualizado con las Estimaciones interce"
+"nsales de población y con la población de los Censos anuales a 1 de enero 202"
+"1 y a 1 de enero de 2022.";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Periodo")="2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011",
+"2010","2009","2008","2007","2006","2005","2004";
+UNITS="Años";
+DATA=83.8 83.1 83.0 82.3 83.5 83.2 83.1 83.1 82.7 82.9 82.8 82.3 82.3 82.1 81.7 81.3 81.0 80.9 80.3 80.3 81.1 80.4 80.2 79.5 80.8 80.4 80.3 80.3 79.9 80.1 79.9 79.4 79.3 79.1 78.6 78.2 77.8 77.7 77.0 77.0 86.3 85.7 85.8 85.0 86.2 85.8 85.7 85.8 85.4 85.6
+ 85.5 85.1 85.1 85.0 84.7 84.3 84.1 84.2 83.5 83.6;

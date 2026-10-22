@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Sentido y propósito de la vida";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Evaluación del sentido y propósito de la vida por edad";
+CONTENTS="Evaluación del sentido y propósito de la vida";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Evaluación","Periodo";
+VALUES("Edad")="Total","De 16 a 24 años","De 25 a 34 años","De 35 a 49 años","De 50 a 64 años",
+"De 65 y más años";
+VALUES("Evaluación")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Valoración media";
+VALUES("Periodo")="2013";
+UNITS="%, Número medio";
+DATA=4.7 19.1 46.7 29.5 7.5 2.0 16.1 45.8 36.1 7.8 4.0 16.2 48.9 30.9 7.7 4.7 17.4 47.1 30.8 7.6 4.3 21.0 48.8 25.9 7.4 7.1 23.5 42.4 27.0 7.3;

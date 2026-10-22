@@ -1,0 +1,31 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones económicas";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Renta media y mediana por sexo";
+CONTENTS="Renta media y mediana";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Corresponde al concepto de renta disponible equivalente de los hogares estand"
+"arizados en función del número de unidades de consumo equivalentes, para perm"
+"itir la comparación de hogares de distinta composición.";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Renta media y mediana","Sexo";
+HEADING="Periodo";
+VALUES("Renta media y mediana")="Renta media por unidad de consumo","Renta mediana por unidad de consumo",
+"Ratio Media/Mediana";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+PRECISION("Renta media y mediana","Renta media por unidad de consumo")=0;
+PRECISION("Renta media y mediana","Renta mediana por unidad de consumo")=0;
+PRECISION("Renta media y mediana","Ratio Media/Mediana")=2;
+UNITS="Euros por unidad de consumo";
+DATA=21759.0 20676.0 19160.0 18103.0 18116.0 17287.0 16937.0 16390.0 15842.0 15408.0 15405.0 15635.0 16119.0 16280.0 16922.0 17042.0 16190.0 22089.0 20953.0 19440.0 18275.0 18339.0 17449.0 17187.0 16537.0 15969.0 15491.0 15536.0 15722.0 16278.0 16494.0 17128.0 17408.0 16471.0 21442.0 20410.0 18891.0 17937.0 17900.0 17131.0 16695.0 16249.0 15719.0 15328.0 15278.0 15551.0 15964.0 16070.0 16721.0 16684.0
+ 15915.0 19307.0 18316.0 16814.0 15892.0 16043.0 15015.0 14785.0 14203.0 13681.0 13352.0 13269.0 13524.0 13868.0 13929.0 14605.0 14795.0 13966.0 19723.0 18630.0 17162.0 16118.0 16339.0 15294.0 15086.0 14513.0 13873.0 13459.0 13428.0 13617.0 14029.0 14174.0 14798.0 15118.0 14339.0 18932.0 18063.0 16560.0 15719.0 15804.0 14783.0 14492.0 13948.0 13490.0 13249.0 13091.0 13444.0 13695.0 13699.0 14450.0
+ 14355.0 13623.0 1.13 1.13 1.14 1.14 1.13 1.15 1.15 1.15 1.16 1.15 1.16 1.16 1.16 1.17 1.16 1.15 1.16 1.12 1.12 1.13 1.13 1.12 1.14 1.14 1.14 1.15 1.15 1.16 1.15 1.16 1.16 1.16 1.15 1.15 1.13 1.13 1.14 1.14 1.13 1.16 1.15 1.16 1.17 1.16 1.17 1.16 1.17 1.17
+ 1.16 1.16 1.17;

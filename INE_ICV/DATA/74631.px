@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad física y personal";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Nivel de seguridad que sienten las personas al pasear solas de noche por deciles de renta";
+CONTENTS="Nivel de seguridad que sienten las personas al pasear solas de noche";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de renta";
+HEADING="Nivel de seguridad","Periodo";
+VALUES("Nivel de renta")="Total","Primer decil","Segundo decil","Tercer decil","Cuarto decil","Quinto decil",
+"Sexto decil","Septimo decil","Octavo decil","Noveno decil","Décimo decil";
+VALUES("Nivel de seguridad")="Muy seguro","Bastante seguro","Un poco inseguro","Muy inseguro";
+VALUES("Periodo")="2013";
+UNITS="%";
+DATA=32.4 45.9 16.4 5.3 33.5 46.6 13.9 6.0 35.3 45.3 13.0 6.5 29.6 47.1 17.9 5.4 31.8 45.0 17.4 5.7 34.7 41.2 18.0 6.1 32.2 44.0 18.0 5.7 31.9 46.2 17.5 4.3 31.0 46.2 17.7 5.1 30.1 48.0 17.3 4.5 34.1 48.7 13.6 3.6;

@@ -1,0 +1,25 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Sentimientos y emociones";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Sentimiento de felicidad en las 4 últimas semanas por edad";
+CONTENTS="Sentimiento de felicidad en las 4 últimas semanas";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Muy a menudo incluye: 'Siempre', 'Casi siempre'. Alguna vez incluye : 'Alguna"
+"s veces', 'Solo alguna vez'";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Frecuencia","Periodo";
+VALUES("Edad")="Total","De 16 a 24 años","De 25 a 34 años","De 35 a 49 años","De 50 a 64 años",
+"De 65 y más años";
+VALUES("Frecuencia")="Algunas veces","Muy a menudo","Nunca";
+VALUES("Periodo")="2022","2018","2013";
+UNITS="%";
+DATA=30.8 26.7 34.7 67.3 71.5 63.2 1.9 1.9 2.0 21.6 15.9 24.1 77.4 83.4 74.5 1.0 0.7 1.4 25.4 18.6 29.8 73.5 80.5 69.1 1.1 0.9 1.1 30.3 23.9 34.2 68.1 74.6 64.1 1.6 1.5 1.6 34.3 30.7 39.7 63.4 67.0 57.7 2.3 2.3 2.6 34.6 35.7 35.3 62.5 61.3
+ 62.2 2.9 3.0 2.5;

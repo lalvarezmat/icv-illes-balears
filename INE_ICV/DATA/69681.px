@@ -1,0 +1,25 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Ejercicio físico regular y sedentarismo en el tiempo libre por quintiles de renta";
+CONTENTS="Ejercicio físico regular y sedentarismo en el tiempo libre";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 15 y más años"
+"En 2022 ruptura de serie por diferente fuente, diferente pregunta y población"
+" de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de renta";
+HEADING="Tipo de ejercicio","Periodo";
+VALUES("Nivel de renta")="Total","Primer quintil","Segundo quintil","Tercer quintil","Cuarto quintil",
+"Quinto quintil";
+VALUES("Tipo de ejercicio")="Ejercicio fisico regular","Sedentarismo";
+VALUES("Periodo")="2023","2022","2020","2017","2014","2012";
+UNITS="%";
+DATA=29.8 37.7 26.4 25.6 25.1 22.4 30.5 27.4 36.5 38.4 36.7 44.4 22.6 33.1 22.2 17.3 22.4 12.2 40.5 38.7 42.2 48.9 39.7 50.6 22.5 36.3 22.1 18.0 16.4 17.0 37.8 33.4 41.9 44.2 42.6 47.2 27.1 37.0 24.9 22.7 22.8 21.8 32.1 29.5 37.6 39.6 37.9 43.3 32.4 38.9
+ 28.4 29.7 28.1 28.0 26.1 22.5 33.6 34.1 34.0 39.2 41.6 42.5 34.6 40.2 38.8 36.3 21.3 14.3 27.0 25.4 25.3 33.4;

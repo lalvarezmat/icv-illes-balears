@@ -1,0 +1,16 @@
+# Subproductos de knitr / rmarkdown
+*.knit.md
+*_files/
+*_cache/
+*.html
+.Rhistory
+.RData
+.Rproj.user/
+*.log
+
+# Ficheros abiertos en Excel
+~$*.xlsx
+
+# Fuentes grandes que descargan los scripts (no se versionan)
+REGISTRADORES/ERI_Anuarios/
+SERPAVI/BD_SERPAVI_*.xlsx

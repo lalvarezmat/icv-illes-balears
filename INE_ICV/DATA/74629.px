@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad física y personal";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Nivel de seguridad que sienten las personas al pasear solas de noche por edad";
+CONTENTS="Nivel de seguridad que sienten las personas al pasear solas de noche";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Nivel de seguridad","Periodo";
+VALUES("Edad")="Total","De 16 a 24 años","De 25 a 34 años","De 35 a 49 años","De 50 a 64 años",
+"De 65 y más años";
+VALUES("Nivel de seguridad")="Muy seguro","Bastante seguro","Un poco inseguro","Muy inseguro";
+VALUES("Periodo")="2013";
+UNITS="%";
+DATA=32.4 45.9 16.4 5.3 37.2 45.3 13.8 3.8 36.4 46.6 13.9 3.2 35.4 46.0 14.4 4.1 32.4 46.6 16.4 4.5 22.2 44.5 23.0 10.4;

@@ -1,0 +1,27 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Ocio";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas de 16 y más años por eventos culturales, deportivos o lugares de interés cultural a los que han asistido en los últimos 12 meses por sexo";
+CONTENTS="Personas de 16 y más años";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Indicador de calidad de vida","Sexo";
+HEADING="Asistencia","Periodo";
+VALUES("Indicador de calidad de vida")="Adultos que han ido al cine",
+"Adultos que han ido a espectáculos en directo tales como obras de teatro, conciertos, etc.",
+"Adultos que han visitado lugares de interés cultural tales como monumentos históricos, museos, etc.",
+"Adultos que han presenciado en directo acontecimientos deportivos";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Asistencia")="Sí ha asistido","No ha ido porque no puede permitírselo",
+"No ha ido por otras razones";
+VALUES("Periodo")="2022","2015";
+UNITS="%";
+DATA=36.7 45.9 7.6 14.4 55.6 39.7 37.3 45.6 7.1 14.1 55.6 40.2 36.3 46.1 8.1 14.7 55.6 39.2 32.6 32.7 11.0 17.3 56.4 50.0 30.8 30.9 10.1 16.5 59.1 52.6 34.3 34.4 11.8 18.1 53.9 47.5 39.2 34.2 8.2 14.1 52.6 51.7 38.7 33.4 7.5 13.7 53.8 53.0 39.7 35.0
+ 8.8 14.5 51.5 50.4 24.5 25.5 7.1 13.9 68.4 60.6 31.7 33.6 7.8 15.9 60.5 50.5 17.8 17.8 6.5 12.1 75.8 70.2;

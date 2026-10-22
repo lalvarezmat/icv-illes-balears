@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad física y personal";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Nivel de seguridad que sienten las personas al pasear solas de noche por grado de urbanización";
+CONTENTS="Nivel de seguridad que sienten las personas al pasear solas de noche";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Nivel de seguridad","Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Nivel de seguridad")="Muy seguro","Bastante seguro","Un poco inseguro","Muy inseguro";
+VALUES("Periodo")="2013";
+UNITS="%";
+DATA=32.4 45.9 16.4 5.3 25.3 47.9 20.3 6.6 37.1 43.0 15.4 4.5 41.7 44.6 10.2 3.5;

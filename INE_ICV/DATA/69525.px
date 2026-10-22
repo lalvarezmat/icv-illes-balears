@@ -1,0 +1,20 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad económica";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Valor mediano de los activos y las deudas";
+CONTENTS="Valor mediano de los activos y las deudas";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Valor mediano";
+HEADING="Periodo";
+VALUES("Valor mediano")="Valor mediano de los activos (reales o financieros)",
+"Valor mediano de las deudas";
+VALUES("Periodo")="2022","2020","2017","2014","2011","2008","2005";
+UNITS="Miles ¤";
+DATA=198.0 200.6 189.4 191.2 227.0 279.6 298.9 28.7 37.4 40.0 52.7 52.5 45.9 42.8;

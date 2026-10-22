@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones económicas";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Tasa de riesgo de pobreza (de las personas de 18 y más años) con umbral fijo en el año 2008 por nivel de educación";
+CONTENTS="Tasa de riesgo de pobreza (de las personas de 18 y más años) con umbral fijo en el año 2008";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+UNITS="%";
+DATA=16.9 18.3 18.9 21.2 20.3 23.3 24.5 25.1 27.6 28.4 29.2 26.6 24.4 22.1 18.9 18.1 18.3 23.8 26.7 26.3 29.6 28.0 31.6 33.9 33.7 36.7 37.4 38.1 35.1 32.0 29.1 25.3 24.5 24.6 17.4 18.3 19.6 21.5 20.7 22.0 23.8 24.0 25.5 27.3 27.5 24.7 22.7 18.3 16.3 14.4
+ 14.7 8.6 9.0 10.0 11.0 10.3 12.1 10.6 12.0 13.7 13.3 14.3 11.9 10.5 10.7 7.4 7.3 7.2;

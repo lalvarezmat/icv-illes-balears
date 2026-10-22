@@ -1,0 +1,28 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Ocio";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas de 16 y más años por eventos culturales, deportivos o lugares de interés cultural a los que han asistido en los últimos 12 meses por grado de urbanización";
+CONTENTS="Personas de 16 y más años";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Indicador de calidad de vida","Asistencia","Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Indicador de calidad de vida")="Adultos que han ido al cine",
+"Adultos que han ido a espectáculos en directo tales como obras de teatro, conciertos, etc.",
+"Adultos que han visitado lugares de interés cultural tales como monumentos históricos, museos, etc.",
+"Adultos que han presenciado en directo acontecimientos deportivos";
+VALUES("Asistencia")="Sí ha asistido","No ha ido porque no puede permitírselo",
+"No ha ido por otras razones";
+VALUES("Periodo")="2022","2015";
+UNITS="%";
+DATA=36.7 45.9 7.6 14.4 55.6 39.7 32.6 32.7 11.0 17.3 56.4 49.9 39.2 34.2 8.2 14.1 52.6 51.7 24.5 25.5 7.1 13.9 68.4 60.6 40.9 51.4 7.4 14.6 51.7 34.0 35.3 36.2 11.1 18.2 53.6 45.5 43.9 39.8 7.6 13.9 48.4 46.3 24.5 25.5 7.1 14.8 68.4 59.6 33.9 48.9
+ 8.8 13.3 57.4 37.8 29.7 33.9 11.9 16.7 58.4 49.4 34.1 33.1 9.5 14.1 56.4 52.8 25.1 30.1 7.6 12.3 67.2 57.6 27.0 32.8 5.7 14.9 67.4 52.2 28.6 25.0 8.2 16.1 63.2 58.8 32.4 24.4 7.3 14.4 60.3 61.2 23.6 21.5 5.8 13.6 70.6 64.9;

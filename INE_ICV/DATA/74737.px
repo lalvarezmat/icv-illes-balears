@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Sentimientos y emociones";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Sentimiento de felicidad en las 4 últimas semanas por sexo";
+CONTENTS="Sentimiento de felicidad en las 4 últimas semanas";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Muy a menudo incluye: 'Siempre', 'Casi siempre'. Alguna vez incluye : 'Alguna"
+"s veces', 'Solo alguna vez'";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Frecuencia","Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Frecuencia")="Algunas veces","Muy a menudo","Nunca";
+VALUES("Periodo")="2022","2018","2013";
+UNITS="%";
+DATA=30.8 26.7 34.7 67.3 71.5 63.2 1.9 1.9 2.0 29.8 24.2 33.3 68.4 74.2 64.9 1.8 1.6 1.8 31.7 29.0 36.2 66.2 69.0 61.5 2.1 2.1 2.2;

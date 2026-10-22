@@ -1,0 +1,29 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Ocio";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas de 16 y más años por eventos culturales, deportivos o lugares de interés cultural a los que han asistido en los últimos 12 meses por edad";
+CONTENTS="Personas de 16 y más años";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Indicador de calidad de vida","Asistencia","Periodo";
+VALUES("Edad")="Total","De 16 a 24 años","De 25 a 34 años","De 35 a 49 años","De 50 a 64 años",
+"De 65 y más años";
+VALUES("Indicador de calidad de vida")="Adultos que han ido al cine",
+"Adultos que han ido a espectáculos en directo tales como obras de teatro, conciertos, etc.",
+"Adultos que han visitado lugares de interés cultural tales como monumentos históricos, museos, etc.",
+"Adultos que han presenciado en directo acontecimientos deportivos";
+VALUES("Asistencia")="Sí ha asistido","No ha ido porque no puede permitírselo",
+"No ha ido por otras razones";
+VALUES("Periodo")="2022","2015";
+UNITS="%";
+DATA=36.7 45.9 7.6 14.4 55.6 39.7 32.6 32.7 11.0 17.3 56.4 49.9 39.2 34.2 8.2 14.1 52.6 51.7 24.5 25.5 7.1 13.9 68.4 60.6 70.5 77.0 4.7 11.1 24.8 11.9 44.3 43.5 9.7 17.1 45.9 39.4 46.2 38.6 6.4 13.4 47.4 48.0 41.2 43.2 6.9 14.8 51.9 42.1 55.5 65.9
+ 7.2 12.3 37.2 21.8 43.9 43.2 10.5 17.3 45.6 39.5 45.8 39.8 7.6 13.8 46.7 46.4 30.2 34.9 7.0 14.3 62.8 50.8 41.5 52.9 9.6 17.8 48.9 29.2 35.4 34.6 13.0 20.9 51.5 44.5 42.1 37.6 9.8 17.2 48.1 45.2 28.1 29.3 9.0 16.7 62.9 54.0 29.1 38.3 9.5 17.8
+ 61.3 44.0 31.3 31.6 13.1 19.7 55.7 48.7 42.2 36.3 10.1 16.1 47.7 47.6 21.8 20.7 8.1 15.8 70.1 63.4 13.3 14.9 4.7 9.3 82.0 75.8 18.9 18.8 7.1 10.0 74.0 71.3 25.6 21.2 5.3 8.3 69.1 70.5 12.4 10.0 3.9 7.4 83.8 82.5;

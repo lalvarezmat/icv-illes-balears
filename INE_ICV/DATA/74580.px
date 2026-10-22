@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Satisfacción con las relaciones personales por edad";
+CONTENTS="Satisfacción con las relaciones personales";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Nivel de satisfacción","Periodo";
+VALUES("Edad")="Total","De 16 a 24 años","De 25 a 34 años","De 35 a 49 años","De 50 a 64 años",
+"De 65 y más años";
+VALUES("Nivel de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2022","2018","2013";
+UNITS="%, Número medio";
+DATA=3.2 1.9 3.5 14.0 8.5 14.9 46.6 41.3 45.6 36.2 48.3 36.0 7.9 8.2 7.8 2.0 1.3 1.5 12.3 4.8 10.5 47.6 36.5 46.7 38.2 57.4 41.3 8.0 8.5 8.1 3.1 1.5 3.1 12.0 6.4 13.9 45.2 40.5 43.7 39.6 51.6 39.3 8.0 8.4 7.9 3.4 1.8 4.1 14.5 9.4
+ 14.7 47.5 42.2 45.9 34.7 46.6 35.3 7.8 8.2 7.8 3.5 2.3 3.5 14.9 8.8 15.9 48.8 44.3 48.9 32.9 44.6 31.6 7.8 8.2 7.7 3.3 2.3 4.0 14.5 9.7 17.2 43.4 39.7 42.3 38.8 48.3 36.4 7.9 8.2 7.8;

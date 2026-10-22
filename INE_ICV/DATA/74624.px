@@ -1,0 +1,24 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad física y personal";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas de 18 y más años que declaran padecer problemas de delincuencia o vandalismo en la zona por nivel de educación";
+CONTENTS="Personas de 18 y más años que declaran padecer problemas de delincuencia o vandalismo en la zona";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="A partir de 2020 periodicidad trienal";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Periodo")="2023","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011","2010","2009",
+"2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=13.7 14.2 11.7 10.9 8.8 10.3 10.0 11.8 14.7 10.3 10.9 12.8 16.6 14.8 17.7 19.3 18.9 18.4 15.7 15.5 12.4 12.6 9.4 11.2 10.5 12.2 15.3 10.8 11.2 13.3 17.2 15.4 18.6 19.2 18.7 18.3 13.7 15.3 11.7 9.9 8.6 10.2 9.9 11.6 14.6 10.5 11.0 12.5 16.7 15.4
+ 17.1 20.2 20.0 18.6 11.4 11.6 10.5 9.3 7.9 8.7 9.1 11.3 13.6 9.1 10.1 12.0 15.0 12.8 16.1 18.3 18.4 18.4;

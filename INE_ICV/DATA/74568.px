@@ -1,0 +1,35 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Frecuencia de las reuniones con amigos por comunidad autónoma";
+CONTENTS="Frecuencia de las reuniones con amigos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"En los últimos 12 meses";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Comunidad autónoma";
+HEADING="Nivel de frecuencia","Periodo";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Nivel de frecuencia")="Diaria","Semanal pero no diaria","Varias veces al mes pero no semanal",
+"Una vez al mes","Al menos una vez al año pero menos de una vez por mes","Nunca";
+VALUES("Periodo")="2022","2015";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%";
+DATA=13.8 25.3 36.9 43.0 19.5 13.9 12.4 7.9 10.3 5.1 7.1 4.8 17.5 28.3 34.4 42.3 17.4 12.9 11.2 8.2 11.5 4.1 8.0 4.1 15.5 32.0 38.7 41.4 19.5 13.4 11.9 6.4 8.8 4.2 5.7 2.6 13.4 31.2 36.6 43.9 19.8 9.1 11.8 5.2 9.8 5.0 8.6 5.6 13.1 17.4
+ 40.2 44.6 20.6 14.4 10.6 12.5 8.6 6.9 6.8 4.2 11.3 19.1 31.6 43.2 20.6 15.7 14.5 8.8 13.1 4.8 8.8 8.5 17.5 31.4 39.2 46.7 16.3 8.8 9.9 3.6 9.9 5.8 7.3 3.6 17.6 31.5 36.6 38.9 17.4 13.2 11.1 5.9 10.5 5.2 6.9 5.2 17.4 29.6 37.4 37.1
+ 18.6 13.9 10.6 8.4 8.6 6.2 7.4 4.8 10.7 18.2 36.0 40.8 20.2 19.7 14.1 8.5 11.2 6.9 7.7 5.8 11.6 29.8 42.3 43.6 20.7 10.2 11.4 7.3 7.7 5.2 6.4 4.1 23.0 33.6 38.2 36.0 15.2 14.5 8.7 6.2 9.2 4.3 5.7 5.4 13.7 33.1 38.3 39.6 18.8 10.5
+ 12.4 5.4 10.0 5.6 6.8 5.8 10.0 14.8 33.1 51.7 22.6 15.9 15.9 10.3 12.0 3.6 6.4 3.7 9.4 25.4 37.0 45.3 24.7 13.1 12.2 7.6 9.2 4.3 7.5 4.3 17.4 29.0 42.0 40.5 16.2 14.5 11.9 5.7 7.5 5.8 4.9 4.4 16.6 32.1 46.1 42.6 16.0 8.7 8.8 5.4
+ 7.7 5.5 4.8 5.6 16.6 29.6 46.0 42.5 17.1 9.6 8.8 8.4 5.9 5.7 5.6 4.2 18.6 53.7 37.1 26.0 16.3 11.6 10.0 3.0 8.5 2.6 9.5 3.2 19.8 27.3 33.9 39.6 16.0 10.4 11.9 8.4 8.6 4.5 9.8 9.7;

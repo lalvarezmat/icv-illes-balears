@@ -1,0 +1,21 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones materiales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Población de 16 y más años con gasto elevado en vivienda por nacionalidad";
+CONTENTS="Población de 16 y más años con gasto elevado en vivienda";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nacionalidad";
+HEADING="Periodo";
+VALUES("Nacionalidad")="Total","Española","Extranjera (UE)","Extranjera (Resto del mundo)";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+UNITS="%";
+DATA=7.3 7.7 8.6 9.2 7.6 8.0 8.4 9.1 9.5 9.7 10.4 9.7 10.1 9.3 9.0 9.5 8.6 4.5 5.3 5.6 6.2 5.1 5.7 6.2 6.9 7.1 7.2 7.6 6.9 6.6 6.3 5.7 6.1 4.6 23.9 24.8 31.7 30.9 36.8 28.9 27.6 29.5 32.2 28.7 29.0 27.0 31.4 29.7 29.2 32.3
+ 39.6 27.4 30.9 40.7 40.6 30.8 32.1 35.6 35.8 39.3 45.0 48.9 37.9 42.7 35.6 38.9 39.1 43.7;

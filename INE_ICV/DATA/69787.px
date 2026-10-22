@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Competencias y habilidades";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Abandono educativo temprano de la población de 18 a 24 años por ámbito geográfico";
+CONTENTS="Abandono educativo temprano de la población de 18 a 24 años";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Ámbito geográfico";
+HEADING="Periodo";
+VALUES("Ámbito geográfico")="España","Unión Europea";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+CODES("Ámbito geográfico")="null","null";
+MAP("Ámbito geográfico")="";
+UNITS="%";
+DATA=13.0 13.7 13.9 13.3 16.0 17.3 17.9 18.3 19.0 20.0 21.9 23.6 24.7 26.3 28.2 30.9 31.7 30.8 30.3 31.0 32.2 9.3 9.5 9.6 9.8 10.0 10.1 10.5 10.5 10.6 11.0 11.1 11.8 12.6 13.2 13.8 14.0 14.4 14.7 15.2 15.6 16.0;

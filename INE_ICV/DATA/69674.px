@@ -1,0 +1,21 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Fumadores diarios por nacionalidad";
+CONTENTS="Fumadores diarios";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 15 y más años"
+"En 2022, poblacion de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nacionalidad";
+HEADING="Periodo";
+VALUES("Nacionalidad")="Total","Española","Extranjera (UE)","Extranjera (Resto del mundo)";
+VALUES("Periodo")="2023","2022","2020","2017","2014","2012","2009";
+UNITS="%";
+DATA=16.6 17.0 19.8 22.1 23.0 24.0 26.2 17.0 17.1 19.9 22.2 23.1 24.1 26.2 27.2 24.3 30.4 32.9 33.3 38.2 42.1 10.7 11.2 13.3 13.6 15.0 15.3 17.2;

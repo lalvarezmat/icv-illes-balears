@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Satisfacción con las relaciones personales por grado de urbanización";
+CONTENTS="Satisfacción con las relaciones personales";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Grado de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2022","2018","2013";
+UNITS="%, Número medio";
+DATA=3.2 1.9 3.5 14.0 8.5 14.9 46.6 41.3 45.6 36.2 48.3 36.0 7.9 8.2 7.8 3.2 2.3 3.8 13.8 8.4 13.7 46.8 41.0 46.4 36.1 48.3 36.1 7.9 8.2 7.8 3.4 1.8 2.4 14.4 8.9 15.1 46.2 41.1 46.1 36.0 48.1 36.4 7.9 8.2 7.9 2.6 1.4 3.9 14.2 8.2
+ 17.0 46.5 42.1 43.5 36.7 48.4 35.5 7.9 8.3 7.7;

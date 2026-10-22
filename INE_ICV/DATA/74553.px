@@ -1,0 +1,45 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Ocio";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Personas de 16 y más años por eventos culturales, deportivos o lugares de interés cultural a los que han asistido en los últimos 12 meses por comunidad autónoma y asistencia";
+CONTENTS="Personas de 16 y más años";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="No ha ido por otras razones incluye: No ha ido porque no está interesado, No "
+"ha ido porque no lo hay lo cerca y No ha ido por otras razones"
+"Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Indicador de calidad de vida","Comunidad autónoma";
+HEADING="Asistencia","Periodo";
+VALUES("Indicador de calidad de vida")="Adultos que han ido al cine",
+"Adultos que han ido a espectáculos en directo tales como obras de teatro, conciertos, etc.",
+"Adultos que han visitado lugares de interés cultural tales como monumentos históricos, museos, etc.",
+"Adultos que han presenciado en directo acontecimientos deportivos";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Asistencia")="Sí ha asistido","No ha ido porque no puede permitírselo",
+"No ha ido por otras razones";
+VALUES("Periodo")="2022","2015";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%";
+DATA=36.7 45.9 7.6 14.4 55.6 39.7 32.7 37.5 11.3 21.0 56.0 41.5 38.7 51.0 5.5 6.6 55.8 42.3 29.5 34.9 4.6 10.6 65.9 54.4 34.9 48.0 7.0 16.0 58.1 36.0 28.1 41.0 9.1 20.2 62.8 38.9 34.8 44.5 5.3 11.3 59.9 44.2 31.4 43.0 5.2 8.8 63.4 48.1 33.6 40.6
+ 8.6 14.9 57.8 44.6 41.4 52.4 7.7 15.3 51.0 32.4 36.7 49.8 6.8 12.3 56.5 37.9 30.3 33.5 8.9 9.1 60.8 57.3 29.1 36.0 6.8 8.5 64.1 55.5 48.5 56.3 6.4 15.4 45.1 28.3 35.2 40.7 8.1 15.9 56.8 43.4 40.4 51.2 5.7 8.1 53.9 40.7 35.7 52.0 3.7 8.5
+ 60.6 39.5 36.6 48.0 3.8 8.4 59.7 43.6 28.1 44.6 11.9 11.2 60.1 44.3 35.9 38.2 9.6 5.8 54.5 56.1 32.6 32.7 11.0 17.3 56.4 50.0 28.0 24.7 14.9 24.0 57.1 51.4 33.1 32.9 8.9 7.5 58.1 59.5 28.8 25.0 5.8 10.9 65.4 64.2 29.8 36.1 9.7 19.1 60.6 44.8
+ 23.0 22.4 13.0 25.3 64.0 52.4 28.7 32.2 7.8 9.9 63.5 57.9 31.8 34.2 8.3 10.2 59.9 55.5 32.1 30.3 11.7 15.7 56.2 54.0 37.1 37.3 11.5 19.8 51.4 42.9 31.3 31.0 10.1 15.4 58.6 53.6 29.7 32.7 12.1 9.6 58.2 57.6 27.7 34.4 9.1 8.0 63.2 57.7 40.9 39.2
+ 10.4 19.8 48.7 40.9 26.5 32.1 12.4 19.4 61.1 48.5 38.5 35.7 7.4 9.1 54.2 55.0 38.5 43.0 5.4 11.8 56.1 45.1 34.8 34.9 6.0 10.6 59.2 54.5 23.2 30.2 14.4 12.8 62.5 57.0 30.8 29.8 12.2 4.3 56.9 65.9 39.2 34.2 8.2 14.1 52.6 51.7 33.7 23.3 11.8 20.6
+ 54.5 56.0 45.4 44.0 6.3 3.7 48.3 52.3 38.5 25.0 3.5 9.7 58.1 65.3 37.7 37.5 7.3 17.3 55.0 45.2 26.5 20.6 10.2 22.1 63.3 57.4 39.1 32.5 6.2 6.0 54.6 61.5 41.5 35.3 5.9 6.6 52.5 58.0 36.5 28.6 9.0 16.5 54.5 54.8 42.0 38.6 8.1 16.0 49.9 45.4
+ 37.5 36.3 8.0 12.7 54.5 51.0 35.4 32.0 10.1 7.2 54.5 60.7 33.6 34.1 6.9 6.4 59.5 59.4 51.1 44.9 6.2 14.5 42.8 40.7 30.7 27.4 11.4 18.6 57.9 54.0 43.6 40.0 5.4 6.2 51.0 53.8 43.0 42.6 4.6 7.2 52.5 50.2 44.9 43.5 5.3 8.0 49.8 48.5 27.1 20.8
+ 11.5 10.6 61.4 68.5 34.6 27.5 10.3 1.9 55.1 70.7 24.5 25.5 7.1 13.9 68.4 60.6 21.6 14.3 10.2 20.9 68.2 64.8 29.8 29.3 4.6 4.2 65.6 66.5 27.3 20.2 3.0 7.4 69.7 72.4 27.3 26.4 6.5 15.5 66.2 58.1 22.5 26.0 6.6 20.0 70.8 54.0 29.6 37.8 3.9 4.7
+ 66.5 57.5 23.6 21.0 4.6 9.1 71.8 70.0 23.7 24.3 8.2 13.0 68.1 62.6 25.6 32.2 7.2 14.8 67.1 53.0 22.5 26.4 6.7 12.5 70.8 61.1 23.2 33.5 7.5 4.4 69.3 62.1 25.4 29.3 5.3 5.8 69.3 64.9 23.4 24.3 7.6 17.8 69.0 57.9 20.8 19.1 8.8 15.3 70.5 65.6
+ 33.9 34.3 3.5 5.1 62.6 60.6 35.5 39.0 3.4 6.6 61.2 54.4 29.0 33.7 3.7 6.4 67.3 59.9 24.3 32.1 9.9 5.9 65.9 62.0 35.6 36.4 7.3 2.3 57.1 61.3;

@@ -1,0 +1,26 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones económicas";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Tasa de riesgo de pobreza con umbral fijo en el año 2008 por umbral y sexo";
+CONTENTS="Tasa de riesgo de pobreza con umbral fijo en el año 2008";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Umbral de renta","Sexo";
+HEADING="Periodo";
+VALUES("Umbral de renta")="Inferior al 40% de la renta mediana equivalente",
+"Inferior al 50% de la renta mediana equivalente",
+"Inferior al 60% de la renta mediana equivalente",
+"Inferior al 70% de la renta mediana equivalente";
+VALUES("Sexo")="Hombres","Mujeres";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+UNITS="%";
+DATA=7.7 7.9 8.7 10.4 10.0 10.2 10.9 12.3 13.7 15.0 15.0 12.6 11.3 9.6 8.6 7.6 7.3 8.0 8.5 9.2 10.7 9.9 11.0 11.1 13.0 13.4 14.2 14.5 11.8 11.4 9.9 8.9 8.0 7.5 12.2 12.7 13.4 15.8 14.9 16.1 17.1 18.3 21.1 22.1 22.2 18.9 17.9 15.2 13.5 12.5
+ 12.3 12.9 13.2 14.1 16.1 15.5 17.2 18.0 19.1 20.7 21.4 22.0 18.1 17.9 16.2 13.7 13.1 13.8 17.9 19.4 19.8 22.2 20.9 23.8 24.4 25.5 28.9 29.8 30.4 28.3 25.4 22.8 19.9 18.7 18.4 19.5 20.7 21.1 23.4 22.6 25.8 26.7 27.6 29.4 30.0 31.4 27.9 26.4 24.6 21.1
+ 20.6 21.2 24.5 25.7 26.3 28.9 27.6 31.5 31.7 32.9 36.5 38.0 38.4 36.5 32.9 30.4 26.1 25.5 25.8 26.5 27.7 28.7 30.8 30.0 33.8 34.5 35.0 37.5 38.6 39.9 36.7 34.3 32.6 27.7 28.1 28.8;

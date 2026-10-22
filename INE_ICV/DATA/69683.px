@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Ejercicio físico regular y sedentarismo en el tiempo libre por nacionalidad";
+CONTENTS="Ejercicio físico regular y sedentarismo en el tiempo libre";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 15 y más años"
+"En 2022 ruptura de serie por diferente fuente, diferente pregunta y población"
+" de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nacionalidad";
+HEADING="Tipo de ejercicio","Periodo";
+VALUES("Nacionalidad")="Total","Española","Extranjera (UE)","Extranjera (Resto del mundo)";
+VALUES("Tipo de ejercicio")="Ejercicio fisico regular","Sedentarismo";
+VALUES("Periodo")="2023","2022","2020","2017","2014","2012";
+UNITS="%";
+DATA=29.8 37.7 26.5 25.9 25.1 22.4 30.5 27.4 36.4 37.8 36.7 44.4 31.2 38.4 27.3 26.3 25.3 22.5 29.3 26.7 35.4 37.0 36.2 43.8 24.7 32.2 19.9 24.9 22.0 20.7 31.6 33.1 42.5 39.6 41.6 42.7 19.3 28.4 20.0 20.4 23.9 21.5 40.9 34.3 45.5 48.8 39.6 50.9;

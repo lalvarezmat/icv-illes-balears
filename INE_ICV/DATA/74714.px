@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Acceso a zonas verdes y de recreo";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Satisfacción con las zonas verdes y áreas recreativas ( de las personas de 18 y más años) por nivel de educación";
+CONTENTS="Satisfacción con las zonas verdes y áreas recreativas ( de las personas de 18 y más años)";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Grado de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2013";
+UNITS="%, Número medio";
+DATA=14.5 25.6 41.1 18.7 6.6 16.1 26.7 39.0 18.1 6.5 13.3 25.3 42.6 18.7 6.7 12.6 23.7 43.9 19.8 6.8;

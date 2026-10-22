@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones materiales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Población con gasto elevado en vivienda por edad";
+CONTENTS="Población con gasto elevado en vivienda";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Periodo";
+VALUES("Edad")="Total","Menos de 16 años","De 16 a 24 años","De 25 a 34 años","De 35 a 49 años",
+"De 50 a 64 años","De 65 y más años";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008";
+UNITS="%";
+DATA=7.8 8.2 9.2 9.9 8.2 8.5 8.9 9.8 10.1 10.3 10.9 10.3 10.7 10.0 9.7 10.3 9.4 10.3 11.4 11.9 13.4 10.9 11.4 11.2 13.6 13.9 13.8 14.2 13.8 14.2 14.2 13.8 15.4 13.9 6.2 6.8 8.4 8.9 7.3 8.4 9.9 10.4 10.8 13.1 13.4 12.4 13.7 9.9 12.1 11.0
+ 10.5 10.0 9.5 12.6 13.7 11.5 12.4 13.3 15.2 14.5 13.3 15.7 13.4 14.5 14.3 12.9 13.0 13.1 10.1 10.2 11.0 11.5 9.2 10.3 9.8 10.6 12.0 12.6 12.7 12.6 12.4 11.2 10.2 12.5 10.4 6.0 6.6 6.8 7.5 6.5 6.8 7.8 7.6 8.0 7.5 8.3 6.9 7.5 6.5 6.3
+ 6.0 4.6 4.9 5.5 6.2 6.0 4.9 3.5 3.7 4.2 3.5 3.7 3.5 3.9 3.5 4.0 3.8 3.6 4.1;

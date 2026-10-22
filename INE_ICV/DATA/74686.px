@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Contaminación y ruidos";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Población de 18 y más años que sufre problemas de ruidos producidos por vecinos o del exterior por nivel de educación";
+CONTENTS="Población de 18 y más años que sufre problemas de ruidos producidos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Periodo")="2023","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011","2010","2009",
+"2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=23.7 21.9 14.1 17.1 15.2 16.0 15.4 16.0 18.4 14.9 15.7 18.3 22.7 22.2 25.7 26.7 28.9 24.8 22.5 20.7 13.3 15.7 14.2 14.7 14.4 14.7 17.9 13.7 15.1 17.7 21.2 20.2 24.8 25.3 27.5 23.2 24.2 23.4 13.9 19.3 16.1 18.1 17.8 18.4 19.3 16.6 15.8 18.3 23.9 25.1
+ 27.0 28.6 30.8 26.8 24.7 22.4 15.4 17.5 16.0 16.5 15.3 16.6 18.6 15.9 17.0 19.5 24.8 24.1 26.5 28.3 30.5 27.1;

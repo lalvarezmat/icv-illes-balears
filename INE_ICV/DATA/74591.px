@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Posibilidad de pedir ayuda a familiares, amigos o vecinos por edad";
+CONTENTS="Posibilidad de pedir ayuda a familiares, amigos o vecinos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Ruptura de serie por diferente pregunta en 2018: 'Posibilidad de pedir ayuda "
+"material'";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Periodo";
+VALUES("Edad")="Total","De 16 a 24 años","De 25 a 34 años","De 35 a 49 años","De 50 a 64 años",
+"De 65 y más años";
+VALUES("Periodo")="2022","2018","2015","2013";
+UNITS="%";
+DATA=93.1 89.3 96.6 95.8 95.6 92.2 97.8 97.2 93.5 91.1 97.5 97.7 92.5 89.7 96.1 95.2 91.8 87.7 95.9 94.6 93.7 88.2 96.8 95.9;

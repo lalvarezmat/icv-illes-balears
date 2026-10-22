@@ -1,0 +1,25 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Ejercicio físico regular y sedentarismo en el tiempo libre por edad";
+CONTENTS="Ejercicio físico regular y sedentarismo en el tiempo libre";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 15 y más años"
+"En 2022 ruptura de serie por diferente fuente, diferente pregunta y población"
+" de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Tipo de ejercicio","Periodo";
+VALUES("Edad")="Total","De 15 a 24 años","De 25 a 34 años","De 35 a 49 años","De 50 a 64 años",
+"De 65 y más años";
+VALUES("Tipo de ejercicio")="Ejercicio fisico regular","Sedentarismo";
+VALUES("Periodo")="2023","2022","2020","2017","2014","2012";
+UNITS="%";
+DATA=29.8 37.7 26.5 25.9 25.1 22.4 30.5 27.4 36.4 37.8 36.7 44.4 53.8 45.8 45.9 46.3 46.0 42.4 18.4 15.3 24.7 30.0 26.8 35.2 42.0 37.8 35.2 38.3 35.2 33.3 24.0 21.1 32.7 34.6 32.6 41.4 32.1 30.4 28.6 29.2 28.0 24.2 30.9 26.4 36.1 38.4 35.6 45.3 24.1 37.4
+ 22.1 20.3 18.7 14.9 29.7 26.8 35.2 36.4 36.5 43.8 13.7 42.5 13.5 9.2 15.0 6.9 41.3 38.5 46.6 44.7 33.5 51.7;

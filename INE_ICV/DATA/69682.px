@@ -1,0 +1,25 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Ejercicio físico regular y sedentarismo en el tiempo libre por nivel de educación";
+CONTENTS="Ejercicio físico regular y sedentarismo en el tiempo libre";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 15 y más años"
+"En 2022 ruptura de serie por diferente fuente, diferente pregunta y población"
+" de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Tipo de ejercicio","Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Tipo de ejercicio")="Ejercicio fisico regular","Sedentarismo";
+VALUES("Periodo")="2023","2022","2020","2017","2014","2012";
+UNITS="%";
+DATA=29.8 37.7 26.5 25.9 25.1 22.4 30.5 27.4 36.4 37.8 36.7 44.4 19.0 35.3 18.3 17.8 22.4 15.8 42.2 39.2 45.5 44.6 39.7 50.1 30.9 39.1 29.9 30.3 16.4 27.7 26.5 23.8 31.8 33.5 42.6 39.6 43.9 39.6 37.8 38.1 22.8 33.7 17.5 15.7 24.6 27.9 37.9 33.0;

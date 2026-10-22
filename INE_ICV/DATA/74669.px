@@ -1,0 +1,26 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Participación ciudadana";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas que han participado en actividades de carácter político por nacionalidad";
+CONTENTS="Personas que han participado en actividades de carácter político";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Participación en actividades de partidos políticos, en una manifestación, en "
+"peticiones escritas a políticos o a medios de comunicación, etc. Se incluye l"
+"a participación a través de internet y se excluye la votación en procesos ele"
+"ctorales";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nacionalidad";
+HEADING="Participación","Periodo";
+VALUES("Nacionalidad")="Total","Española","Extranjera (UE)","Extranjera (Resto del mundo)";
+VALUES("Participación")="Sí","No, porque no está interesado","No, por falta de tiempo",
+"No, por otras razones";
+VALUES("Periodo")="2022","2015";
+UNITS="%";
+DATA=5.6 7.9 64.4 52.5 4.1 4.7 25.9 34.9 6.0 8.1 64.0 52.4 3.9 4.6 26.2 34.9 2.4 7.8 71.6 59.0 5.2 6.3 20.7 26.8 2.3 4.0 66.0 50.9 7.7 4.9 24.0 40.2;

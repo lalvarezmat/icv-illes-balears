@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad física y personal";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas que declaran padecer problemas de delincuencia o vandalismo en la zona por sexo";
+CONTENTS="Personas que declaran padecer problemas de delincuencia o vandalismo en la zona";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"A partir de 2020 periodicidad trienal";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Periodo")="2023","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011","2010","2009",
+"2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=13.5 14.1 11.6 10.9 8.7 10.3 10.0 11.9 14.2 10.2 10.8 13.1 16.4 14.7 17.5 19.3 18.8 18.9 13.4 13.9 11.8 10.8 8.7 10.1 9.3 11.6 13.6 9.7 10.7 12.9 16.2 14.6 17.0 18.6 18.4 18.4 13.6 14.3 11.4 11.0 8.7 10.5 10.6 12.2 14.8 10.6 10.9 13.2 16.5 14.8
+ 18.0 20.0 19.2 19.4;

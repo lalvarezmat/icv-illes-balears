@@ -1,0 +1,21 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Confianza alta o muy alta en los demás por nacionalidad";
+CONTENTS="Confianza alta o muy alta en los demás";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"La confianza 'alta o muy alta'  corresponde a los valores de 7 a 10 puntos";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nacionalidad";
+HEADING="Periodo";
+VALUES("Nacionalidad")="Total","Española","Extranjera (UE)","Extranjera (Resto del mundo)";
+VALUES("Periodo")="2024","2023","2022","2021","2018","2013";
+UNITS="%";
+DATA=50.3 52.7 52.9 52.3 59.8 51.9 50.5 53.3 53.4 52.8 60.5 52.4 50.6 52.0 50.9 54.8 47.5 51.0 48.5 46.4 45.9 45.3 55.3 46.1;

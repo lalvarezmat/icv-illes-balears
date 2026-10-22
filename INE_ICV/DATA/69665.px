@@ -1,0 +1,25 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Índice de masa corporal por nacionalidad";
+CONTENTS="Índice de masa cor";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población 18 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nacionalidad";
+HEADING="Masa corporal","Periodo";
+VALUES("Nacionalidad")="Total","Española","Extranjera (UE)","Extranjera (Resto del mundo)";
+VALUES("Masa corporal")="Peso insuficiente (IMC < 18,5 kg/m2)",
+"Normopeso (18,5 kg/m2 <= IMC < 25 kg/m2)",
+"Sobrepeso (25 kg/m2 <= IMC < 30 kg/m2)","Obesidad (IMC >= 30 kg/m2)";
+VALUES("Periodo")="2023","2022","2020","2017","2014","2012","2009";
+UNITS="%";
+DATA=1.7 2.3 2.1 2.2 2.2 2.2 2.1 43.3 43.7 44.3 43.3 45.2 44.2 44.3 39.8 34.3 37.6 37.1 35.7 36.7 37.7 15.2 14.1 16.0 17.4 16.9 17.0 16.0 1.7 2.3 2.2 2.1 2.2 2.1 2.0 43.1 44.0 43.9 42.9 45.0 43.7 43.4 39.6 34.5 37.7 37.4 36.0 37.0 38.1 15.6
+ 13.9 16.2 17.6 16.9 17.3 16.5 1.7 2.0 3.4 3.2 1.7 2.9 4.3 46.0 42.7 47.3 44.0 53.3 46.2 49.7 36.7 30.7 37.9 36.5 28.0 37.0 33.2 15.6 15.8 11.5 16.4 17.0 13.9 12.8 2.0 2.3 0.4 2.3 2.2 2.8 1.7 43.9 38.8 46.9 49.1 43.6 48.4 50.5 42.5 32.9
+ 36.2 32.6 36.6 33.0 35.6 11.6 17.0 16.5 16.0 17.6 15.9 12.2;

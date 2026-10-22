@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Frecuencia de las reuniones con amigos por sexo";
+CONTENTS="Frecuencia de las reuniones con amigos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"En los últimos 12 meses";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Nivel de frecuencia","Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Nivel de frecuencia")="Diaria","Semanal pero no diaria","Varias veces al mes pero no semanal",
+"Una vez al mes","Al menos una vez al año pero menos de una vez por mes","Nunca";
+VALUES("Periodo")="2022","2015";
+UNITS="%";
+DATA=13.8 25.3 36.9 43.0 19.5 13.9 12.4 7.9 10.3 5.1 7.1 4.8 15.2 27.4 37.2 43.4 19.3 13.3 12.0 7.4 10.3 4.8 5.9 3.7 12.4 23.4 36.7 42.6 19.7 14.5 12.8 8.3 10.3 5.4 8.2 5.8;

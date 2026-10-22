@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Instituciones y servicios públicos";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Confianza en la policía por edad";
+CONTENTS="Confianza en la policía";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Edad";
+HEADING="Grado de confianza","Periodo";
+VALUES("Edad")="Total","De 16 a 24 años","De 25 a 34 años","De 35 a 49 años","De 50 a 64 años",
+"De 65 y más años";
+VALUES("Grado de confianza")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Confianza media";
+VALUES("Periodo")="2013";
+UNITS="%, Número medio";
+DATA=26.0 37.5 28.3 8.2 5.4 34.3 37.3 22.7 5.7 4.9 32.7 35.3 25.5 6.6 5.1 26.1 38.5 27.3 8.2 5.4 23.7 38.4 30.7 7.1 5.6 18.7 37.2 32.2 11.9 6.0;

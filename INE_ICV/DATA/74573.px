@@ -1,0 +1,26 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Frecuencia de las reuniones con amigos por deciles de renta";
+CONTENTS="Frecuencia de las reuniones con amigos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"En los últimos 12 meses";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de renta";
+HEADING="Nivel de frecuencia","Periodo";
+VALUES("Nivel de renta")="Total","Primer decil","Segundo decil","Tercer decil","Cuarto decil","Quinto decil",
+"Sexto decil","Septimo decil","Octavo decil","Noveno decil","Décimo decil";
+VALUES("Nivel de frecuencia")="Diaria","Semanal pero no diaria","Varias veces al mes pero no semanal",
+"Una vez al mes","Al menos una vez al año pero menos de una vez por mes","Nunca";
+VALUES("Periodo")="2022","2015";
+UNITS="%";
+DATA=13.8 25.3 36.9 43.0 19.5 13.9 12.4 7.9 10.3 5.1 7.1 4.8 16.0 27.4 30.5 37.0 16.6 14.7 12.9 10.0 12.0 5.9 12.0 5.0 16.7 29.4 33.0 37.4 15.7 13.4 11.7 7.9 10.4 4.8 12.5 7.0 16.6 27.1 36.5 36.4 17.6 14.3 10.4 8.4 9.4 7.1 9.4 6.7 16.1 29.8
+ 36.1 37.4 17.2 13.9 12.3 8.6 10.5 5.1 7.8 5.2 13.5 27.6 37.5 42.8 19.0 11.3 12.5 7.2 10.4 5.1 7.1 6.0 14.7 26.0 38.2 41.5 19.0 12.6 11.2 8.3 10.1 5.8 6.8 5.8 12.9 23.4 37.7 45.7 20.2 14.7 12.5 7.7 10.6 4.2 6.0 4.2 11.2 22.8 37.6 48.6
+ 21.8 13.6 14.0 7.0 10.7 4.6 4.7 3.2 11.2 22.5 40.0 48.4 24.2 14.8 11.8 6.5 9.4 4.9 3.5 3.0 9.3 17.6 41.0 53.4 22.9 15.8 14.6 7.5 9.9 3.6 2.2 2.1;

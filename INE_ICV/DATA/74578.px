@@ -1,0 +1,24 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Satisfacción con las relaciones personales por ámbito geográfico";
+CONTENTS="Satisfacción con las relaciones personales";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Satisfacción Baja 0-5, Media 6-8 y Alta 9-10#"
+"Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Ámbito geográfico";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Ámbito geográfico")="España","Unión Europea";
+VALUES("Grado de satisfacción")="Baja","Media","Alta","Satisfacción media";
+VALUES("Periodo")="2022","2018","2013";
+CODES("Ámbito geográfico")="null","null";
+MAP("Ámbito geográfico")="";
+UNITS="%, Número medio";
+DATA=9.4 5.7 9.2 54.5 46.0 54.5 36.2 48.3 36.3 7.9 8.2 7.8 9.8 10.4 11.5 54.2 48.5 51.5 36.1 41.1 37.0 7.8 7.9 7.8;

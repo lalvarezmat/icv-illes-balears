@@ -1,0 +1,26 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad física y personal";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Nivel de seguridad que sienten las personas al pasear solas de noche por tipo de hogar";
+CONTENTS="Nivel de seguridad que sienten las personas al pasear solas de noche";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Tipo de hogar";
+HEADING="Nivel de seguridad","Periodo";
+VALUES("Tipo de hogar")="Total","Adulto solo menor de 65 años","Hombre (solo menor de 65 años)",
+"Mujer (sola menor de 65 años)","Adulto solo de 65 o más años",
+"Hombre (solo de 65 y más años)","Mujer (sola de 65 y más años)",
+"Adulto solo con hijos dependientes","Dos adultos ambos menores de 65 años",
+"Dos adultos, al menos uno de 65 y más años",
+"Dos o más adultos con hijos dependientes","Otros hogares";
+VALUES("Nivel de seguridad")="Muy seguro","Bastante seguro","Un poco inseguro","Muy inseguro";
+VALUES("Periodo")="2013";
+UNITS="%";
+DATA=32.4 45.9 16.4 5.3 37.3 45.0 14.4 3.3 46.8 42.8 8.3 2.1 22.4 48.5 23.9 5.2 18.4 42.0 26.8 12.9 32.3 43.0 16.5 8.2 12.9 41.6 30.8 14.7 29.7 50.1 13.8 6.5 31.9 48.4 15.6 4.1 24.8 44.4 22.3 8.5 36.3 44.9 14.9 3.9 31.8 47.8 14.8 5.6;

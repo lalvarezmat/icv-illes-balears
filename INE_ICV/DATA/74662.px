@@ -1,0 +1,37 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Participación ciudadana";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Personas que han participado en actividades de carácter político por comunidad autónoma";
+CONTENTS="Personas que han participado en actividades de carácter político";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Participación en actividades de partidos políticos, en una manifestación, en "
+"peticiones escritas a políticos o a medios de comunicación, etc. Se incluye l"
+"a participación a través de internet y se excluye la votación en procesos ele"
+"ctorales";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Comunidad autónoma";
+HEADING="Participación","Periodo";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Participación")="Sí","No, porque no está interesado","No, por falta de tiempo",
+"No, por otras razones";
+VALUES("Periodo")="2022","2015";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%";
+DATA=5.6 7.9 64.4 52.5 4.1 4.7 25.9 34.9 4.6 2.4 66.8 46.1 4.3 6.4 24.3 45.1 5.4 3.5 62.9 35.9 5.0 3.4 26.7 57.2 7.6 6.9 59.7 31.6 2.6 6.0 30.1 55.5 4.5 11.3 66.6 59.1 3.9 5.6 24.9 24.0 4.2 10.7 65.9 46.0 4.3 4.3 25.7 39.0 5.7 4.7
+ 65.4 47.8 3.7 1.7 25.2 45.9 6.1 5.3 62.2 59.3 4.1 3.3 27.6 32.2 4.2 4.9 69.0 59.9 4.4 3.2 22.4 32.0 6.0 14.9 66.0 49.0 3.8 6.9 24.2 29.2 4.9 8.4 64.0 56.6 3.0 3.3 28.1 31.6 5.5 3.6 65.3 74.7 4.3 1.4 25.0 20.3 5.8 8.2 60.2 56.0
+ 4.2 5.2 29.8 30.5 6.7 8.4 60.1 53.7 5.8 4.2 27.3 33.7 3.1 8.0 71.0 56.0 4.3 2.2 21.6 33.8 9.5 14.0 65.7 46.0 4.1 3.6 20.7 36.4 9.0 7.2 61.0 68.8 2.4 2.3 27.6 21.7 4.7 9.3 63.7 56.8 3.4 4.9 28.3 28.9 3.7 7.5 64.4 76.9 5.0 1.4
+ 27.0 14.2 3.6 7.2 67.6 52.1 4.5 5.0 24.3 35.8;

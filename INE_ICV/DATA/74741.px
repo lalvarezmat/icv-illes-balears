@@ -1,0 +1,24 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Sentimientos y emociones";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Sentimiento de felicidad (de las personas de 18 y más años) en las 4 últimas semanas por nivel de educación";
+CONTENTS="Sentimiento de felicidad (de las personas de 18 y más años) en las 4 últimas semanas";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Muy a menudo incluye: 'Siempre', 'Casi siempre'. Alguna vez incluye : 'Alguna"
+"s veces', 'Solo alguna vez'";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Frecuencia","Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Frecuencia")="Algunas veces","Muy a menudo","Nunca";
+VALUES("Periodo")="2022","2018","2013";
+UNITS="%";
+DATA=30.8 27.0 35.1 67.3 71.1 62.8 1.9 1.9 2.0 32.9 33.5 40.0 64.4 64.0 57.4 2.7 2.5 2.6 28.9 23.6 31.7 69.5 74.9 66.6 1.5 1.5 1.7 29.6 19.6 28.7 69.2 79.2 70.1 1.3 1.2 1.2;

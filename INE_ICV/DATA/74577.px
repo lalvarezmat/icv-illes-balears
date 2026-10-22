@@ -1,0 +1,35 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Satisfacción con las relaciones personales por comunidad autónoma";
+CONTENTS="Satisfacción con las relaciones personales";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Comunidad autónoma";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Grado de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2022","2018","2013";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%, Número medio";
+DATA=3.2 1.9 3.5 14.0 8.5 14.9 46.6 41.3 45.6 36.2 48.3 36.0 7.9 8.2 7.8 3.0 1.8 4.2 12.9 8.0 15.8 42.9 36.2 39.5 41.3 53.9 40.4 8.0 8.4 7.8 2.6 0.8 3.6 12.5 4.8 10.5 50.0 50.6 44.4 34.8 43.9 41.5 7.9 8.3 8.0 4.2 2.1 4.0 14.3 7.5
+ 11.3 46.1 46.4 47.7 35.4 44.1 37.0 7.8 8.2 7.8 3.0 2.4 2.7 17.7 11.3 13.8 45.5 31.9 40.7 33.9 54.4 42.8 7.8 8.3 8.0 3.7 1.2 3.5 12.9 4.8 19.4 41.3 38.6 48.2 42.1 55.5 28.8 8.0 8.5 7.6 3.2 0.8 3.0 15.5 6.1 9.6 49.9 46.9 55.5 31.4
+ 46.3 31.9 7.7 8.3 7.8 3.6 2.3 3.2 14.2 8.3 23.1 46.3 39.7 50.5 35.9 49.6 23.2 7.8 8.2 7.4 3.7 0.4 3.2 13.5 10.3 11.3 47.1 42.9 46.6 35.8 46.3 38.9 7.8 8.2 7.9 3.3 1.7 2.7 13.5 9.1 15.3 47.1 48.4 47.9 36.1 40.8 34.1 7.9 8.1 7.8
+ 2.9 2.4 3.0 16.1 7.7 10.9 45.5 39.8 46.2 35.6 50.2 39.9 7.8 8.3 8.0 2.7 0.1 1.6 12.8 1.8 19.2 47.9 31.6 38.4 36.5 66.5 40.8 7.9 8.8 8.0 3.4 2.3 4.2 18.5 14.4 27.3 48.3 43.5 46.7 29.7 39.9 21.8 7.6 7.9 7.2 3.0 2.7 4.2 13.0 8.1
+ 12.0 48.6 40.7 46.4 35.4 48.6 37.3 7.9 8.2 7.9 4.0 1.8 4.7 17.4 8.9 8.9 47.4 42.3 39.6 31.3 47.0 46.8 7.6 8.2 8.0 3.4 2.6 3.3 11.4 4.9 9.4 51.8 31.3 55.5 33.4 61.2 31.8 7.9 8.6 7.8 3.2 2.3 3.3 12.5 11.0 11.6 52.9 46.1 49.0 31.4
+ 40.5 36.1 7.8 8.0 7.9 2.2 1.6 2.2 13.5 6.6 13.7 51.2 36.0 49.2 33.1 55.7 34.9 7.9 8.5 7.9 5.4 8.5 4.2 10.5 31.5 8.9 51.2 35.2 31.4 32.9 24.8 55.4 7.8 7.1 8.4 4.4 0.7 3.5 13.0 2.3 23.7 44.0 26.9 41.5 38.7 70.1 31.3 7.9 9.0 7.5
+;

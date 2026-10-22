@@ -1,0 +1,24 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones materiales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Población que vive en hogares con determinadas deficiencias en la vivienda por deciles de renta";
+CONTENTS="Población que vive en hogares con determinadas deficiencias en la vivienda";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de renta";
+HEADING="Periodo";
+VALUES("Nivel de renta")="Total","Primer decil","Segundo decil","Tercer decil","Cuarto decil","Quinto decil",
+"Sexto decil","Septimo decil","Octavo decil","Noveno decil","Décimo decil";
+VALUES("Periodo")="2023","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011","2010","2009",
+"2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=22.9 19.7 14.7 15.9 11.5 15.9 15.2 17.1 16.7 12.0 16.1 21.8 18.3 16.8 19.0 18.5 17.9 20.6 29.9 29.7 22.3 26.1 18.9 28.5 20.2 27.7 25.3 19.1 27.5 32.0 27.8 26.0 30.5 27.5 25.7 28.2 33.0 30.9 18.8 19.9 16.7 26.1 21.8 23.6 18.8 16.1 22.3 28.3 23.8 22.3
+ 25.7 23.9 21.7 24.9 28.5 23.8 16.4 19.4 13.1 19.6 21.4 25.0 23.2 18.8 19.7 25.3 25.4 19.5 21.4 19.4 19.2 25.9 23.2 21.0 17.3 17.8 13.8 15.6 15.9 18.3 16.8 11.8 19.6 27.2 19.8 18.8 19.0 23.6 19.7 23.5 24.3 20.1 14.7 15.0 10.9 15.2 15.6 18.8 18.9 11.9
+ 14.4 23.0 16.9 16.5 20.8 22.1 18.7 21.2 22.0 17.1 12.0 13.0 10.2 13.0 13.7 14.9 15.1 11.0 13.9 19.4 17.0 16.4 15.3 17.8 18.9 19.8 21.7 15.8 11.8 11.8 8.7 12.7 14.0 12.6 15.0 8.8 12.8 18.3 19.5 15.2 15.3 13.7 19.2 19.6 17.5 12.9 11.7 13.5 7.9 11.8
+ 10.5 11.2 12.1 8.9 9.0 15.5 12.0 13.0 16.2 13.9 12.5 16.7 15.4 13.5 13.0 11.5 7.0 8.7 12.2 10.6 12.1 9.0 11.4 16.2 11.2 9.8 12.4 11.9 12.6 13.9 13.2 12.4 9.2 11.4 8.2 7.7 6.5 8.1 10.2 5.3 10.0 12.9 9.7 10.6 13.1 11.1 10.7 12.4;

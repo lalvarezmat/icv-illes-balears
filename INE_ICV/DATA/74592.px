@@ -1,0 +1,27 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Relaciones sociales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Posibilidad de pedir ayuda a familiares, amigos o vecinos por tipo de hogar";
+CONTENTS="Posibilidad de pedir ayuda a familiares, amigos o vecinos";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Ruptura de serie por diferente pregunta en 2018: 'Posibilidad de pedir ayuda "
+"material'";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Tipo de hogar";
+HEADING="Periodo";
+VALUES("Tipo de hogar")="Total","Adulto solo menor de 65 años","Hombre (solo menor de 65 años)",
+"Mujer (sola menor de 65 años)","Adulto solo de 65 o más años",
+"Hombre (solo de 65 y más años)","Mujer (sola de 65 y más años)",
+"Adulto solo con hijos dependientes","Dos adultos ambos menores de 65 años",
+"Dos adultos, al menos uno de 65 y más años",
+"Dos o más adultos con hijos dependientes","Otros hogares";
+VALUES("Periodo")="2022","2018","2015","2013";
+UNITS="%";
+DATA=93.1 89.3 96.6 95.8 92.1 88.4 96.3 94.8 91.7 87.1 95.8 93.9 92.7 90.1 97.0 96.4 94.7 90.3 96.9 96.1 93.1 87.5 95.4 93.4 95.4 91.5 97.5 97.1 92.7 91.5 94.5 95.8 93.2 90.6 96.5 95.9 93.9 88.3 97.4 96.4 93.0 89.7 96.5 95.6 92.4 88.3 96.4 96.1;

@@ -1,0 +1,21 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad económica";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Distribución del valor de los activos reales por tipo de activo";
+CONTENTS="Distribución del valor de los activos reales";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Tipo de activo";
+HEADING="Periodo";
+VALUES("Tipo de activo")="Vivienda principal","Otras propiedades inmobiliarias",
+"Negocios por trabajo por cuenta propia","Joyas, obras de arte, antigüedades",
+"Activos reales (% de activos totales)";
+VALUES("Periodo")="2022","2020","2017","2014","2011","2008","2005";
+UNITS="%";
+DATA=51.7 53.0 54.4 57.3 60.6 62.1 66.7 35.0 35.4 35.1 31.6 29.1 27.0 23.8 12.1 10.2 9.4 10.1 9.3 10.3 8.9 1.2 1.4 1.1 1.0 1.0 0.5 0.6 79.2 78.6 79.9 80.4 84.6 89.0 89.2;

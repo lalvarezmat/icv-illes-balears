@@ -1,0 +1,36 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Contaminación y ruidos";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Media ponderada, población considerada o estaciones consideradas con la población de la concentración media anual PM10 por tamaño del municipio";
+CONTENTS="Media ponderada, población considerada o estaciones consideradas con la población de la concentración media anual PM10";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Para las PM10 el valor límite de concentración anual desde 2005 es 40 µg/m3"
+"Población de municipios mayores de 50.000 habitantes";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Tamaño del municipio";
+HEADING="Indicador de calidad de vida","Periodo";
+VALUES("Tamaño del municipio")="Total (de 50.000 y más habitantes)","De 50.000 a 100.000 habitantes",
+"De 100.000 a 250.000 habitantes","De 250.000 a 500.000 habitantes",
+"Más de 500.000 habitantes";
+VALUES("Indicador de calidad de vida")=
+"Media ponderada con la población de la concentración media anual de PM10 (µg/m3)",
+"Población considerada para la media ponderada de concentración media anual PM10",
+"Estaciones consideradas para media ponderada de concentración media anual PM10";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+PRECISION("Indicador de calidad de vida","Población considerada para la media ponderada de concentración media anual PM10")=0;
+PRECISION("Indicador de calidad de vida","Estaciones consideradas para media ponderada de concentración media anual PM10")=0;
+UNITS="Microgramos/metro cúbico, Miles Personas, Número";
+DATA=20.2 20.4 23.2 20.4 20.3 20.9 20.8 23.2 21.4 23.9 21.7 20.8 25.3 25.6 25.1 28.3 30.3 36.2 37.2 36.9 36.7 23004.0 22603.0 19030.0 22100.0 22176.0 21846.0 21508.0 21621.0 21500.0 21175.0 21337.0 22144.0 22078.0 22170.0 22076.0 21646.0 21165.0 19019.0 19738.0 19000.0 17572.0 283.0 280.0 249.0 266.0 264.0 257.0 252.0 253.0
+ 249.0 232.0 221.0 227.0 226.0 216.0 207.0 205.0 191.0 165.0 158.0 143.0 112.0 19.5 19.4 21.5 20.1 20.1 20.2 20.1 23.3 21.3 22.8 21.3 20.3 24.2 23.9 23.6 26.5 29.1 36.3 37.1 36.8 34.7 4324.0 4194.0 3083.0 3959.0 3736.0 3729.0 3527.0 3701.0 3620.0 3312.0 3537.0 3929.0 3830.0 3879.0 3966.0 3684.0
+ 3644.0 2562.0 2545.0 2157.0 1932.0 89.0 86.0 71.0 87.0 79.0 78.0 76.0 79.0 79.0 74.0 71.0 78.0 72.0 72.0 69.0 70.0 66.0 51.0 48.0 38.0 31.0 19.9 19.8 22.8 20.2 20.6 21.4 20.7 23.1 21.0 23.6 21.6 20.9 24.1 25.1 25.2 28.2 30.0 36.0 36.8 36.9 39.1 7052.0 6977.0 6125.0
+ 6829.0 7021.0 6843.0 7055.0 7054.0 7046.0 7057.0 6957.0 7285.0 7257.0 7276.0 7067.0 6937.0 6589.0 6396.0 6683.0 6088.0 5315.0 95.0 98.0 92.0 91.0 95.0 92.0 95.0 94.0 96.0 92.0 86.0 86.0 90.0 82.0 77.0 84.0 74.0 69.0 69.0 59.0 46.0 20.9 22.0 25.2 21.5 22.8 21.2 21.6 24.6 21.8 25.9 23.8
+ 21.4 26.5 26.6 26.5 27.8 27.0 33.5 33.9 36.2 37.0 3717.0 3679.0 2866.0 3642.0 3668.0 3639.0 3364.0 3351.0 3348.0 3346.0 3359.0 3368.0 3390.0 3391.0 3394.0 3388.0 3362.0 3320.0 3056.0 3299.0 2970.0 43.0 41.0 36.0 40.0 40.0 37.0 35.0 35.0 31.0 29.0 25.0 26.0 27.0 27.0 26.0 27.0 25.0 23.0 19.0
+ 20.0 13.0 20.6 20.7 23.3 20.1 18.9 20.8 20.8 22.7 21.5 23.7 21.1 20.6 26.4 26.6 25.1 29.5 32.6 37.6 38.9 37.3 35.4 7911.0 7753.0 6955.0 7669.0 7751.0 7635.0 7562.0 7515.0 7485.0 7461.0 7484.0 7562.0 7601.0 7624.0 7649.0 7638.0 7569.0 6741.0 7454.0 7455.0 7355.0 56.0 55.0 50.0 48.0 40.0 50.0
+ 46.0 45.0 43.0 37.0 39.0 37.0 37.0 35.0 35.0 24.0 26.0 22.0 22.0 26.0 22.0;

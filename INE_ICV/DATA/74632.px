@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad física y personal";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Nivel de seguridad que sienten las personas (de 18 y más años) al pasear solas de noche por nivel de educación";
+CONTENTS="Nivel de seguridad que sienten las personas (de 18 y más años) al pasear solas de noche";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Nivel de seguridad","Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Nivel de seguridad")="Muy seguro","Bastante seguro","Un poco inseguro","Muy inseguro";
+VALUES("Periodo")="2013";
+UNITS="%";
+DATA=32.4 45.8 16.5 5.3 30.7 44.4 17.8 7.1 35.1 45.4 15.7 3.9 33.6 48.6 14.9 3.0;

@@ -1,0 +1,30 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Ejercicio físico regular y sedentarismo en el tiempo libre por tipo de hogar";
+CONTENTS="Ejercicio físico regular y sedentarismo en el tiempo libre";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 15 y más años"
+"En 2022 ruptura de serie por diferente fuente, diferente pregunta y población"
+" de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Tipo de hogar";
+HEADING="Tipo de ejercicio","Periodo";
+VALUES("Tipo de hogar")="Total","Adulto solo menor de 65 años","Hombre (solo menor de 65 años)",
+"Mujer (sola menor de 65 años)","Adulto solo de 65 o más años",
+"Hombre (solo de 65 y más años)","Mujer (sola de 65 y más años)",
+"Adulto solo con hijos dependientes","Dos adultos ambos menores de 65 años",
+"Dos adultos, al menos uno de 65 y más años",
+"Dos o más adultos con hijos dependientes","Otros hogares";
+VALUES("Tipo de ejercicio")="Ejercicio fisico regular","Sedentarismo";
+VALUES("Periodo")="2023","2022","2020","2017","2014","2012";
+UNITS="%";
+DATA=".." 37.7 ".." ".." ".." ".." ".." 27.4 ".." ".." ".." ".." ".." 39.6 ".." ".." ".." ".." ".." 22.2 ".." ".." ".." ".." ".." 37.3 ".." ".." ".." ".." ".." 24.3 ".." ".." ".." ".." ".." 43.3 ".." ".." ".." ".." ".." 18.9 ".." ".." ".." ".." ".." 41.7
+ ".." ".." ".." ".." ".." 41.1 ".." ".." ".." ".." ".." 52.0 ".." ".." ".." ".." ".." 35.8 ".." ".." ".." ".." ".." 37.7 ".." ".." ".." ".." ".." 43.3 ".." ".." ".." ".." ".." 39.5 ".." ".." ".." ".." ".." 23.1 ".." ".." ".." ".." ".." 38.6 ".." ".."
+ ".." ".." ".." 22.6 ".." ".." ".." ".." ".." 45.9 ".." ".." ".." ".." ".." 32.5 ".." ".." ".." ".." ".." 33.1 ".." ".." ".." ".." ".." 25.4 ".." ".." ".." ".." ".." 38.2 ".." ".." ".." ".." ".." 29.8 ".." ".." ".." "..";

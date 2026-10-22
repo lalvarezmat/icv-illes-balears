@@ -1,0 +1,27 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Seguridad física y personal";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Indicadores de criminalidad por tipo de indicador";
+CONTENTS="Indicadores de criminalidad";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Cifras de población provisionales para el último año";
+DECIMALS=1;
+SHOWDECIMALS=1;
+HEADING="Indicador de calidad de vida","Periodo";
+VALUES("Indicador de calidad de vida")="Infracciones penales","Tasa de criminalidad",
+"Homicidios y asesinatos consumados","Tasa de homicidios";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+
+PRECISION("Indicador de calidad de vida","Infracciones penales")=0;
+PRECISION("Indicador de calidad de vida","Tasa de criminalidad")=1;
+PRECISION("Indicador de calidad de vida","Homicidios y asesinatos consumados")=0;
+PRECISION("Indicador de calidad de vida","Tasa de homicidios")=2;
+UNITS="Miles Infracciones, %1000, Número, Tanto por 100.000";
+DATA=2454.0 2465.0 2323.0 1958.0 1767.0 2199.0 2131.0 2046.0 2010.0 2037.0 2092.0 2172.0 2269.0 2286.0 2297.0 2339.0 2397.0 2316.0 2270.0 2231.0 2141.0 50.3 51.0 48.6 41.3 37.3 46.7 45.6 44.0 43.3 43.9 45.1 46.6 48.5 48.9 49.3 50.4 52.1 51.2 50.8 50.6 49.6 349.0 333.0 326.0 293.0 298.0 331.0 289.0 307.0
+ 294.0 302.0 323.0 302.0 364.0 385.0 401.0 399.0 426.0 482.0 476.0 518.0 520.0 0.72 0.69 0.67 0.62 0.63 0.7 0.62 0.66 0.63 0.65 0.7 0.65 0.78 0.82 0.86 0.86 0.93 1.1 1.1 1.2 1.2;

@@ -1,0 +1,31 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC-CCAA";
+TITLE="Fumadores diarios por comunidad autónoma";
+CONTENTS="Fumadores diarios";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 15 y más años"
+"En 2022, poblacion de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Comunidad autónoma";
+HEADING="Periodo";
+VALUES("Comunidad autónoma")="Total Nacional","01 Andalucía","02 Aragón","03 Asturias, Principado de",
+"04 Balears, Illes","05 Canarias","06 Cantabria","07 Castilla y León",
+"08 Castilla - La Mancha","09 Cataluña","10 Comunitat Valenciana","11 Extremadura",
+"12 Galicia","13 Madrid, Comunidad de","14 Murcia, Región de",
+"15 Navarra, Comunidad Foral de","16 País Vasco","17 Rioja, La","18 Ceuta",
+"19 Melilla";
+VALUES("Periodo")="2023","2022","2020","2017","2014","2012","2009";
+CODES("Comunidad autónoma")="CA00","CA01","CA02","CA03","CA04","CA05","CA06","CA07","CA08","CA09","CA10","CA11","CA12",
+"CA13","CA14","CA15","CA16","CA17","CA18","CA19";
+MAP("Comunidad autónoma")="spain_regions_img_ind";
+UNITS="%";
+DATA=16.6 17.0 19.8 22.1 23.0 24.0 26.2 18.2 18.7 20.9 22.7 24.4 27.1 26.7 15.5 16.1 17.8 24.1 23.9 25.9 24.8 12.5 17.3 19.2 23.8 19.1 21.8 27.2 20.9 17.2 20.5 23.1 23.0 22.7 25.7 16.1 16.9 20.7 22.3 22.7 21.9 27.2 9.9 17.6 18.9 22.9 21.4 23.9 27.6 19.0
+ 18.2 19.0 22.7 21.6 22.8 28.4 19.4 18.5 20.6 24.6 23.4 24.5 29.0 13.8 18.1 20.9 22.5 23.7 23.0 24.2 21.2 16.2 19.9 24.8 22.0 27.6 28.2 21.5 20.3 25.3 23.9 25.6 24.7 26.3 14.9 15.0 17.7 17.8 19.1 20.3 22.2 13.3 15.1 17.7 19.0 23.2 20.9 25.1 19.7 16.8
+ 23.7 23.3 25.6 25.0 26.7 17.6 14.7 18.2 20.4 23.2 23.3 28.3 15.6 13.8 16.1 19.8 22.8 23.3 27.2 16.6 18.1 18.7 20.1 21.8 24.4 29.4 9.9 17.3 20.1 24.3 22.8 18.7 24.8 11.2 12.3 15.2 19.5 15.3 19.0 18.8;

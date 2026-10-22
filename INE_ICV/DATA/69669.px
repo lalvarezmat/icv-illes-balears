@@ -1,0 +1,21 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Fumadores diarios por sexo";
+CONTENTS="Fumadores diarios";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 15 y más años"
+"En 2022, poblacion de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Periodo")="2023","2022","2020","2017","2014","2012","2009";
+UNITS="%";
+DATA=16.6 17.0 19.8 22.1 23.0 24.0 26.2 20.2 20.2 23.3 25.6 27.6 27.9 31.2 13.3 13.9 16.4 18.8 18.6 20.2 21.3;

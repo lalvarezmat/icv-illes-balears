@@ -1,0 +1,26 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Determinantes de salud";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Índice de masa corporal por grado de urbanización";
+CONTENTS="Índice de masa cor";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Masa corporal","Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Masa corporal")="Peso insuficiente (IMC < 18,5 kg/m2)",
+"Normopeso (18,5 kg/m2 <= IMC < 25 kg/m2)",
+"Sobrepeso (25 kg/m2 <= IMC < 30 kg/m2)","Obesidad (IMC >= 30 kg/m2)";
+VALUES("Periodo")="2023","2022","2020","2017","2014","2012","2009";
+UNITS="%";
+DATA=".." 2.3 ".." ".." ".." ".." ".." ".." 43.7 ".." ".." ".." ".." ".." ".." 34.3 ".." ".." ".." ".." ".." ".." 14.1 ".." ".." ".." ".." ".." ".." 2.4 ".." ".." ".." ".." ".." ".." 45.6 ".." ".." ".." ".." ".." ".." 33.7 ".." ".." ".." ".." ".." ".."
+ 13.1 ".." ".." ".." ".." ".." ".." 2.3 ".." ".." ".." ".." ".." ".." 41.9 ".." ".." ".." ".." ".." ".." 34.0 ".." ".." ".." ".." ".." ".." 15.3 ".." ".." ".." ".." ".." ".." 1.6 ".." ".." ".." ".." ".." ".." 40.0 ".." ".." ".." ".." ".." ".." 37.2
+ ".." ".." ".." ".." ".." ".." 15.5 ".." ".." ".." ".." "..";

@@ -1,0 +1,40 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones materiales";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Población con carencias materiales (al menos 3, 4 conceptos) por número de conceptos y grado de urbanización";
+CONTENTS="Población con carencias materiales (al menos 3, 4 conceptos)";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Conceptos considerados:#<ul><li>No puede permitirse ir de vacaciones al menos"
+" una semana al año;</li><li>No puede permitirse una comida de carne, pollo o "
+"pescado al menos cada dos días;</li><li>No puede permitirse mantener la vivie"
+"nda con una temperatura adecuada;</li><li>No tiene capacidad para afrontar ga"
+"stos imprevistos;</li><li>Ha tenido retrasos en el pago de gastos relacionado"
+"s con la vivienda principal (hipoteca o alquiler, recibos de gas, comunidad.."
+".) o en compras a plazos en los últimos 12 meses;</li><li>No puede permitirse"
+" disponer de un automóvil;</li><li>No puede permitirse disponer de un teléfon"
+"o;</li><li>No puede permitirse disponer de un televisor en color;</li><li>No "
+"puede permitirse disponer de una lavadora.</li></ul>##A partir de ECV2021 se "
+"dejan de recoger los conceptos:#<ul><li>No puede permitirse disponer de un te"
+"léfono,</li><li>No puede permitirse disponer de un televisor en color</li><li"
+"> y No puede permitirse disponer de una lavadora</li></ul>#asumiéndose que el"
+" hogar no tiene carencia en esos conceptos.#";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Grado de urbanización";
+HEADING="Número de conceptos","Periodo";
+VALUES("Grado de urbanización")="Total","Área densamente poblada","Área poblada nivel intermedio",
+"Área poco poblada";
+VALUES("Número de conceptos")="Carencia material (carencia en al menos 3 conceptos)",
+"Carencia material severa (carencia en al menos 4 conceptos)";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=18.4 19.2 17.8 17.2 16.7 12.4 13.9 12.8 15.2 16.5 17.8 16.9 16.3 13.2 15.1 13.7 10.8 11.1 13.0 11.9 14.4 8.4 8.9 8.1 7.3 7.0 4.7 5.4 5.1 5.8 6.4 7.1 6.2 5.8 4.5 4.9 4.5 3.6 3.5 4.1 4.1 4.8 19.2 19.8 18.2 17.3 17.5 13.1 13.8 13.5
+ 15.2 15.0 17.4 17.5 15.3 13.2 14.1 14.0 12.0 10.9 12.1 11.8 12.8 9.4 10.1 8.4 8.4 7.7 5.0 5.2 6.0 6.2 6.5 7.3 6.7 5.4 4.7 5.2 5.0 4.5 3.5 3.7 4.4 4.6 18.4 19.9 18.9 18.8 17.0 11.9 13.0 12.9 15.2 18.5 18.6 15.4 17.3 13.0 16.5 15.4
+ 10.6 12.9 15.7 12.3 17.2 7.7 8.4 8.6 6.6 6.2 5.2 5.4 4.9 5.6 7.6 7.2 5.4 6.9 4.3 5.1 5.3 2.8 4.2 5.4 4.0 6.1 15.1 14.9 13.7 12.8 14.9 11.5 14.7 11.5 15.3 17.5 18.1 17.1 17.5 13.3 15.9 11.6 8.7 10.0 12.5 11.8 15.5 5.9 5.7 5.4
+ 4.3 6.2 3.6 5.8 3.7 5.2 5.3 6.4 5.8 5.7 4.5 4.3 2.8 2.5 3.1 3.9 3.6 4.3;

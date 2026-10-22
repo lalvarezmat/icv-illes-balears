@@ -1,0 +1,28 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Formación continua";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas de 25 a 64 años que han recibido formación durante las últimas 4 semanas por nivel de educación";
+CONTENTS="Personas de 25 a 64 años que han recibido formación durante las últimas 4 semanas";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Los datos de 2006 a 2020 están calculados según la base poblacional 2011. Des"
+"de 2021 se utiliza la base 2021"
+"Ruptura de serie; en el año 2005 debido a una mayor cobertura de las activida"
+"des de enseñanza y en el año 2014 por aplicación de la CNED 2014, que es la a"
+"daptación de la CINE-2011, cuyo efecto es de bastante relevancia.";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+UNITS="%";
+DATA=16.0 15.8 15.2 14.3 11.0 10.6 10.5 9.9 9.4 9.9 10.1 11.4 11.2 11.2 11.2 10.8 10.7 10.8 10.7 10.8 4.8 6.4 6.2 5.7 5.2 3.5 3.8 3.7 3.5 3.4 3.6 3.9 4.6 4.7 4.7 4.9 4.8 4.5 4.5 4.4 4.1 1.3 14.9 15.2 14.6 13.2 10.4 10.6 10.8 10.4
+ 9.4 9.9 10.1 11.5 12.3 12.0 12.2 12.2 12.1 12.2 12.3 13.0 7.0 24.6 24.5 24.0 23.3 18.2 17.5 17.6 16.7 16.3 17.5 17.9 20.2 19.4 19.9 19.9 19.5 20.1 20.3 20.7 21.1 10.3;

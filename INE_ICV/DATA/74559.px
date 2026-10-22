@@ -1,0 +1,29 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Ocio";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Personas de 16 y más años por eventos culturales, deportivos o lugares de interés cultural a los que han asistido en los últimos 12 meses por nivel de educación";
+CONTENTS="Personas de 16 y más años";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Indicador de calidad de vida","Asistencia","Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Indicador de calidad de vida")="Adultos que han ido al cine",
+"Adultos que han ido a espectáculos en directo tales como obras de teatro, conciertos, etc.",
+"Adultos que han visitado lugares de interés cultural tales como monumentos históricos, museos, etc.",
+"Adultos que han presenciado en directo acontecimientos deportivos";
+VALUES("Asistencia")="Sí ha asistido","No ha ido porque no puede permitírselo",
+"No ha ido por otras razones";
+VALUES("Periodo")="2022","2015";
+UNITS="%";
+DATA=36.7 45.2 7.6 14.5 55.6 40.3 32.6 32.5 11.0 17.4 56.4 50.1 39.2 33.9 8.2 14.2 52.6 51.9 24.5 25.0 7.1 13.9 68.4 61.1 21.0 25.6 11.0 20.4 68.0 54.0 18.2 17.1 14.3 22.3 67.5 60.6 21.7 17.3 11.6 19.2 66.7 63.5 18.3 15.8 9.1 18.0 72.7 66.2 43.6 59.0
+ 7.3 12.5 49.1 28.6 35.1 38.6 12.2 17.2 52.7 44.2 41.7 39.7 8.7 13.4 49.6 46.9 28.0 32.5 8.1 13.5 63.9 54.0 50.9 69.1 3.8 5.7 45.3 25.2 48.1 54.7 6.1 9.0 45.8 36.3 58.7 58.7 3.6 6.1 37.7 35.2 29.7 35.3 4.0 7.2 66.3 57.5;

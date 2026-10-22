@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Sentido y propósito de la vida";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Evaluación (de las personas de 18 y más años) del sentido y propósito de la vida  nivel de educación";
+CONTENTS="Evaluación (de las personas de 18 y más años) del sentido y propósito de la vida  nivel de educación";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Nivel de educación";
+HEADING="Evaluación","Periodo";
+VALUES("Nivel de educación")="Total","Nivel (0-2): preescolar, primaria y secundaria de 1ª etapa",
+"Nivel (3-4): secundaria de 2ª etapa y postsecundaria no superior",
+"Nivel (5-8): primer y segundo ciclo de educación superior y doctorado";
+VALUES("Evaluación")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Valoración media";
+VALUES("Periodo")="2013";
+UNITS="%, Número medio";
+DATA=4.8 19.2 46.8 29.2 7.5 6.1 23.5 44.4 26.1 7.3 3.7 16.8 46.7 32.7 7.7 3.2 13.2 51.2 32.4 7.8;

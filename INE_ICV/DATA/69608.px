@@ -1,0 +1,23 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Calidad";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Ocupados por sexo y grado de satisfacción con su trabajo actual";
+CONTENTS="Ocupados";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+NOTE="Población de 16 y más años"
+"Los datos de 2006 a 2020 están calculados según la base poblacional 2011. Des"
+"de 2021 se utiliza la base 2021";
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Sexo";
+HEADING="Grado de satisfacción","Periodo";
+VALUES("Sexo")="Total","Hombres","Mujeres";
+VALUES("Grado de satisfacción")="De 0 a 4","De 5 a 6","De 7 a 8","De 9 a 10","Satisfacción media";
+VALUES("Periodo")="2023","2018","2013";
+UNITS="%, Número medio";
+DATA=7.3 6.4 10.1 20.9 20.4 26.4 46.8 47.6 44.2 25.1 25.6 19.4 7.3 7.3 6.9 7.3 6.0 10.4 20.5 20.0 27.3 47.8 48.6 43.6 24.5 25.4 18.7 7.2 7.4 6.8 7.3 6.8 9.6 21.3 20.8 25.2 45.6 46.5 44.8 25.8 26.0 20.4 7.3 7.3 7.0;

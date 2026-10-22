@@ -1,0 +1,22 @@
+AXIS-VERSION="2006";
+CREATION-DATE="20260305";
+CHARSET="ANSI";
+SUBJECT-AREA="Condiciones económicas";
+SUBJECT-CODE="null";
+MATRIX="NAC";
+TITLE="Tasa de riesgo de pobreza después de transferencias sociales (<60% de la renta mediana equivalente) por ámbito geográfico";
+CONTENTS="Tasa de riesgo de pobreza después de transferencias sociales (<60% de la renta mediana equivalente)";
+CODEPAGE="iso-8859-15";
+DESCRIPTION="";
+COPYRIGHT=YES;
+DECIMALS=1;
+SHOWDECIMALS=1;
+STUB="Ámbito geográfico";
+HEADING="Periodo";
+VALUES("Ámbito geográfico")="España","Unión Europea";
+VALUES("Periodo")="2024","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012",
+"2011","2010","2009","2008","2007","2006","2005","2004";
+CODES("Ámbito geográfico")="null","null";
+MAP("Ámbito geográfico")="";
+UNITS="%";
+DATA=19.7 20.2 20.4 21.7 21.0 20.7 21.5 21.6 22.3 22.1 22.2 20.4 20.8 20.6 20.7 20.4 19.8 19.7 20.3 20.1 20.1 16.2 16.2 16.5 16.8 16.7 16.5 16.8 16.9 17.5 17.4 17.3 16.8 16.9 16.9 16.5 ".." ".." ".." ".." ".." "..";
