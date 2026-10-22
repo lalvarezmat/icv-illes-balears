@@ -2599,16 +2599,9 @@ p13 %>%
 
 <span class="mod-claude">Finalmente, si se cruzan la renta (eje horizontal), la esperanza de vida (eje vertical) y el PIB per cápita (tamaño de los círculos), las comunidades se sitúan así:</span>
 
-```{r fig-renta-esperanza-pib, out.width = "85%", fig.align = "center"}
-# Grafico aportado por los editores del borrador (2026-10-22), como imagen.
-knitr::include_graphics("Figuras_editores/Renta_esperanza_PIB.png")
-```
-
-`r fig_cap("Renta media (eje horizontal) y esperanza de vida (eje vertical) de cada comunidad autónoma, como diferencia con la media de las comunidades; el tamaño de los círculos representa el PIB per cápita.")`
-
 ```{r fig-renta-esperanza-pib-r}
-# Version en R de la figura anterior de los editores (2026-10-22), para elegir
-# entre las dos. Como en la original: renta y esperanza de vida como diferencia
+# Version en R del grafico propuesto por los editores (2026-10-22). Como en el
+# original: renta y esperanza de vida como diferencia
 # con la media de las 17 CCAA, tamaño segun el PIB per capita y circulo relleno
 # si el PIB per capita supera la media de las 17 (hueco si no). El diametro va
 # de DIAM_14[1] a DIAM_14[2] px entre el PIB mas bajo y el mas alto, para que
@@ -2655,7 +2648,7 @@ plot_ly(height = 600) %>%
          margin = list(t = 40))
 ```
 
-`r fig_cap("Versión interactiva de la figura anterior: renta media real (eje horizontal) y esperanza de vida (eje vertical) de cada comunidad autónoma, como diferencia con la media de las 17 (mediana de los últimos 5 años). El diámetro de los círculos crece con el PIB per cápita real; rellenos, las comunidades con PIB per cápita por encima de la media. Illes Balears, con borde naranja.")`
+`r fig_cap("Renta media real (eje horizontal) y esperanza de vida (eje vertical) de cada comunidad autónoma, como diferencia con la media de las 17 (mediana de los últimos 5 años). El diámetro de los círculos crece con el PIB per cápita real; rellenos, las comunidades con PIB per cápita por encima de la media. Illes Balears, con borde naranja.")`
 
 <span class="mod-claude">**Qué se ve.** Las dos figuras confirman el retrato del apartado: dentro del Grupo 1, Illes Balears es la comunidad con menos PIB per cápita y menos renta. Y frente al conjunto de España se queda en el centro: su renta está solo `r es(mat["04.Balears,.Illes", "Renta media real"] - mean(mat[, "Renta media real"]), 0)` € por encima de la media de las 17 y su esperanza de vida, `r es(abs(mat["04.Balears,.Illes", "Esperanza de vida"] - mean(mat[, "Esperanza de vida"])), 1)` años `r ifelse(mat["04.Balears,.Illes", "Esperanza de vida"] - mean(mat[, "Esperanza de vida"]) < 0, "por debajo", "por encima")`, mientras sus cuatro compañeros de grupo están arriba a la derecha.</span>
 
