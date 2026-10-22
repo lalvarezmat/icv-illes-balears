@@ -991,7 +991,7 @@ nombres %>%
   gt() %>%
   cols_label(dimension = "Dimensión del ICV", n_indicadores = "Nº de indicadores") %>%
   opt_row_striping() %>%
-  tab_options(table.font.size = px(13)) %>%
+  tab_options(table.font.size = px(16), source_notes.font.size = px(14)) %>%
   tab_source_note("Fuentes: INE (Indicadores de Calidad de Vida, Contabilidad Regional de España e IPC, este último para descontar la inflación), Colegio de Registradores de la Propiedad y SERPAVI (Ministerio de Vivienda y Agenda Urbana). Elaboración propia.")
 ```
 
@@ -2602,7 +2602,7 @@ p13 %>%
          margin = list(t = 40))
 ```
 
-`r fig_cap("Versión en R (interactiva) de la figura anterior, para elegir entre las dos: PIB per cápita real (círculos) y renta media real (cuadrados) de cada comunidad autónoma por grupo de k-means, en euros de 2023 (mediana de los últimos 5 años). Las líneas grises marcan la media de las 17 comunidades.")`
+`r fig_cap("Versión interactiva de la figura anterior: PIB per cápita real (círculos) y renta media real (cuadrados) de cada comunidad autónoma por grupo de k-means, en euros de 2023 (mediana de los últimos 5 años). Las líneas grises marcan la media de las 17 comunidades.")`
 
 <span class="mod-claude">Finalmente, si se cruzan la renta (eje horizontal), la esperanza de vida (eje vertical) y el PIB per cápita (tamaño de los círculos), las comunidades se sitúan así:</span>
 
@@ -2662,7 +2662,7 @@ plot_ly(height = 600) %>%
          margin = list(t = 40))
 ```
 
-`r fig_cap("Versión en R (interactiva) de la figura anterior, para elegir entre las dos: renta media real (eje horizontal) y esperanza de vida (eje vertical) de cada comunidad autónoma, como diferencia con la media de las 17 (mediana de los últimos 5 años). El diámetro de los círculos crece con el PIB per cápita real; rellenos, las comunidades con PIB per cápita por encima de la media. Illes Balears, con borde naranja.")`
+`r fig_cap("Versión interactiva de la figura anterior: renta media real (eje horizontal) y esperanza de vida (eje vertical) de cada comunidad autónoma, como diferencia con la media de las 17 (mediana de los últimos 5 años). El diámetro de los círculos crece con el PIB per cápita real; rellenos, las comunidades con PIB per cápita por encima de la media. Illes Balears, con borde naranja.")`
 
 <span class="mod-claude">**Qué se ve.** Las dos figuras confirman el retrato del apartado: dentro del Grupo 1, Illes Balears es la comunidad con menos PIB per cápita y menos renta. Y frente al conjunto de España se queda en el centro: su renta está solo `r es(mat["04.Balears,.Illes", "Renta media real"] - mean(mat[, "Renta media real"]), 0)` € por encima de la media de las 17 y su esperanza de vida, `r es(abs(mat["04.Balears,.Illes", "Esperanza de vida"] - mean(mat[, "Esperanza de vida"])), 1)` años `r ifelse(mat["04.Balears,.Illes", "Esperanza de vida"] - mean(mat[, "Esperanza de vida"]) < 0, "por debajo", "por encima")`, mientras sus cuatro compañeros de grupo están arriba a la derecha.</span>
 
@@ -4074,6 +4074,228 @@ efecto se reduce a
 `r es(jk_sin_bal(jk2, "POB", "PRECIO"), 2)`. Es lo que se comentó en el apartado
 10: la relación entre la llegada de población y el precio se apoya en buena parte
 en el caso balear, y por eso conviene leerla con cautela.
+
+</div>
+
+# <span class="mod-claude">Anexo F · ¿Y si se resume todo en una sola cifra? Un indicador sintético</span> {#anexo-sintesis .unnumbered}
+
+<div class="mod-claude">
+
+A lo largo del informe la calidad de vida se ha analizado indicador a
+indicador y dimensión a dimensión. Una alternativa natural es **agregar de alguna manera los indicadores para
+obtener un único indicador de síntesis de la calidad de vida**, una sola cifra
+por comunidad que permita ordenarlas de mejor a peor. Este anexo construye ese
+indicador, compara su resultado con el índice oficial que publica el INE y
+explica por qué el informe ha preferido una aproximación multidimensional en
+lugar de un valor de síntesis.
+
+## Cómo se construye el indicador sintético {.unnumbered}
+
+Se parte de diez indicadores: los nueve que describen los grupos del
+apartado 7 más la esperanza de vida, un indicador clave en salud pública que
+el INE incluye también en su propio indicador sintético (el IMCV, que se
+compara más abajo), como primer indicador de la dimensión de salud.
+Con cada uno se hace lo mismo:
+
+1. Se toma su valor normal en cada comunidad: la mediana de los últimos cinco
+   años, como en el resto del informe.
+2. Se **tipifica cada indicador por separado**: a su valor en cada comunidad
+   se le resta la media de ese mismo indicador en las 17 comunidades, y el
+   resultado se divide por la desviación típica de ese indicador en esas 17.
+   La cifra que sale dice a cuántas desviaciones típicas de la media está cada
+   comunidad en ese indicador; así todos quedan en la misma escala y se pueden
+   sumar euros con porcentajes. Es parecido al z-score del apartado 4, con una
+   diferencia: allí se comparaba Illes Balears con la media y la desviación
+   típica de las *otras 16*; aquí cada comunidad se compara con las 17.
+3. Se **ajusta el signo según su polaridad**: en los indicadores en los que
+   subir es malo (paro, abandono, precios de la vivienda, criminalidad) se
+   cambia el signo, para que en todos un valor positivo signifique "mejor que
+   la media".
+4. El indicador sintético es el **promedio** de las diez puntuaciones
+   ajustadas, todas con el mismo peso. Vale 0 en una comunidad que esté justo
+   en la media en todo, y es positivo o negativo según quede por encima o por
+   debajo en el conjunto.
+
+```{r sintesis-calculo}
+# Indicador sintetico (Anexo F): promedio de puntuaciones z de 10 indicadores,
+# con el signo cambiado en los que es malo que suban. Mismos datos que el resto
+# del informe: medianas de los ultimos 5 años ("mat", chunk "medianas").
+VARS_IS <- c("Renta media real", "PIB per cápita real", "Tasa de paro", "Tasa de empleo",
+             "Abandono educativo 18-24", "Salud: muy buena", "Esperanza de vida",
+             "Precio compraventa (€/m²)", "Precio alquiler (€/m²/mes)", "Tasa de criminalidad")
+PRECIOS_IS <- c("Precio compraventa (€/m²)", "Precio alquiler (€/m²/mes)")
+stopifnot(all(VARS_IS %in% colnames(mat)), all(POLARIDAD[VARS_IS] %in% c("mejor", "peor")))
+signo_is <- ifelse(POLARIDAD[VARS_IS] == "mejor", 1, -1)
+z_is <- sweep(scale(mat[, VARS_IS]), 2, signo_is, "*")
+indice_is <- function(vars) rowMeans(z_is[, vars, drop = FALSE])
+is10 <- indice_is(VARS_IS)
+is_sin_precios <- indice_is(setdiff(VARS_IS, PRECIOS_IS))
+is_sin_precios_crim <- indice_is(setdiff(VARS_IS, c(PRECIOS_IS, "Tasa de criminalidad")))
+
+# Indice oficial del INE (IMCV, 55 indicadores en 9 dimensiones): mediana
+# 2020-2024 de su valor global, para compararlo en la misma ventana.
+imcv <- read.xlsx("../INE_ICV/IMCV.datos.xlsx", sheet = "AMPI_Global")
+imcv_med <- setNames(apply(imcv[, as.character(2020:2024)], 1, median), imcv$CCAA)
+nom_ine <- gsub("[.]", " ", sub("^[0-9]+[.]", "", rownames(mat)))
+stopifnot(all(nom_ine %in% names(imcv_med)))
+imcv17 <- setNames(imcv_med[nom_ine], rownames(mat))
+anios_imcv <- as.character(2008:2024)
+fila_bal_imcv <- which(imcv$CCAA == "Balears, Illes")
+puesto_imcv_anual <- sapply(anios_imcv, function(a) {
+  x <- setNames(imcv[[a]], imcv$CCAA)[nom_ine]; rank(-x)[nom_ine == "Balears, Illes"] })
+
+puesto <- function(x) rank(-x, ties.method = "min")
+B_IS <- "04.Balears,.Illes"
+p_is10 <- puesto(is10)[[B_IS]]
+p_sin_precios <- puesto(is_sin_precios)[[B_IS]]
+p_sin_precios_crim <- puesto(is_sin_precios_crim)[[B_IS]]
+p_imcv <- puesto(imcv17)[[B_IS]]
+g1_is <- names(grupo)[grupo == 1]
+g1_negativos <- limpiar_ccaa(g1_is[is10[g1_is] < 0])
+contrib_precios <- sum(z_is[B_IS, PRECIOS_IS]) / length(VARS_IS)
+cor_is_imcv <- cor(is10, imcv17, method = "spearman")
+cor_renta_pib <- cor(mat[, "Renta media real"], mat[, "PIB per cápita real"])
+cor_precios <- cor(mat[, PRECIOS_IS[1]], mat[, PRECIOS_IS[2]])
+```
+
+`r tab_cap("Los diez indicadores del indicador sintético y el sentido con el que entra cada uno.")`
+
+```{r sintesis-variables}
+tabla_is <- tibble(Indicador = VARS_IS,
+       `Que suba es` = ifelse(signo_is > 0, "bueno: se mantiene el signo", "malo: se le cambia el signo"),
+       `Illes Balears (valor tipificado ajustado)` = round(unname(z_is[B_IS, ]), 2))
+# z ajustado: ya lleva el signo cambiado en los indicadores en los que subir es
+# malo, asi que positivo = mejor que la media (verde) y negativo = peor (rojo).
+lim_is <- max(abs(tabla_is$`Illes Balears (valor tipificado ajustado)`))
+tabla_is %>%
+  gt() %>%
+  fmt_es() %>%
+  tab_style(style = cell_fill(color = COLOR_POL_MEJOR), locations = cells_body(columns = `Que suba es`, rows = signo_is > 0)) %>%
+  tab_style(style = cell_fill(color = COLOR_POL_PEOR), locations = cells_body(columns = `Que suba es`, rows = signo_is < 0)) %>%
+  data_color(columns = `Illes Balears (valor tipificado ajustado)`,
+             colors = col_numeric(c("#e34948", "#f0efec", "#1baf7a"), domain = c(-lim_is, lim_is))) %>%
+  tab_source_note(md("*Que suba es*: verde, subir es bueno; morado, subir es malo. *Illes Balears (valor tipificado ajustado)*: valor tipificado con el signo ya ajustado según la polaridad; verde, Illes Balears está mejor que la media de las comunidades en ese indicador; rojo, peor; más intenso cuanto más lejos.")) %>%
+  tab_options(table.font.size = px(14))
+```
+
+## Qué dice {.unnumbered}
+
+```{r sintesis-grafico}
+d_is <- tibble(ccaa = rownames(mat), nombre = sub(",.*", "", limpiar_ccaa(ccaa)), is = unname(is10),
+               grupo = grupo[ccaa]) %>%
+  arrange(is) %>%
+  mutate(nombre = factor(nombre, levels = nombre),
+         info = paste0("<b>", nombre, "</b><br>Indicador sintético: ", es(is, 3),
+                       "<br>Puesto: ", puesto(is10)[ccaa], " de 17",
+                       "<br>Grupo ", grupo, " del apartado 7"))
+rango_is <- range(d_is$is) + c(-0.15, 0.15)
+p_is <- plot_ly(height = 560)
+for (k in 1:3) {
+  sub <- filter(d_is, grupo == k)
+  p_is <- p_is %>% add_trace(data = sub, x = ~is, y = ~nombre, type = "bar", orientation = "h",
+    name = paste0("Grupo ", k, ": ", sub("la España de ", "", NOMBRES_GRUPO[k])),
+    marker = list(color = COLORES_GRUPO[[as.character(k)]],
+                  line = list(color = ifelse(sub$ccaa == B_IS, COLOR_BALEARS, "rgba(0,0,0,0)"),
+                              width = ifelse(sub$ccaa == B_IS, 3, 0))),
+    text = es(sub$is, 2), textposition = "outside", cliponaxis = FALSE,
+    hovertext = ~info, hoverinfo = "text")
+}
+p_is %>%
+  layout(separators = ",.", barmode = "overlay",
+         xaxis = list(title = "Indicador sintético (promedio de puntuaciones tipificadas con el signo ajustado)", range = rango_is,
+                      zeroline = TRUE, zerolinecolor = "#55606e"),
+         yaxis = list(title = "", categoryorder = "array", categoryarray = levels(d_is$nombre)),
+         legend = list(orientation = "h", x = 0.5, xanchor = "center", y = 1, yanchor = "bottom"),
+         margin = list(l = 10, t = 40))
+```
+
+`r fig_cap("Indicador sintético de calidad de vida de las 17 comunidades autónomas: promedio de las puntuaciones tipificadas de diez indicadores, con el signo ajustado según su polaridad (mediana de los últimos 5 años). Color: grupo del apartado 7; Illes Balears, con borde naranja.")`
+
+Con este indicador, Illes Balears queda en el **puesto `r p_is10` de 17**
+(`r es(is10[B_IS], 2)`), por debajo de la media, y es
+`r if (length(g1_negativos) == 1) "la única comunidad del Grupo 1 con un valor negativo" else paste0("una de las comunidades del Grupo 1 con valor negativo (", paste(g1_negativos, collapse = ", "), ")")`:
+sus cuatro compañeros de grupo están por encima de la media. Las seis
+comunidades del Grupo 3 están todas en la mitad baja.
+
+## El índice oficial del INE dice otra cosa {.unnumbered}
+
+El INE ya publica un indicador de síntesis, el **Indicador Multidimensional
+de Calidad de Vida (IMCV)**, construido con 55 indicadores de las nueve
+dimensiones (ver el apartado 2.1). Con él, y con la misma ventana de cinco
+años, Illes Balears está en el **puesto `r p_imcv` de 17**; desde 2008 nunca
+ha bajado del puesto `r max(puesto_imcv_anual)` ni subido del
+`r min(puesto_imcv_anual)`. Los dos índices coinciden en lo grueso (la
+correlación entre los dos órdenes es de `r es(cor_is_imcv, 2)`): arriba,
+Navarra, La Rioja y Aragón; abajo, Canarias y Andalucía. Donde más discrepan
+es justo en Illes Balears.
+
+`r tab_cap("Puesto de cada comunidad según el indicador sintético de diez indicadores, sus variantes sin los precios de la vivienda (y sin la criminalidad) y el índice oficial del INE (IMCV, mediana 2020–2024).")`
+
+```{r sintesis-tabla}
+tibble(ccaa = rownames(mat), CCAA = limpiar_ccaa(ccaa), Grupo = unname(grupo[ccaa]),
+       `Indicador sintético` = round(unname(is10), 3),
+       `Puesto (10 indicadores)` = puesto(is10),
+       `Puesto sin precios` = puesto(is_sin_precios),
+       `Puesto sin precios ni criminalidad` = puesto(is_sin_precios_crim),
+       `Puesto IMCV (INE)` = puesto(imcv17)) %>%
+  arrange(`Puesto (10 indicadores)`) %>%
+  select(-ccaa) %>%
+  gt() %>%
+  data_color(columns = Grupo, colors = col_factor(unname(COLORES_GRUPO), domain = c(1, 2, 3))) %>%
+  fmt_es() %>%
+  tab_style(style = cell_text(weight = "bold"), locations = cells_body(rows = CCAA == "Illes Balears")) %>%
+  opt_row_striping() %>%
+  tab_options(table.font.size = px(13))
+```
+
+La diferencia la explican sobre todo **los dos precios de la vivienda**, que
+el IMCV no incluye. En Illes Balears los dos son de los más altos de España y,
+con el signo cambiado, restan juntos `r es(abs(contrib_precios), 2)` puntos al
+indicador. Sin ellos, Illes Balears sube al **puesto `r p_sin_precios`**, y sin
+los precios ni la criminalidad (que, como se vio en el apartado 4, el turismo
+probablemente infla), al **puesto `r p_sin_precios_crim`**. Es decir: por lo
+que miden los indicadores clásicos de calidad de vida, Illes Balears está en la
+mitad alta de España; lo que la hunde en un índice que incluye el coste de la
+vivienda es precisamente ese coste. Es la misma tijera que describe el
+informe, vista ahora a través de una sola cifra.
+
+## Por qué el informe no se apoya en un único valor de síntesis {.unnumbered}
+
+Un indicador sintético es muy útil para comunicar: una sola cifra, un solo
+orden, fácil de recordar. Pero este informe ha preferido una **aproximación
+multidimensional** —mirar cada indicador, su nivel y su tendencia, y después
+cómo se agrupan y se relacionan— por varias razones que este mismo anexo
+ilustra:
+
+- **Los pesos son una decisión, no un dato.** Dar a los diez indicadores el
+  mismo peso es tan razonable como cualquier otra opción, y el resultado
+  depende de ella: según qué indicadores entren, Illes Balears pasa del puesto
+  `r p_imcv` al `r p_is10`. Un único valor esconde esa elección detrás de una
+  apariencia de exactitud.
+- **Lo bueno compensa lo malo.** Al promediar, una tasa de empleo muy alta
+  tapa un abandono escolar muy alto. Pero lo que define a Illes Balears es
+  precisamente ese contraste entre lo que va bien (empleo, salud) y lo que va
+  mal (vivienda, educación), y una cifra media lo borra.
+- **Hay indicadores que dicen casi lo mismo.** La renta y el PIB per cápita
+  tienen una correlación de `r es(cor_renta_pib, 2)`, y los dos precios de la
+  vivienda, de `r es(cor_precios, 2)`: en un promedio simple esas ideas cuentan
+  dos veces. El análisis de componentes principales del apartado 6 resuelve
+  este problema de forma objetiva, porque los pesos de cada eje los decide la
+  propia estructura de los datos y no el analista.
+- **No siempre está claro si subir es bueno.** Un precio alto es malo para
+  quien quiere comprar, pero también refleja que mucha gente quiere vivir en
+  ese lugar; la tasa de criminalidad balear está inflada por los turistas; la
+  salud "muy buena" es una sola categoría de una pregunta de encuesta.
+- **Una cifra dice dónde, pero no por qué ni hacia dónde.** El orden de las
+  comunidades no explica qué hay detrás de cada posición, ni si mejora o
+  empeora. Para eso hacen falta los apartados de tendencia y el análisis de
+  rutas, que necesitan los indicadores por separado.
+
+En resumen, el indicador sintético es un buen complemento para resumir y
+comunicar, siempre que se diga de qué está hecho, y confirma el mensaje
+central del informe: la singularidad de Illes Balears no es una calidad de
+vida baja en general, sino la distancia entre lo que ofrece y lo que cuesta
+vivir en las islas.
 
 </div>
 
