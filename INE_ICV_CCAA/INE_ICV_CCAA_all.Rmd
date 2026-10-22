@@ -4076,3 +4076,11 @@ efecto se reduce a
 en el caso balear, y por eso conviene leerla con cautela.
 
 </div>
+
+# <span class="mod-claude">Reproducibilidad: datos y código del estudio</span> {#reproducibilidad .unnumbered}
+
+<span class="mod-claude">Este estudio es reproducible. El código, los datos de origen —tal como los publican el INE, el Colegio de Registradores de la Propiedad y el Ministerio de Vivienda y Agenda Urbana— y los datos elaborados a partir de ellos están en el repositorio [github.com/lalvarezmat/icv-illes-balears](https://github.com/lalvarezmat/icv-illes-balears).</span>
+
+<span class="mod-claude">Con ese material cualquiera puede volver a generar este informe de tres formas: abriendo este mismo documento en RStudio, que usa los datos ya preparados; rehaciendo todo el conjunto de datos sin conexión a partir de los ficheros originales incluidos; o descargándolo de nuevo de las fuentes con los scripts del repositorio. Se ha comprobado que, partiendo de los ficheros originales, la cadena de cálculo regenera exactamente los mismos datos y resultados que se usan aquí. El repositorio explica cómo hacerlo y qué programas hacen falta.</span>
+
+<span class="mod-claude">El código se distribuye con licencia MIT, y el texto, las figuras y los datos elaborados, con licencia CC BY 4.0, salvo los derivados del Colegio de Registradores, que mantienen la licencia ODbL 1.0 de su origen. Los datos de cada fuente conservan sus propias condiciones de reutilización.</span>
