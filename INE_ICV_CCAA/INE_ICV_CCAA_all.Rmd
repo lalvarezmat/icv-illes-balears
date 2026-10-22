@@ -2517,17 +2517,10 @@ económica y formación de comunidad media**.
 
 <span class="mod-claude">La figura siguiente muestra el PIB per cápita real y la renta media real de cada comunidad, por grupo.</span>
 
-```{r fig-grupos-pib-renta, out.width = "75%", fig.align = "center"}
-# Grafico aportado por los editores del borrador (2026-10-22), como imagen.
-knitr::include_graphics("Figuras_editores/Grupos_PIB_renta.png")
-```
-
-`r fig_cap("PIB per cápita real (círculos) y renta media real (cuadrados) de cada comunidad autónoma, agrupadas según los tres grupos de k-means del apartado 7 (euros de 2023; medianas de los últimos cinco años disponibles). A la izquierda, la media de las comunidades.")`
-
 ```{r fig-grupos-pib-renta-r}
-# Version en R de la figura anterior de los editores (2026-10-22), para elegir
-# entre las dos. Mismos datos que el resto del apartado: mediana de los ultimos
-# 5 años de cada CCAA ("mat") y grupos de k-means ("grupo").
+# Version en R del grafico propuesto por los editores (2026-10-22). Mismos datos
+# que el resto del apartado: mediana de los ultimos 5 años de cada CCAA ("mat")
+# y grupos de k-means ("grupo").
 g13 <- tibble(ccaa = rownames(mat), nombre = limpiar_ccaa(ccaa),
               corto = sub(",.*", "", nombre), grupo = unname(grupo[ccaa]),
               pib = mat[, "PIB per cápita real"], renta = mat[, "Renta media real"],
@@ -2602,7 +2595,7 @@ p13 %>%
          margin = list(t = 40))
 ```
 
-`r fig_cap("Versión interactiva de la figura anterior: PIB per cápita real (círculos) y renta media real (cuadrados) de cada comunidad autónoma por grupo de k-means, en euros de 2023 (mediana de los últimos 5 años). Las líneas grises marcan la media de las 17 comunidades.")`
+`r fig_cap("PIB per cápita real (círculos) y renta media real (cuadrados) de cada comunidad autónoma, por grupo de k-means del apartado 7, en euros de 2023 (mediana de los últimos 5 años). Las líneas grises marcan la media de las 17 comunidades.")`
 
 <span class="mod-claude">Finalmente, si se cruzan la renta (eje horizontal), la esperanza de vida (eje vertical) y el PIB per cápita (tamaño de los círculos), las comunidades se sitúan así:</span>
 
