@@ -1,5 +1,5 @@
 ---
-title: 'La “Calidad de Vida” en Illes Balears: <span class="ed-azul">una visión multidimensional</span>'
+title: 'La “Calidad de Vida” en Illes Balears: una visión multidimensional'
 pagetitle: "La Calidad de Vida en Illes Balears"
 subtitle: "¿En qué se diferencia Illes Balears del resto de España? Un análisis de 82 indicadores de calidad de vida (2004–2024)"
 date: "`r format(Sys.Date(), '%d de %B de %Y')`"
@@ -187,11 +187,11 @@ N_FIG <- 0
 N_TAB <- 0
 fig_cap <- function(txt) {
   N_FIG <<- N_FIG + 1
-  paste0('<p class="leyenda leyenda-fig mod-claude"><b>Figura ', N_FIG, '.</b> ', txt, '</p>')
+  paste0('<p class="leyenda leyenda-fig"><b>Figura ', N_FIG, '.</b> ', txt, '</p>')
 }
 tab_cap <- function(txt) {
   N_TAB <<- N_TAB + 1
-  paste0('<p class="leyenda leyenda-tab mod-claude"><b>Tabla ', N_TAB, '.</b> ', txt, '</p>')
+  paste0('<p class="leyenda leyenda-tab"><b>Tabla ', N_TAB, '.</b> ', txt, '</p>')
 }
 
 # Periodo del estudio. Las series empiezan en años distintos: solo el PIB per
@@ -344,12 +344,6 @@ grafico_dimension <- function(dims, ncol = 3) {
 }
 .clave p:last-child { margin-bottom: 0; }
 h2 { margin-top: 2em; }
-/* Ediciones del borrador de Google Docs (2026-10-22): mismos colores que en el
-   documento editado. mod-claude = cambios del volcado, no de los editores. */
-.ed-verde { color: #00ff00; }
-.ed-azul { color: #0000ff; }
-.ed-azulclaro { color: #4a86e8; }
-.mod-claude { color: #ff0000; }
 .autores { font-size: 0.9em; margin-bottom: 1.5em; }
 .autores p { margin-bottom: 0.4em; }
 .leyenda { font-size: 0.92em; text-align: center; margin: 0.6em 0 1.4em 0; }
@@ -413,6 +407,26 @@ pob <- read.xlsx("../PIB_CCAA/PIB_CCAA_Real.xlsx", sheet = "datos") %>%
   summarise(crec = 100 * (poblacion[anio == 2023] / poblacion[anio == 2000] - 1), .groups = "drop")
 crec_pob <- setNames(pob$crec, pob$codigo_ccaa)[substr(rownames(mat), 1, 2)]
 stopifnot(!anyNA(crec_pob))
+
+# Prueba (2026-10-25): formacion superior de 25 a 64 años (resumen y final
+# del apartado 6, chunk form-sup-calculo).
+IND_FS <- "Form. 25-64: nivel 5-8"
+BAL <- "04.Balears,.Illes"
+# Mediana de los ultimos 5 años de España (Total Nacional), como "mat" para las 17 CCAA
+mediana_esp <- function(ind) {
+  d %>% filter(nombre_corto == ind, fecha > max(fecha) - 5) %>%
+    pull(Total.Nacional) %>% median(na.rm = TRUE)
+}
+# Puesto de Illes Balears entre las 17 (1 = valor mas favorable segun POLARIDAD;
+# en los "depende", el mas alto)
+puesto_fav <- function(ind) {
+  x <- mat[, ind]
+  r <- if (POLARIDAD[[ind]] == "peor") rank(x) else rank(-x)
+  r[[BAL]]
+}
+fs_bal <- mat[BAL, IND_FS]
+fs_esp <- mediana_esp(IND_FS)
+fs_puesto <- puesto_fav(IND_FS)
 ```
 
 ```{r rutas-herramientas}
@@ -751,7 +765,7 @@ m2_sin_bal_p <- summary(lm(PRECIO ~ RENTA + POB,
                            data = estandarizar(X[rownames(X) != BALEARS, m2$vars])))$coefficients["POB", 4]
 ```
 
-<div class="autores ed-azul">
+<div class="autores">
 
 **Autores:**
 
@@ -793,8 +807,8 @@ artificiales", nos facilitan hoy los análisis multivariantes o multivariables
 —*reducción de variables, agrupación, relaciones de dependencia o construcción
 de modelos*— que nos permiten una aproximación más respetuosa y honesta a la
 realidad. La medición del progreso, del bienestar, no puede basarse en un solo
-indicador como el PIB, igual que la salud de una persona, <span class="ed-azul">o de un colectivo,</span> no se resume en un
-único dato (temperatura o peso). <span class="ed-verde">Y seguramente si hiciéramos una pequeña encuesta en un grupo de personas sobre lo que consideran bienestar las respuestas serían diversas, según los diferentes indicadores que definen este concepto.</span>
+indicador como el PIB, igual que la salud de una persona, o de un colectivo, no se resume en un
+único dato (temperatura o peso). Y seguramente si hiciéramos una pequeña encuesta en un grupo de personas sobre lo que consideran bienestar las respuestas serían diversas, según los diferentes indicadores que definen este concepto.
 
 En este contexto, en las últimas décadas se han sucedido distintas iniciativas
 en el ámbito internacional (OCDE, Eurostat) en relación con la medición de la
@@ -821,40 +835,40 @@ Aprovechando esta abundante información oficial, en la segunda parte de este
 informe (apartados 8 a 10) analizamos también las posibles rutas que pueden
 conducir a la mejora de la calidad de vida en nuestro territorio: mediante
 modelos de relaciones de dependencia, estudiamos cómo se encadenan la
-formación, el empleo, la renta y el bienestar, <span class="ed-azul">cómo afecta</span> el precio de la
+formación, el empleo, la renta y el bienestar, cómo afecta el precio de la
 vivienda y si Baleares sigue las mismas pautas que el resto de comunidades.
 
 # Resumen: las ideas principales {#resumen}
 
 Antes de entrar en los detalles, esto es lo que dicen los datos. Cada afirmación
-se justifica en el apartado correspondiente. Las <span class="mod-claude">cinco</span> primeras ideas <span class="ed-azul">narran (explican)</span> en
+se justifica en el apartado correspondiente. Las cinco primeras ideas narran (explican) en
 qué se diferencia Illes Balears del resto de España y hacia dónde va (apartados 3 a
 7); las cuatro últimas, qué relaciona unos indicadores con otros (apartados 8
 a 10).
 
 <div class="clave">
 
-1. **Illes Balears tiene mucho empleo y<span class="ed-azul"> buena salud subjetiva</span>, pero una renta que no
+1. **Illes Balears tiene mucho empleo y buena salud subjetiva, pero una renta que no
    destaca.** Es la primera de las 17 comunidades autónomas en tasa de empleo,
    en salud autopercibida "muy buena" y en satisfacción media con el trabajo, y
    la que *menos* enfermedad crónica y *menos* necesidades médicas sin atender
-   tiene de toda España, <span class="ed-azul">aunque su esperanza de vida ocupa el lugar 11 de las 17</span>. Parte de esas ventajas se explican, probablemente, porque
+   tiene de toda España, aunque su esperanza de vida ocupa el lugar 11 de las 17. Parte de esas ventajas se explican, probablemente, porque
    su población es más joven que la media (el apartado 4 lo detalla). Su renta
    por persona, en cambio, está en la zona media: casi todos los años entre el
    **puesto 5 y el 8** de 17, y solo uno (2018) entre las cuatro primeras.
 
 2. **Junto con Madrid, tiene la vivienda más cara de España.** Su metro
    cuadrado cuesta casi el **doble** que la media de las demás comunidades y
-   casi **cuatro veces** <span class="ed-azulclaro">más</span> que en la más barata (Extremadura). Como su renta
+   casi **cuatro veces** más que en la más barata (Extremadura). Como su renta
    no está a esa altura, es la comunidad donde comprar vivienda exige **más
    esfuerzo en relación con lo que se gana**, y lo es todos los años desde 2019. Ese es el verdadero desequilibrio balear: unos precios de comunidad rica
-   con rentas de comunidad media. <span class="mod-claude">Un dato ayuda a entenderlo: según el Colegio de Registradores de la Propiedad, en 2025 el 29,9 % de las compraventas de vivienda en Illes Balears las hicieron compradores de nacionalidad extranjera, más del doble que en el conjunto de España (13,8 %).</span>
+   con rentas de comunidad media. Un dato ayuda a entenderlo: según el Colegio de Registradores de la Propiedad, en 2025 el 29,9 % de las compraventas de vivienda en Illes Balears las hicieron compradores de nacionalidad extranjera, más del doble que en el conjunto de España (13,8 %).
 
 3. **Y además es donde más rápido sube.** Descontada la inflación, la vivienda
    en Illes Balears vale hoy un **18 % más** que en 2007, mientras que la renta de
    sus hogares ha subido un 6 %. En el conjunto de España, en cambio, vale un
-   **27 % menos** que entonces <span class="mod-claude">(no es un efecto del peso de las comunidades menos pobladas: descontada la inflación, 15 de las 17 comunidades valen hoy menos que en 2007, entre ellas Cataluña, un 40 % menos, País Vasco, un 34 %, y Madrid, un 17 %)</span>, y solo Illes Balears y Canarias están por encima de
-   aquel nivel. <span class="mod-claude">Es la evolución</span>
+   **27 % menos** que entonces (no es un efecto del peso de las comunidades menos pobladas: descontada la inflación, 15 de las 17 comunidades valen hoy menos que en 2007, entre ellas Cataluña, un 40 % menos, País Vasco, un 34 %, y Madrid, un 17 %), y solo Illes Balears y Canarias están por encima de
+   aquel nivel. Es la evolución
    en la que Illes Balears más se aparta del resto del país. El alquiler repite el
    patrón: +23 % desde 2011, también descontada la inflación, la mayor subida
    de España.
@@ -873,15 +887,15 @@ a 10).
 5. **Su otro punto débil, persistente, es la educación.** Es la segunda
    comunidad con más **abandono escolar temprano** (el 18 % de los jóvenes de
    18 a 24 años ha dejado de estudiar con, como mucho, la ESO, frente al 12 %
-   de <span class="mod-claude">media en el resto de comunidades</span>) y la que tiene menos jóvenes con estudios superiores. La
+   de media en el resto de comunidades) y la que tiene menos jóvenes con estudios superiores. La
    distancia con el resto de España se ha acortado mucho en veinte años, pero
-   no se ha cerrado, y desde 2021 el abandono ha vuelto a subir.
+   no se ha cerrado, y desde 2021 el abandono ha vuelto a subir. Entre los adultos de 25 a 64 años, solo el `r es(fs_bal)` % tiene estudios superiores, frente al `r es(fs_esp)` % de España (puesto `r fs_puesto` de 17); es el indicador de educación que más pesa en el eje de nivel socioeconómico del apartado 6, y en el que Illes Balears queda más lejos de las comunidades a las que se parece por renta.
 
 </div>
 
 <div class="clave">
 
-**<span class="ed-azulclaro">¿Y a qué comunidades se parece <span class="mod-claude">Illes Balears</span>?</span>**
+**¿Y a qué comunidades se parece Illes Balears?**
 
 Un algoritmo que agrupa las 17
 comunidades, sin saber cuál es cada cuál, coloca a Illes Balears junto a Cataluña, Madrid,
@@ -907,7 +921,7 @@ vuelve sobre esto.
 
 <div class="clave">
 
-**<span class="ed-azulclaro">¿Qué influye en qué o cómo se interrelacionan los indicadores?</span>**
+**¿Qué influye en qué o cómo se interrelacionan los indicadores?**
 
 El análisis de rutas de los apartados 8 a 10, que
 estudia cómo se relacionan los indicadores entre sí y si Illes Balears sigue las
@@ -942,8 +956,8 @@ mismas reglas que el resto, añade cuatro ideas más:
 
 9. **El precio de la vivienda en Illes Balears va mucho más allá de lo que "le
     tocaría".** Ni su renta ni el fuerte crecimiento de su población (idea 4)
-    bastan para explicarlo: con esas dos cifras, <span class="mod-claude">y según lo que ocurre en las otras 16
-    comunidades, a Illes Balears le correspondería un precio medio de vivienda</span> de unos
+    bastan para explicarlo: con esas dos cifras, y según lo que ocurre en las otras 16
+    comunidades, a Illes Balears le correspondería un precio medio de vivienda de unos
     **`r es(pb_precio$esperado, 0)` €/m²** (en euros de 2024, es decir,
     descontada la inflación); en Illes Balears cuesta
     **`r es(pb_precio$observado, 0)` €/m²**, un
@@ -952,7 +966,7 @@ mismas reglas que el resto, añade cuatro ideas más:
     `r if (dos_archipielagos) "Que las dos comunidades más caras de lo que les correspondería sean los dos archipiélagos es un indicio (no una prueba) de que la insularidad y el turismo pesan en el precio." else ""`
     Esa parte del precio no la explican ni la renta ni la población, y apunta a
     factores que no están en estos datos (la demanda turística y extranjera, la
-    escasez de suelo de un territorio insular,<span class="ed-verde"> y la fuerte demanda de segunda vivienda de extranjeros</span>).
+    escasez de suelo de un territorio insular, y la fuerte demanda de segunda vivienda de extranjeros).
 
 </div>
 
@@ -962,23 +976,23 @@ mismas reglas que el resto, añade cuatro ideas más:
 Las flechas son hipótesis razonables que el analista dibuja *antes* de mirar
 los resultados; el análisis dice cuánto pesaría cada flecha *si* el esquema
 fuera correcto, y si los datos contradicen o no el esquema. Además, se trabaja
-con <span class="mod-claude">solo</span> 17 comunidades, lo que obliga a usar modelos pequeños y a leer los
+con solo 17 comunidades, lo que obliga a usar modelos pequeños y a leer los
 números con prudencia. El apartado 8 explica todo esto con detalle.
 
 </div>
 
 # De qué va este informe
 
-## El marco: <span class="mod-claude">los Indicadores</span> de Calidad de Vida del INE
+## El marco: los Indicadores de Calidad de Vida del INE
 
 Medir "la calidad de vida" de un territorio con una sola cifra es imposible:
-depende de la salud <span class="mod-claude">—objetiva y subjetiva—</span>, del dinero <span class="mod-claude">—riqueza, patrimonio, renta…—</span>, del trabajo<span class="mod-claude">,</span> de la vivienda, de la seguridad,
-del entorno... Por eso, <span class="ed-azul">promovido por diversas iniciativas internacionales</span>, el Instituto Nacional de Estadística (INE) publica anualmente <span class="mod-claude">los denominados</span>
-**<span class="mod-claude">Indicadores de Calidad de Vida (ICV)</span>**, que no <span class="mod-claude">son</span> un número único sino <span class="mod-claude">un</span>
+depende de la salud —objetiva y subjetiva—, del dinero —riqueza, patrimonio, renta…—, del trabajo, de la vivienda, de la seguridad,
+del entorno... Por eso, promovido por diversas iniciativas internacionales, el Instituto Nacional de Estadística (INE) publica anualmente los denominados
+**Indicadores de Calidad de Vida (ICV)**, que no son un número único sino un
 *conjunto* de indicadores organizados en nueve dimensiones temáticas, siguiendo el
-mismo marco que usa Eurostat para toda la Unión Europea. <span class="mod-claude">A partir de 55 de ellos, el INE elabora además desde 2017 un índice único, el Indicador Multidimensional de Calidad de Vida (IMCV), que los resume en una sola cifra. De las nueve dimensiones, la de *Gobernanza y derechos básicos* no tiene ningún dato por comunidad autónoma posterior a 2022, así que este informe trabaja con ocho.</span> <span class="ed-verde">La Encuesta Europea de Calidad de Vida (EQLS)<span class="mod-claude">, de Eurofound,</span> es otra herramienta de seguimiento para captar la calidad de vida en múltiples dimensiones.</span>
+mismo marco que usa Eurostat para toda la Unión Europea. A partir de 55 de ellos, el INE elabora además desde 2017 un índice único, el Indicador Multidimensional de Calidad de Vida (IMCV), que los resume en una sola cifra. De las nueve dimensiones, la de *Gobernanza y derechos básicos* no tiene ningún dato por comunidad autónoma posterior a 2022, así que este informe trabaja con ocho. La Encuesta Europea de Calidad de Vida (EQLS), de Eurofound, es otra herramienta de seguimiento para captar la calidad de vida en múltiples dimensiones.
 
-Este informe <span class="ed-azulclaro">analiza</span> los `r n_ind` indicadores disponibles **desagregados por
+Este informe analiza los `r n_ind` indicadores disponibles **desagregados por
 comunidad autónoma** y que siguen actualizándose (datos hasta 2023 o 2024
 según el indicador), repartidos en estas dimensiones:
 
@@ -1008,7 +1022,7 @@ autónoma, que es la unidad de comparación de este informe.
 
 **Segundo filtro: que siga vivo.** Solo se conservan indicadores cuyo
 último dato disponible es de **2023 o posterior**. Se descartan 
-series que el INE ha dejado de actualizar. <span class="mod-claude">Quedan **42** tablas.</span>
+series que el INE ha dejado de actualizar. Quedan **42** tablas.
 
 **Y un paso de desagregación: una tabla no es un indicador.** Muchas tablas del
 ICV no contienen un único número por comunidad y año, sino **varias categorías
@@ -1018,7 +1032,7 @@ regular, mala, muy mala), y cada una cuenta algo diferente. Tratarlas como un
 único indicador obligaría a elegir una y tirar el resto, o a promediar
 categorías que no son promediables.
 
-Por eso cada categoría se separa como **indicador aparte**. <span class="ed-verde">En este contexto</span>, aparte no quiere
+Por eso cada categoría se separa como **indicador aparte**. En este contexto, aparte no quiere
 decir independiente: las categorías de una misma pregunta suman 100 %, así que
 si una sube, alguna otra tiene que bajar. El apartado 6 tiene esto en cuenta.
 De las 42 tablas, 24 tienen una sola cifra y 18 se desdoblan en varias —entre
@@ -1026,7 +1040,7 @@ De las 42 tablas, 24 tienen una sola cifra y 18 se desdoblan en varias —entre
 alcanzado por la población adulta", que cruza dos grupos de edad (25–64 y 65+)
 con cuatro niveles formativos: 8 indicadores de una sola tabla.
 
-<span class="mod-claude">De esos 85 se quitan 6 que no miden la calidad de vida sino el tamaño de la muestra de las mediciones de contaminación (población y estaciones consideradas), y quedan 79.</span> Añadiendo a estos indicadores los
+De esos 85 se quitan 6 que no miden la calidad de vida sino el tamaño de la muestra de las mediciones de contaminación (población y estaciones consideradas), y quedan 79. Añadiendo a estos indicadores los
 tres que no salen de una tabla del ICV —dos de precio de la
 vivienda y uno de producción económica, que se explican justo debajo—, se
 llega a los `r n_ind` de este informe.
@@ -1092,7 +1106,7 @@ inflación** (se dice que están *deflactados*, o en *euros constantes*), con el
 - **Una limitación**: el IPC mide cómo cambian los precios *dentro* de cada
   comunidad con el paso del tiempo, no si vivir en una es más caro que en otra.
   Estas cifras quitan la inflación, pero no dicen que 1.000 € den para lo
-  mismo en Palma que en <span class="ed-azul">otras capitales peninsulares.</span>
+  mismo en Palma que en otras capitales peninsulares.
 
 El PIB per cápita ya viene en euros constantes por su propio método, también
 anclado en su último año (2023),
@@ -1107,7 +1121,7 @@ ajuste.
 > se está moviendo?**
 
 Parece una pregunta sencilla, pero tiene trampa. Si se compara Illes Balears con la
-media nacional indicador por indicador, salen `r n_ind` comparaciones <span class="ed-azul">distintas</span>: algunas
+media nacional indicador por indicador, salen `r n_ind` comparaciones distintas: algunas
 diferencias serán grandes de verdad y otras serán ruido. Y una diferencia, además, puede
 ser llamativa *hoy* pero estar desapareciendo, o al revés: un indicador puede
 parecer normal ahora mismo y estar empeorando a toda velocidad.
@@ -1118,11 +1132,11 @@ uno respondiendo a algo que los otros no ven.
 Y esa pregunta deja abierta una segunda, a la que se dedican los apartados 8
 a 10:
 
-> **¿Cómo se relacionan unos indicadores con otros, <span class="ed-verde">y si Illes Balears sigue</span> las mismas
+> **¿Cómo se relacionan unos indicadores con otros, y si Illes Balears sigue las mismas
 > reglas que el resto?**
 
 Saber que Illes Balears tiene mucho empleo, pocos titulados superiores y una vivienda
-muy cara no dice si esas cosas están conectadas <span class="ed-verde">o interrelacionadas,</span> ni si lo están igual que en
+muy cara no dice si esas cosas están conectadas o interrelacionadas, ni si lo están igual que en
 las demás comunidades. Para eso se usa un *análisis de rutas*.
 
 ## Guía de lectura
@@ -1148,8 +1162,8 @@ autónomas y no comunidades, y el total nacional, que es un agregado y no un
 caso comparable): en los apartados 4 y 5 eso significa medir a Illes Balears contra
 las otras 16. El apartado 3, en cambio, compara Illes Balears con el **total
 nacional**, que es la referencia más intuitiva para ver una evolución. Son dos
-referencias distintas a propósito: <span class="ed-verde">si nos preguntamos</span> "¿es Illes Balears atípica?" hace falta el
-grupo de comparación completo; <span class="ed-verde">y si por el contrario la pregunta es</span> "¿cómo ha evolucionado?" basta la media del
+referencias distintas a propósito: si nos preguntamos "¿es Illes Balears atípica?" hace falta el
+grupo de comparación completo; y si por el contrario la pregunta es "¿cómo ha evolucionado?" basta la media del
 país.
 
 </div>
@@ -1176,7 +1190,7 @@ clásica. La idea es bonita y fácil: en vez de ajustar una recta que minimice
 distancias, se calcula la pendiente **entre cada pareja de años posible** y se
 toma la *mediana* de todas esas pendientes. Si un año es atípico, solo estropea
 las parejas en las que él participa, y la mediana lo ignora. Una regresión
-clásica, en cambio, puede quedar inclinada entera por culpa de un único punto. <span class="mod-claude">Es el efecto de los valores atípicos, cuyo impacto hay que mitigar.</span>
+clásica, en cambio, puede quedar inclinada entera por culpa de un único punto. Es el efecto de los valores atípicos, cuyo impacto hay que mitigar.
 
 </div>
 
@@ -1206,13 +1220,13 @@ después los números encaja con lo que se ve.
 
 <div class="nota">
 
-**Cómo leer estos gráficos.** <span class="ed-verde">La escala horizontal nos da la evolución con el tiempo medida en años. Por otra parte,</span> cada panel tiene su **propia escala vertical**,
+**Cómo leer estos gráficos.** La escala horizontal nos da la evolución con el tiempo medida en años. Por otra parte, cada panel tiene su **propia escala vertical**,
 porque los indicadores se miden en cosas distintas (porcentajes, euros,
 µg/m³, tasas por 100.000 habitantes...). Eso significa que aquí hay que
 comparar **formas**, no alturas: si la línea naranja va por encima de la azul,
 Illes Balears está por encima de España en ese indicador; si se separan con el
 tiempo, la diferencia está creciendo. El fondo del título de cada panel dice
-<span class="mod-claude">si es bueno o malo que ese indicador suba</span>: **verde**, subir es bueno;
+si es bueno o malo que ese indicador suba: **verde**, subir es bueno;
 **morado**, subir es malo; **sin color**, depende (los mismos colores que la
 columna *Indicador* de las tablas de los apartados 4 y 5, y el criterio de
 cada uno está en el [Anexo B](#anexo-b)). Así, una línea naranja por encima de
@@ -1220,12 +1234,12 @@ la azul en un panel verde es una buena noticia para Illes Balears, y en uno mora
 una mala. Para comparar magnitudes entre
 indicadores distintos están las tablas de los apartados siguientes. La renta y
 los precios de vivienda aparecen descontada la inflación, en euros constantes
-(ver el <span class="ed-verde">Apartado</span> 2).
+(ver el Apartado 2).
 
 **Una salvedad sobre el panel de *Precio alquiler*** (en "Condiciones
 materiales de vida"): SERPAVI publica el dato por comunidad autónoma pero **no
 un agregado nacional**, así que la línea azul de ese panel no es el "precio
-medio en España" sino la **media simple de las comunidades<span class="mod-claude"> y ciudades</span> autónomas**, con
+medio en España" sino la **media simple de las comunidades y ciudades autónomas**, con
 todas pesando igual. Al no estar ponderada por población no representa la media nacional, así que conviene leerla como "la comunidad típica", no como "España".
 Además, Navarra (desde 2021) y País Vasco (solo 2024) entran en esa media a
 mitad de la serie, y eso la mueve un poco por sí solo. Sirve para ver la
@@ -1322,7 +1336,7 @@ aparta una comunidad cualquiera de la media).
 - Los valores **negativos** significan lo mismo pero por debajo.
 
 La ventaja sobre el puesto es que el z-score distingue "el primero de 17 por
-muy poco" (z pequeño) de "el primero de 17 con diferencia" (z grande). <span class="mod-claude">El z-score permite, además, comparar entre sí indicadores medidos en escalas distintas, como el abandono educativo y la renta.</span>
+muy poco" (z pequeño) de "el primero de 17 con diferencia" (z grande). El z-score permite, además, comparar entre sí indicadores medidos en escalas distintas, como el abandono educativo y la renta.
 
 </div>
 
@@ -1334,7 +1348,7 @@ y conviene leerlos juntos:
 - **La columna *Z-score* indica dirección, no si es bueno o malo.** Azul =
   Illes Balears por encima de la media; rojo = por debajo; más intenso cuanto más
   lejos.
-- **La columna *Indicador* <span class="mod-claude">nos dice si es bueno o malo que el indicador suba</span>.**
+- **La columna *Indicador* nos dice si es bueno o malo que el indicador suba.**
   Verde = subir es bueno (tasa de empleo, renta, esperanza de vida...); morado
   = subir es malo (paro, pobreza, criminalidad, precio de la vivienda...); sin
   color = depende, porque es una categoría del centro de una escala (salud
@@ -1355,7 +1369,6 @@ cada uno de los `r n_ind` indicadores.
 De los `r nrow(singularidades)` indicadores analizados, en
 **`r nrow(sing_extremos)`** Illes Balears ocupa uno de los dos primeros o uno de los
 dos últimos puestos entre las 17 comunidades. Son estos:
-
 
 `r tab_cap("Indicadores en los que Illes Balears ocupa uno de los dos primeros o de los dos últimos puestos de las 17 comunidades (nivel: mediana de los últimos 5 años).")`
 
@@ -1474,7 +1487,7 @@ población con gasto elevado en vivienda y la segunda en falta de espacio en la
 vivienda. Sobre la criminalidad hay que hacer una salvedad: la tasa se calcula
 dividiendo los delitos conocidos entre la población *residente*, pero en las
 islas pasan cada año millones de turistas que no cuentan como habitantes y que
-también sufren (y cometen) delitos. Es muy probable que eso <span class="ed-azulclaro">distorsione</span> la cifra
+también sufren (y cometen) delitos. Es muy probable que eso distorsione la cifra
 balear frente a la de comunidades con poco turismo; los datos de este informe
 no permiten saber cuánto.
 
@@ -1528,7 +1541,7 @@ sube al 18 % y al 23 %).
 
 Una forma de resumirlo en una sola cifra es dividir el precio de 100 m² entre
 la renta media anual, los dos descontada la inflación. Con las medianas
-2020–2024 da **<span class="mod-claude">15,0</span> en Illes Balears**, <span class="mod-claude">que es</span> el
+2020–2024 da **15,0 en Illes Balears**, que es el
 valor más alto de España, por delante de Canarias (12,6), Madrid (12,5), País
 Vasco (11,4) y Cataluña (10,5), y muy lejos de Castilla-La Mancha (4,9). Además, 
 calculado año a año, es la primera todos los años desde 2019.
@@ -1817,7 +1830,7 @@ indicador sube más rápido en Illes Balears que en el resto (o baja más despac
 es bueno o malo depende de qué mide el indicador, y lo dice el color de la
 columna *Indicador*: con verde (subir es bueno), un z azul significa que
 Illes Balears **mejora** más deprisa que el resto; con morado (subir es malo), es el
-z rojo el que significa que mejora más deprisa. <span class="mod-claude">Bajar rápido el empleo parcial involuntario</span>
+z rojo el que significa que mejora más deprisa. Bajar rápido el empleo parcial involuntario
 (morado, z rojo) es excelente; bajar rápido la salud "muy buena" (verde, z
 rojo) no lo es.
 
@@ -1837,7 +1850,6 @@ en el signo. Cuando no coinciden, manda la pendiente, que usa todos los años.
 De los `r nrow(tendencias)` indicadores con serie suficiente (al menos 3 años de
 datos), en **`r nrow(tend_extremos)`** la velocidad de cambio de Illes Balears es de
 las dos más altas o las dos más bajas de España:
-
 
 `r tab_cap("Indicadores en los que la velocidad de cambio de Illes Balears es de las dos más altas o las dos más bajas de España (pendiente de Theil-Sen).")`
 
@@ -1863,7 +1875,7 @@ tend_extremos %>%
 
 ## Qué significa
 
-**<span class="mod-claude">Las buenas noticias: el empleo a tiempo parcial involuntario y el gasto elevado en vivienda bajan más deprisa que en ninguna otra comunidad.</span>**
+**Las buenas noticias: el empleo a tiempo parcial involuntario y el gasto elevado en vivienda bajan más deprisa que en ninguna otra comunidad.**
 
 - **Empleo a tiempo parcial involuntario** (z = −3,52). En 2013, el 64 % de
   quienes trabajaban a tiempo parcial en Illes Balears lo hacían sin quererlo; en
@@ -1912,9 +1924,9 @@ Madrid).
 El alquiler cuenta la misma historia en su periodo más corto (2011–2024), y
 con más fuerza todavía. Descontada la inflación, **+23 % en Illes Balears**, la mayor
 subida de España (la siguiente, la Comunitat Valenciana, +12 %), mientras que
-en la media de las <span class="mod-claude">otras</span> 14 comunidades con serie completa está prácticamente igual
+en la media de las otras 14 comunidades con serie completa está prácticamente igual
 que en 2011 (+1 %). En velocidad de subida es la primera de España, con
-z = **<span class="mod-claude">+3,66</span>**, el segundo valor más extremo del informe. La distancia con el
+z = **+3,66**, el segundo valor más extremo del informe. La distancia con el
 resto se ha ensanchado mucho: en 2011 alquilar en las islas costaba un 12 % más
 que la media de esas 14 comunidades; en 2024, un **37 %** más. (Sin descontar la
 inflación, la subida balear es del 59 %.)
@@ -1928,7 +1940,7 @@ habitante lleva 24 años sin moverse.** El PIB per cápita real (lo que produce
 la economía balear por habitante, ya descontado el efecto de los precios) pasó
 de **34.557 € en 2000 a 34.783 € en 2023: un +0,7 %** en veinticuatro años
 (en euros de 2023). Es
-la peor cifra de las 17 comunidades (z = <span class="mod-claude">−1,91</span>, puesto **17 de 17**): la
+la peor cifra de las 17 comunidades (z = −1,91, puesto **17 de 17**): la
 siguiente más rezagada, Canarias, creció un +4,2 %; España en su conjunto, un
 **+19,0 %**; y Galicia, la que más, un +42,8 %.
 
@@ -1944,9 +1956,9 @@ habitante de Illes Balears producía un **32 % más** que la media española. En
 solo un **12 % más**. Illes Balears no ha empeorado en términos absolutos: se ha
 quedado quieta mientras las demás avanzaban.
 
-**¿Por qué no crece la riqueza por habitante? <span class="ed-azul">Básicamente</span> porque crece con mucha fuerza la población residente.** La
+**¿Por qué no crece la riqueza por habitante? Básicamente porque crece con mucha fuerza la población residente.** La
 economía balear en su conjunto no está parada: entre 2000 y 2023 su PIB real
-creció un **44 %**, algo más que el de España (+41 %). <span class="mod-claude">Así,</span> lo que ocurre es que la
+creció un **44 %**, algo más que el de España (+41 %). Así, lo que ocurre es que la
 población creció casi lo mismo, un **43 %** (de unos 846.000 a 1.210.000
 habitantes, el mayor aumento de España y más del doble que la media nacional,
 +19 %). Al repartir la producción entre muchas más personas, la cifra por
@@ -1995,7 +2007,7 @@ interpretación plausible, no como conclusión demostrada.
 
 </div>
 
-**Señales más débiles, a vigilar.** <span class="mod-claude">Estas tres</span> merecen menos confianza que las anteriores. Se
+**Señales más débiles, a vigilar.** Estas tres merecen menos confianza que las anteriores. Se
 comentan porque apuntan en una dirección coherente o porque ilustran una
 trampa, no porque estén demostradas:
 
@@ -2032,10 +2044,10 @@ vez el más alto de España). Habrá que ver si ese repunte se confirma.
 
 <div class="clave">
 
-**La lectura conjunta de los apartados 4 y 5.** Illes Balears tiene <span class="mod-claude">dos</span> dinámicas
+**La lectura conjunta de los apartados 4 y 5.** Illes Balears tiene dos dinámicas
 distintas a la vez, y conviene no mezclarlas:
 
-1. **Una divergencia <span class="mod-claude">muy rápida</span>**, en el precio de
+1. **Una divergencia muy rápida**, en el precio de
    la vivienda, tanto de compra como de alquiler, también una vez descontada la
    inflación. Y sin crecimiento de la
    riqueza por habitante que la acompañe (+0,7 % en 24 años, la peor cifra de
@@ -2045,7 +2057,7 @@ distintas a la vez, y conviene no mezclarlas:
 2. **Señales de deterioro más débiles**, sobre todo en el espacio de las
    viviendas.
 
-<span class="mod-claude">La segunda es un aviso; la primera es la que</span>
+La segunda es un aviso; la primera es la que
 más condiciona el futuro, porque afecta a quién puede quedarse a vivir en las
 islas, y es justo la que los indicadores del ICV, que no miden precios, no
 llegan a ver.
@@ -2247,7 +2259,7 @@ crónica, mala salud percibida y menos empleo. No es un eje de "mejor o peor":
 describe la diferencia entre comunidades jóvenes, que crecen y están bajo
 presión, y comunidades más envejecidas, tranquilas y baratas.
 
-<span class="mod-claude">PC3 (`r es(varianza$pct_varianza[3])` %) no tiene una lectura tan limpia como los dos primeros: mezcla indicadores de contaminación, empleo y hábitos de salud. Illes Balears es la comunidad con el valor más alto (el [Anexo D](#anexo-pruebas) lo detalla).</span>
+PC3 (`r es(varianza$pct_varianza[3])` %) no tiene una lectura tan limpia como los dos primeros: mezcla indicadores de contaminación, empleo y hábitos de salud. Illes Balears es la comunidad con el valor más alto (el [Anexo D](#anexo-pruebas) lo detalla).
 
 <div class="nota">
 
@@ -2295,6 +2307,270 @@ especialmente cara; por dinamismo, la más cara. El precio real se parece mucho
 más a lo segundo. El modelo de vivienda del apartado 10 vuelve sobre esto y
 calcula qué parte del precio balear explican su renta y el crecimiento de su
 población.
+
+</div>
+
+```{r form-sup-calculo}
+# Apartado sobre la formacion superior de 25 a 64 años (2026-10-25), el
+# indicador de educacion que mas pesa en PC1.
+# IND_FS, BAL, mediana_esp(), puesto_fav(), fs_bal, fs_esp y fs_puesto estan
+# en el chunk "medianas" porque el resumen los cita.
+
+# Los 10 indicadores del PCA mas ligados a PC1 (por el valor absoluto de su
+# correlacion con el eje, ver cor_eje en el chunk pca-calculo)
+cor_pc1 <- sapply(colnames(mat_pca), cor_eje, eje = 1)
+top_pc1 <- names(sort(-abs(cor_pc1)))[1:10]
+fs_cor <- cor_pc1[[IND_FS]]
+fs_rank_carga <- rank(-pca$rotation[, 1])[[IND_FS]]
+fs_por_delante <- names(sort(-pca$rotation[, 1]))[seq_len(fs_rank_carga - 1)]
+
+fs_orden <- sort(mat[, IND_FS], decreasing = TRUE)
+# Nombres para la prosa: "Murcia, Región de" -> "Murcia"; "Castilla - La Mancha" -> "Castilla-La Mancha"
+fs_debajo <- limpiar_ccaa(names(fs_orden)[(fs_puesto + 1):17]) %>%
+  sub(",.*$", "", .) %>% sub(" - ", "-", ., fixed = TRUE)
+
+# Serie anual: Illes Balears, España, brecha y puesto
+fs_serie <- d %>% filter(nombre_corto == IND_FS, fecha >= ANIO_INI) %>% arrange(fecha)
+fs_m <- as.matrix(fs_serie[, ccaa17])
+fs_evol <- tibble(
+  fecha  = fs_serie$fecha,
+  bal    = fs_serie[[BAL]],
+  esp    = fs_serie$Total.Nacional,
+  brecha = bal - esp,
+  ratio  = bal / esp,
+  puesto = apply(fs_m, 1, function(r) rank(-r, ties.method = "min")[which(ccaa17 == BAL)])
+)
+fs_ev <- function(a) fs_evol[fs_evol$fecha == a, ]
+fs_min_brecha <- fs_evol %>% slice_max(brecha, n = 1, with_ties = FALSE)
+fs_cambio <- fs_m[fs_serie$fecha == ANIO_FIN, ] - fs_m[fs_serie$fecha == ANIO_INI, ]
+fs_cambio_esp <- fs_ev(ANIO_FIN)$esp - fs_ev(ANIO_INI)$esp
+fs_cambio_puesto <- rank(-fs_cambio, ties.method = "min")[[BAL]]
+
+# Lo que haria esperar su renta: recta formacion ~ renta con las otras 16
+fs_lm <- lm(y ~ x, data.frame(y = mat[-which(rownames(mat) == BAL), IND_FS],
+                              x = mat[-which(rownames(mat) == BAL), "Renta media real"]))
+fs_r_renta16 <- cor(mat[rownames(mat) != BAL, IND_FS], mat[rownames(mat) != BAL, "Renta media real"])
+fs_esperado <- unname(predict(fs_lm, data.frame(x = mat[BAL, "Renta media real"])))
+```
+
+## Un indicador que pesa mucho en el primer eje: los estudios superiores de los adultos
+
+De todos los indicadores de educación, el que más se parece al eje de nivel
+socioeconómico es el **porcentaje de población de 25 a 64 años con estudios
+superiores** (FP de grado superior, universidad, máster o doctorado). Su
+correlación con PC1 es **r = `r es(fs_cor, 2)`**, y es el
+`r c("primer", "segundo", "tercer", "cuarto", "quinto")[fs_rank_carga]`
+indicador con más peso en ese eje, solo por detrás de
+`r paste(tolower(fs_por_delante[-length(fs_por_delante)]), collapse = ", ")` y
+el `r fs_por_delante[length(fs_por_delante)]`. Dicho de otro modo: las
+comunidades con más adultos titulados son, casi sin excepción, las de más
+renta y menos pobreza. Y para Illes Balears es, de los indicadores que más
+cuentan en ese eje, **el que peor la deja**.
+
+`r tab_cap("Los diez indicadores más ligados al eje de nivel socioeconómico (PC1) y puesto de Illes Balears en cada uno (medianas 2020–2024).")`
+
+```{r form-sup-tabla-pc1}
+fs_t1 <- tibble(
+  Indicador = top_pc1,
+  `Correlación con PC1` = round(cor_pc1[top_pc1], 2),
+  `Illes Balears` = round(mat[BAL, top_pc1], 1),
+  `España` = round(sapply(top_pc1, mediana_esp), 1),
+  Unidad = nombres$unidad[match(top_pc1, nombres$nombre_corto)],
+  `Puesto de Illes Balears` = sapply(top_pc1, puesto_fav)
+)
+fs_t1 %>%
+  gt() %>%
+  colorear_polaridad(fs_t1) %>%
+  fmt_es() %>%
+  tab_style(style = cell_text(weight = "bold"),
+            locations = cells_body(rows = Indicador == IND_FS)) %>%
+  opt_row_striping() %>%
+  tab_footnote("Puesto entre las 17 comunidades: 1 = el valor más favorable (el más alto si que suba es bueno, el más bajo si es malo).") %>%
+  tab_options(table.font.size = px(12))
+```
+
+En los indicadores económicos del eje (pobreza, renta, PIB per cápita,
+salarios bajos, paro), Illes Balears está entre el puesto
+`r min(sapply(setdiff(top_pc1, c(IND_FS, "Form. 25-64: nivel 0-2", "Gastos imprevistos")), puesto_fav))`
+y el
+`r max(sapply(setdiff(top_pc1, c(IND_FS, "Form. 25-64: nivel 0-2", "Gastos imprevistos")), puesto_fav))`
+de 17. En formación superior de los adultos cae al **puesto `r fs_puesto`**.
+Es la pieza de su perfil que más la separa de las comunidades con las que
+comparte grupo en el apartado 7.
+
+**Dónde está hoy.** En 2020–2024, el `r es(fs_bal)` % de los baleares de 25 a
+64 años tiene estudios superiores, frente al `r es(fs_esp)` % de España:
+**`r es(fs_esp - fs_bal)` puntos menos**. Solo
+`r paste(fs_debajo[-length(fs_debajo)], collapse = ", ")` y
+`r fs_debajo[length(fs_debajo)]` tienen un porcentaje más bajo, y Andalucía y
+Canarias están prácticamente igual. La distancia con la primera, País Vasco,
+es de `r es(max(mat[, IND_FS]) - fs_bal, 0)` puntos.
+
+```{r form-sup-ranking, fig.width=9, fig.height=6}
+fs_rank_df <- tibble(
+  geografia = c(limpiar_ccaa(ccaa17), "España"),
+  valor = c(mat[ccaa17, IND_FS], fs_esp)
+) %>%
+  mutate(tipo = case_when(geografia == "Illes Balears" ~ "Illes Balears",
+                          geografia == "España" ~ "España",
+                          TRUE ~ "Resto de comunidades"),
+         geografia = reorder(geografia, valor))
+
+gg <- ggplot(fs_rank_df, aes(x = valor, y = geografia, fill = tipo,
+                             text = paste0("<b>", geografia, "</b><br>", es(valor), " %"))) +
+  geom_col(width = 0.7) +
+  scale_fill_manual(values = c("Illes Balears" = COLOR_BALEARS, "España" = COLOR_ESPANA,
+                               "Resto de comunidades" = "#c9c8c2"), name = NULL) +
+  labs(x = "% de 25 a 64 años con estudios superiores (mediana 2020–2024)",
+       y = NULL) +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.minor = element_blank(), panel.grid.major.y = element_blank(),
+        legend.position = "bottom")
+ggplotly(gg, tooltip = "text") %>%
+  layout(legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.12))
+```
+
+`r fig_cap("Porcentaje de la población de 25 a 64 años con estudios superiores (CINE 5-8) por comunidad autónoma, mediana 2020–2024.")`
+
+**Veinte años de evolución: la distancia se acortó y volvió a abrirse.** En
+`r ANIO_INI`, Illes Balears era la **última** de las 17 comunidades
+(`r es(fs_ev(ANIO_INI)$bal)` % frente a `r es(fs_ev(ANIO_INI)$esp)` %, una
+distancia de `r es(-fs_ev(ANIO_INI)$brecha)` puntos), y lo siguió siendo casi
+todos los años hasta 2011. Desde entonces el porcentaje de adultos con
+estudios superiores ha crecido mucho en las islas:
+**`r es(fs_cambio[[BAL]])` puntos** entre `r ANIO_INI` y `r ANIO_FIN`, algo
+más que en España (`r es(fs_cambio_esp)`), el `r fs_cambio_puesto`.º mayor
+aumento de las 17. Pero como el resto de España también avanzaba, la
+distancia se redujo poco a poco y con altibajos: llegó a su mínimo en
+`r fs_min_brecha$fecha` (`r es(-fs_min_brecha$brecha)` puntos, puesto
+`r fs_min_brecha$puesto`) y desde entonces ha vuelto a abrirse: en
+`r ANIO_FIN` era de `r es(-fs_ev(ANIO_FIN)$brecha)` puntos (puesto
+`r fs_ev(ANIO_FIN)$puesto`). En proporción sí se ve la mejora: en
+`r ANIO_INI` había `r es(fs_ev(ANIO_INI)$ratio, 2)` adultos con estudios
+superiores en Illes Balears por cada uno en España; en `r ANIO_FIN`,
+`r es(fs_ev(ANIO_FIN)$ratio, 2)`.
+
+El mejor momento coincide con los años de la pandemia (2020 y 2021) y se
+deshace en 2022, cuando se recupera la actividad turística. Con estos datos
+no se puede saber si es un cambio real en quién vive en las islas o un
+vaivén de la encuesta, así que conviene no darle demasiado peso.
+
+```{r form-sup-evolucion, fig.width=9, fig.height=5.5}
+fs_largo <- fs_serie %>%
+  select(fecha, Total.Nacional, all_of(ccaa17)) %>%
+  pivot_longer(-fecha, names_to = "ccaa", values_to = "valor") %>%
+  mutate(geografia = if_else(ccaa == "Total.Nacional", "España", limpiar_ccaa(ccaa)),
+         tipo = case_when(geografia == "Illes Balears" ~ "Illes Balears",
+                          geografia == "España" ~ "España",
+                          TRUE ~ "Resto de comunidades"))
+
+gg <- ggplot(fs_largo, aes(x = fecha, y = valor, color = tipo, group = geografia,
+                           text = paste0("<b>", geografia, "</b><br>", es(valor), " %<br>Año: ", fecha))) +
+  geom_line(data = filter(fs_largo, tipo == "Resto de comunidades"), linewidth = 0.4) +
+  geom_line(data = filter(fs_largo, tipo != "Resto de comunidades"), linewidth = 1.1) +
+  geom_point(data = filter(fs_largo, tipo != "Resto de comunidades"), size = 1.4) +
+  scale_color_manual(values = c("Illes Balears" = COLOR_BALEARS, "España" = COLOR_ESPANA,
+                                "Resto de comunidades" = "#c9c8c2"), name = NULL) +
+  labs(x = NULL, y = "% con estudios superiores") +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.minor = element_blank(), legend.position = "bottom")
+p <- ggplotly(gg, tooltip = "text") %>%
+  layout(legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.1))
+nombres_traza <- vapply(p$x$data, function(tr) if (is.null(tr$name)) "" else tr$name, character(1))
+style(p, showlegend = FALSE, traces = which(duplicated(nombres_traza)))
+```
+
+`r fig_cap(paste0("Población de 25 a 64 años con estudios superiores, ", ANIO_INI, "–", ANIO_FIN, ": Illes Balears, España y el resto de comunidades (en gris)."))`
+
+`r tab_cap("Illes Balears frente a España en formación superior de 25 a 64 años, años seleccionados.")`
+
+```{r form-sup-tabla-evol}
+fs_evol %>%
+  filter(fecha %in% c(ANIO_INI, 2008, 2011, 2014, 2017, 2019, 2021, ANIO_FIN)) %>%
+  transmute(Año = as.character(fecha),
+            `Illes Balears (%)` = bal, `España (%)` = esp,
+            `Diferencia (puntos)` = round(brecha, 1),
+            `Por cada titulado en España` = round(ratio, 2),
+            `Puesto de Illes Balears` = puesto) %>%
+  gt() %>%
+  fmt_es() %>%
+  opt_row_striping() %>%
+  tab_options(table.font.size = px(13))
+```
+
+**Por edades: el hueco no viene de las generaciones mayores.** El mismo
+indicador existe para otros dos grupos de edad, y el contraste es claro.
+Entre los mayores de 65 años, Illes Balears está cerca de la media
+(`r es(mat[BAL, "Form. 65+: nivel 5-8"])` % frente a
+`r es(mediana_esp("Form. 65+: nivel 5-8"))` %, puesto
+`r puesto_fav("Form. 65+: nivel 5-8")`). La distancia aparece en la población
+en edad de trabajar y es todavía mayor, en proporción, entre los jóvenes de
+18 a 24 años, donde es la última de España (aunque, como se dijo en el
+apartado 4, en ese grupo hay muchos que aún están estudiando).
+
+`r tab_cap("Población con estudios superiores por grupo de edad, y nivel de estudios de la población de 25 a 64 años (medianas 2020–2024).")`
+
+```{r form-sup-tabla-edades}
+fs_inds <- c("Form. 18-24: nivel 5-8", "Form. 25-64: nivel 5-8", "Form. 65+: nivel 5-8",
+             "Form. 25-64: nivel 0-2", "Form. 25-64: nivel 3-4")
+fs_t2 <- tibble(
+  Bloque = c(rep("Estudios superiores, por edad", 3), rep("Adultos de 25 a 64 años, por nivel", 3)),
+  Indicador = fs_inds[c(1, 2, 3, 4, 5, 2)],
+  `Illes Balears (%)` = round(mat[BAL, fs_inds[c(1, 2, 3, 4, 5, 2)]], 1),
+  `España (%)` = round(sapply(fs_inds[c(1, 2, 3, 4, 5, 2)], mediana_esp), 1)
+) %>%
+  mutate(`Diferencia (puntos)` = round(`Illes Balears (%)` - `España (%)`, 1),
+         `Puesto de Illes Balears` = sapply(Indicador, puesto_fav))
+fs_t2 %>%
+  gt(groupname_col = "Bloque") %>%
+  colorear_polaridad(fs_t2) %>%
+  fmt_es() %>%
+  tab_footnote("Puesto entre las 17 comunidades: 1 = el valor más favorable. En el nivel 3-4 (bachillerato y FP de grado medio), cuya polaridad es «depende», el puesto 1 es el porcentaje más alto.") %>%
+  tab_options(table.font.size = px(12))
+```
+
+**¿Dónde se quedan los que no llegan a estudios superiores?** Sobre todo en
+el nivel intermedio, no en el básico. Entre los adultos de 25 a 64 años,
+Illes Balears tiene `r es(fs_esp - fs_bal)` puntos menos de estudios
+superiores que España, pero solo
+`r es(mat[BAL, "Form. 25-64: nivel 0-2"] - mediana_esp("Form. 25-64: nivel 0-2"))`
+más de estudios básicos y
+**`r es(mat[BAL, "Form. 25-64: nivel 3-4"] - mediana_esp("Form. 25-64: nivel 3-4"))` más
+de bachillerato o FP de grado medio**, el porcentaje más alto de España. Es
+decir: el déficit balear no es tanto de población sin estudios como de
+población que se detiene un escalón antes de los estudios superiores.
+
+**Lo que haría esperar su renta.** En las otras 16 comunidades, la formación
+superior de los adultos y la renta media van muy juntas (r =
+`r es(fs_r_renta16, 2)`). Con la renta que tiene Illes Balears, esa relación
+haría esperar alrededor de un **`r es(fs_esperado, 0)` %** de adultos con
+estudios superiores, el nivel de España; tiene un `r es(fs_bal)` %,
+`r es(fs_esperado - fs_bal, 0)` puntos menos. Visto al revés, Illes Balears
+consigue una renta intermedia con una formación de las más bajas. No es una
+relación de causa y efecto (puede leerse en los dos sentidos), pero encaja
+con lo que muestra el análisis de rutas del apartado 9: las islas tienen
+menos paro del que les correspondería por su nivel de formación.
+
+<div class="clave">
+
+**Qué significa.** La formación superior de los adultos es el rasgo más
+persistente de Illes Balears dentro del eje que más separa a las comunidades
+españolas. En los indicadores económicos de ese eje está en la mitad alta o
+en el centro de la tabla; en este, en el tercio inferior, junto a las
+comunidades de menor nivel socioeconómico. La distancia con España se ha
+reducido en proporción en veinte años, pero en puntos sigue casi donde
+estaba, y en los últimos tres años ha vuelto a abrirse.
+
+El perfil es muy concreto: no faltan tanto estudios básicos como estudios
+superiores, y lo que sobra es el nivel intermedio. Eso casa con una economía
+básicamente de servicios que genera mucho empleo para el que basta el
+bachillerato o la FP de grado medio o trabajadores sin formación, como la
+turística. Hay otra pieza que estos datos no permiten
+separar: el indicador mide a quien **reside** en las islas, y Illes Balears
+es la comunidad cuya población más ha crecido desde 2000 (+43 %). Si la
+distancia viene del sistema educativo de las islas o de quién llega a
+trabajar a ellas no se puede saber con estos indicadores; ambas
+explicaciones son plausibles, ninguna está demostrada.
 
 </div>
 
@@ -2515,7 +2791,7 @@ económica y formación de comunidad media**.
 
 </div>
 
-<span class="mod-claude">La figura siguiente muestra el PIB per cápita real y la renta media real de cada comunidad, por grupo.</span>
+La figura siguiente muestra el PIB per cápita real y la renta media real de cada comunidad, por grupo.
 
 ```{r fig-grupos-pib-renta-r}
 # Version en R del grafico propuesto por los editores (2026-10-22). Mismos datos
@@ -2597,7 +2873,7 @@ p13 %>%
 
 `r fig_cap("PIB per cápita real (círculos) y renta media real (cuadrados) de cada comunidad autónoma, por grupo de k-means del apartado 7, en euros de 2023 (mediana de los últimos 5 años). Las líneas grises marcan la media de las 17 comunidades.")`
 
-<span class="mod-claude">Finalmente, si se cruzan la renta (eje horizontal), la esperanza de vida (eje vertical) y el PIB per cápita (tamaño de los círculos), las comunidades se sitúan así:</span>
+Finalmente, si se cruzan la renta (eje horizontal), la esperanza de vida (eje vertical) y el PIB per cápita (tamaño de los círculos), las comunidades se sitúan así:
 
 ```{r fig-renta-esperanza-pib-r}
 # Version en R del grafico propuesto por los editores (2026-10-22). Como en el
@@ -2650,7 +2926,7 @@ plot_ly(height = 600) %>%
 
 `r fig_cap("Renta media real (eje horizontal) y esperanza de vida (eje vertical) de cada comunidad autónoma, como diferencia con la media de las 17 (mediana de los últimos 5 años). El diámetro de los círculos crece con el PIB per cápita real; rellenos, las comunidades con PIB per cápita por encima de la media. Illes Balears, con borde naranja.")`
 
-<span class="mod-claude">**Qué se ve.** Las dos figuras confirman el retrato del apartado: dentro del Grupo 1, Illes Balears es la comunidad con menos PIB per cápita y menos renta. Y frente al conjunto de España se queda en el centro: su renta está solo `r es(mat["04.Balears,.Illes", "Renta media real"] - mean(mat[, "Renta media real"]), 0)` € por encima de la media de las 17 y su esperanza de vida, `r es(abs(mat["04.Balears,.Illes", "Esperanza de vida"] - mean(mat[, "Esperanza de vida"])), 1)` años `r ifelse(mat["04.Balears,.Illes", "Esperanza de vida"] - mean(mat[, "Esperanza de vida"]) < 0, "por debajo", "por encima")`, mientras sus cuatro compañeros de grupo están arriba a la derecha.</span>
+**Qué se ve.** Las dos figuras confirman el retrato del apartado: dentro del Grupo 1, Illes Balears es la comunidad con menos PIB per cápita y menos renta. Y frente al conjunto de España se queda en el centro: su renta está solo `r es(mat["04.Balears,.Illes", "Renta media real"] - mean(mat[, "Renta media real"]), 0)` € por encima de la media de las 17 y su esperanza de vida, `r es(abs(mat["04.Balears,.Illes", "Esperanza de vida"] - mean(mat[, "Esperanza de vida"])), 1)` años `r ifelse(mat["04.Balears,.Illes", "Esperanza de vida"] - mean(mat[, "Esperanza de vida"]) < 0, "por debajo", "por encima")`, mientras sus cuatro compañeros de grupo están arriba a la derecha.
 
 # ¿Qué influye en qué? El análisis de rutas {#rutas}
 
@@ -2736,8 +3012,8 @@ El diagrama lo decide el analista. Por eso el análisis incluye dos controles.
 17 comunidades, cada coeficiente depende mucho de qué comunidades haya. Para
 medirlo se usa el **bootstrap**: se sortean 17 comunidades *con reemplazo* (así
 en cada sorteo unas salen repetidas y otras no salen), se recalcula todo el
-modelo, y se repite `r es(N_BOOT, 0)` veces. <span class="mod-claude">Si el intervalo del 95 % de esos resultados no incluye el 0 (es decir, si el coeficiente tiene el mismo signo en al menos el 97,5 % de los sorteos),</span> se considera que la flecha **se sostiene**; si
-el <span class="mod-claude">intervalo</span> incluye el 0, la flecha puede no existir, y en los diagramas aparece
+modelo, y se repite `r es(N_BOOT, 0)` veces. Si el intervalo del 95 % de esos resultados no incluye el 0 (es decir, si el coeficiente tiene el mismo signo en al menos el 97,5 % de los sorteos), se considera que la flecha **se sostiene**; si
+el intervalo incluye el 0, la flecha puede no existir, y en los diagramas aparece
 **en gris y discontinua**.
 
 <div class="nota">
@@ -2833,7 +3109,7 @@ VARS %>%
 
 **Tres avisos sobre los datos.**
 
-- **La renta y el precio de la vivienda <span class="mod-claude">aparecen con la inflación descontada</span>**, como
+- **La renta y el precio de la vivienda aparecen con la inflación descontada**, como
   en el resto del informe: van en **euros constantes**, de 2023 la renta (cuyo
   último dato son ingresos de 2023) y de 2024 el precio (ver el apartado 2).
   Una renta o un precio más alto significa, por tanto, más poder de compra o
@@ -2989,7 +3265,7 @@ tabla_efectos(m1, tribble(~desde, ~hacia,
 
 - **La formación influye en la satisfacción vital, pero solo por caminos
   indirectos.** Su efecto total es de `r es(tot(m1, "EDU", "SAT"), 2)`, y llega
-  <span class="mod-claude">casi todo (más del 90 %)</span> a través de la renta y la confianza. Es un buen ejemplo de lo que aporta
+  casi todo (más del 90 %) a través de la renta y la confianza. Es un buen ejemplo de lo que aporta
   el análisis de rutas: la correlación simple (`r cor_txt(m1, "EDU", "SAT")`)
   dice que las dos cosas van juntas; el modelo dice *por dónde* podría llegar
   la influencia.
@@ -3301,7 +3577,7 @@ España, la mejor salud autopercibida y la menor enfermedad crónica. No son
 datos de un año bueno: se mantienen tomando la mediana de un lustro (a ellos se
 suma la mayor satisfacción media con el trabajo, aunque de esta solo hay un año
 reciente, 2023), y el análisis multivariante confirma
-que colocan a Illes Balears en el grupo de <span class="mod-claude">mayor nivel socioeconómico</span> del país. Con
+que colocan a Illes Balears en el grupo de mayor nivel socioeconómico del país. Con
 una cautela: parte de esa ventaja se debe probablemente a que su población es
 más joven, porque la esperanza de vida, que no depende de la edad de la
 población, está en la media.
@@ -3347,7 +3623,7 @@ en jóvenes es el indicador educativo que **más rápido crece** en Illes Balear
 distancia con el resto se ha reducido a menos de la mitad en veinte años. La
 mala, que el abandono escolar ha vuelto a subir desde 2021.
 
-<span class="mod-claude">Una advertencia final que solo aparece al mirar las tendencias:</span> hay
+Una advertencia final que solo aparece al mirar las tendencias: hay
 señales de deterioro en la vida cotidiana, sobre todo un **hacinamiento que
 sube** más deprisa que en el resto del país. Son señales más débiles que las
 anteriores, pero son justo el tipo de cambio que una fotografía anual no
@@ -3412,7 +3688,7 @@ comunidades, no de personas.
 | **Puntos porcentuales** | La diferencia entre dos porcentajes. Pasar del 10 % al 12 % es subir 2 puntos porcentuales (y un 20 % en términos relativos). |
 | **Pendiente** | Cuánto sube o baja un indicador, de media, cada año. |
 | **Theil-Sen** | Forma robusta de calcular una tendencia: mediana de las pendientes entre todas las parejas de puntos. No se deja arrastrar por un año atípico. |
-| **Correlación (r)** | Mide de −1 a +1 lo bien que dos cifras se mueven juntas. r cercano a +1: cuando una es alta, la otra también; cercano a −1: cuando una es alta, la otra es baja; cercano a 0: no hay relación lineal. No dice qué causa qué. |
+| **Coeficiente de correlación (r)** | Mide de −1 a +1 lo bien que dos cifras se mueven juntas. r cercano a +1: cuando una es alta, la otra también; cercano a −1: cuando una es alta, la otra es baja; cercano a 0: no hay relación lineal. No dice qué causa qué. |
 | **PCA** | Análisis de componentes principales: técnica que resume muchas variables correlacionadas en unos pocos ejes independientes. |
 | **Varianza explicada** | Porcentaje de la variación total entre comunidades que captura un componente. |
 | **Carga (*loading*)** | Peso de un indicador dentro de un componente. Sirve para ver qué significa ese componente. Para comparar cuánto se parece un indicador a ejes distintos es mejor su correlación con cada eje. |
@@ -3425,8 +3701,8 @@ comunidades, no de personas.
 
 | Término | Qué significa |
 |---|---|
-| **ICV** | <span class="mod-claude">Indicadores de Calidad de Vida</span> del INE: conjunto de indicadores agrupados en dimensiones temáticas, siguiendo el marco europeo de Eurostat. No es un número único. |
-| **Euros constantes (deflactar)** | Cifras en euros a las que se ha quitado el efecto de la inflación, expresándolas a precios de un año fijo (aquí, el último de cada serie: <span class="mod-claude">"euros de 2024" en los precios de la vivienda y "euros de 2023" en la renta y el PIB</span>). Si una cifra en euros constantes sube, es que ha crecido más que los precios en general. Lo contrario son los *euros corrientes*, los de cada año, sin ajustar. |
+| **ICV** | Indicadores de Calidad de Vida del INE: conjunto de indicadores agrupados en dimensiones temáticas, siguiendo el marco europeo de Eurostat. No es un número único. |
+| **Euros constantes (deflactar)** | Cifras en euros a las que se ha quitado el efecto de la inflación, expresándolas a precios de un año fijo (aquí, el último de cada serie: "euros de 2024" en los precios de la vivienda y "euros de 2023" en la renta y el PIB). Si una cifra en euros constantes sube, es que ha crecido más que los precios en general. Lo contrario son los *euros corrientes*, los de cada año, sin ajustar. |
 | **IPC** | Índice de Precios de Consumo del INE: mide cuánto suben los precios de lo que compran los hogares. Se publica también para cada comunidad autónoma, y es lo que usa este informe para descontar la inflación de la renta y de los precios de la vivienda. |
 | **Unidad de consumo** | Forma de comparar rentas entre hogares de distinto tamaño: no es lo mismo 30.000 € en un hogar de una persona que en uno de cuatro. La renta del hogar se divide por una escala que tiene eso en cuenta. |
 | **Renta media y renta mediana** | La media suma todas las rentas y divide entre el número de personas; la mediana es la renta de la persona que queda justo en el centro. Si hay unas pocas rentas muy altas, la media queda por encima de la mediana. El apellido *real* (renta media real, renta mediana real) indica que se les ha descontado la inflación (están en euros constantes). |
@@ -3470,7 +3746,7 @@ comunidades, no de personas.
 
 Los gráficos y tablas usan nombres abreviados para que quepan como etiqueta.
 Esta es la correspondencia completa con el nombre oficial, el organismo del
-que procede cada indicador y si <span class="mod-claude">es una buena o una mala noticia que suba</span>
+que procede cada indicador y si es una buena o una mala noticia que suba
 (columna *Si sube*, con el mismo color que la columna *Indicador* de las
 tablas de los apartados 4 y 5):
 
@@ -3501,11 +3777,11 @@ anexo_b %>%
 
 # Anexo C · Datos y reproducibilidad {.unnumbered}
 
-<span class="mod-claude">**Código y datos del estudio.** Este estudio es reproducible. El código, los datos de origen —tal como los publican el INE, el Colegio de Registradores de la Propiedad y el Ministerio de Vivienda y Agenda Urbana— y los datos elaborados a partir de ellos están en el repositorio [github.com/lalvarezmat/icv-illes-balears](https://github.com/lalvarezmat/icv-illes-balears).</span>
+**Código y datos del estudio.** Este estudio es reproducible. El código, los datos de origen —tal como los publican el INE, el Colegio de Registradores de la Propiedad y el Ministerio de Vivienda y Agenda Urbana— y los datos elaborados a partir de ellos están en el repositorio [github.com/lalvarezmat/icv-illes-balears](https://github.com/lalvarezmat/icv-illes-balears).
 
-<span class="mod-claude">Con ese material cualquiera puede volver a generar este informe de tres formas: abriendo este mismo documento en RStudio, que usa los datos ya preparados; rehaciendo todo el conjunto de datos sin conexión a partir de los ficheros originales incluidos; o descargándolo de nuevo de las fuentes con los scripts del repositorio. Se ha comprobado que, partiendo de los ficheros originales, la cadena de cálculo regenera exactamente los mismos datos y resultados que se usan aquí. El repositorio explica cómo hacerlo y qué programas hacen falta.</span>
+Con ese material cualquiera puede volver a generar este informe de tres formas: abriendo este mismo documento en RStudio, que usa los datos ya preparados; rehaciendo todo el conjunto de datos sin conexión a partir de los ficheros originales incluidos; o descargándolo de nuevo de las fuentes con los scripts del repositorio. Se ha comprobado que, partiendo de los ficheros originales, la cadena de cálculo regenera exactamente los mismos datos y resultados que se usan aquí. El repositorio explica cómo hacerlo y qué programas hacen falta.
 
-<span class="mod-claude">El código se distribuye con licencia MIT, y el texto, las figuras y los datos elaborados, con licencia CC BY 4.0, salvo los derivados del Colegio de Registradores, que mantienen la licencia ODbL 1.0 de su origen. Los datos de cada fuente conservan sus propias condiciones de reutilización.</span>
+El código se distribuye con licencia MIT, y el texto, las figuras y los datos elaborados, con licencia CC BY 4.0, salvo los derivados del Colegio de Registradores, que mantienen la licencia ODbL 1.0 de su origen. Los datos de cada fuente conservan sus propias condiciones de reutilización.
 
 **Fuentes.** Cuatro para los indicadores, más el IPC para descontar la
 inflación; todas oficiales y de acceso público (ver la columna *Fuente* del
@@ -3520,7 +3796,7 @@ Anexo B para saber de cuál sale cada indicador):
 - **Colegio de Registradores de la Propiedad**, Estadística Registral
   Inmobiliaria — precio de compraventa (€/m²), serie trimestral 2007–2024
   promediada por año. Recoge las compraventas efectivamente inscritas en el
-  registro, no tasaciones ni precios de oferta. <span class="mod-claude">De la misma estadística (anuario de 2025) sale el porcentaje de compraventas de vivienda hechas por compradores de nacionalidad extranjera que cita el resumen (idea 2), que no es uno de los indicadores del informe.</span>
+  registro, no tasaciones ni precios de oferta. De la misma estadística (anuario de 2025) sale el porcentaje de compraventas de vivienda hechas por compradores de nacionalidad extranjera que cita el resumen (idea 2), que no es uno de los indicadores del informe.
 - **SERPAVI** (Ministerio de Vivienda y Agenda Urbana), Sistema Estatal de
   Referencia del Precio del Alquiler de Vivienda — precio de alquiler
   (€/m²/mes), serie anual 2011–2024, mediana de vivienda colectiva, a partir
@@ -3562,7 +3838,7 @@ pendiente sale solo de 2021–2024. Illes Balears tiene serie completa, igual qu
 indicador de compraventa en las 17.
 
 **Una limitación del dato de alquiler.** SERPAVI no publica agregado nacional.
-La serie "España" de ese indicador es la **media simple de las comunidades<span class="mod-claude"> y ciudades</span>
+La serie "España" de ese indicador es la **media simple de las comunidades y ciudades
 autónomas**, sin ponderar por población, así que subestima el precio medio real
 del país y debe leerse como "la comunidad típica". Solo se usa como referencia
 visual en el apartado 3; las comparaciones de los apartados 4 a 10 no la
@@ -3904,7 +4180,7 @@ han ganado entre un 26 % y un 43 % de población desde 2000, tienen más delitos
 por habitante (entre 56 y 63 por 1.000) y están en lo alto de PC2. Navarra ha
 crecido algo menos (24 %) y País Vasco casi nada (6 %); tienen menos
 criminalidad (entre 46 y 50) y están cerca del centro del eje. Es otra forma de
-ver el hallazgo del apartado 6: dentro de la España <span class="mod-claude">de mayor nivel socioeconómico</span>, lo que más
+ver el hallazgo del apartado 6: dentro de la España de mayor nivel socioeconómico, lo que más
 distingue a Illes Balears de Navarra o País Vasco no es tanto la riqueza como la
 presión de una población que crece.
 
@@ -4069,9 +4345,7 @@ en el caso balear, y por eso conviene leerla con cautela.
 
 </div>
 
-# <span class="mod-claude">Anexo F · ¿Y si se resume todo en una sola cifra? Un indicador sintético</span> {#anexo-sintesis .unnumbered}
-
-<div class="mod-claude">
+# Anexo F · ¿Y si se resume todo en una sola cifra? Un indicador sintético {#anexo-sintesis .unnumbered}
 
 A lo largo del informe la calidad de vida se ha analizado indicador a
 indicador y dimensión a dimensión. Una alternativa natural es **agregar de alguna manera los indicadores para
@@ -4289,4 +4563,3 @@ central del informe: la singularidad de Illes Balears no es una calidad de
 vida baja en general, sino la distancia entre lo que ofrece y lo que cuesta
 vivir en las islas.
 
-</div>

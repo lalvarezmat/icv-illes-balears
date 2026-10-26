@@ -14,3 +14,6 @@
 # Fuentes grandes que descargan los scripts (no se versionan)
 REGISTRADORES/ERI_Anuarios/
 SERPAVI/BD_SERPAVI_*.xlsx
+
+# El informe compilado que publica GitHub Pages
+!docs/index.html

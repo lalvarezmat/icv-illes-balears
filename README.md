@@ -4,6 +4,9 @@
 hacia dónde se mueve? Este repositorio contiene el estudio completo, con su
 código y sus datos, para que cualquiera pueda reproducirlo.
 
+**Leer el informe:** <https://lalvarezmat.github.io/icv-illes-balears/>
+(versión compilada de `INE_ICV_CCAA/INE_ICV_CCAA_all.Rmd`, en `docs/index.html`).
+
 El estudio analiza **82 indicadores de calidad de vida** de las 17 comunidades
 autónomas entre **2004 y 2024**: 79 de los Indicadores de Calidad de Vida (ICV)
 del INE, el precio de compraventa y de alquiler de la vivienda y el PIB per
@@ -119,4 +122,4 @@ Los datos de origen mantienen las condiciones de cada fuente (tabla de arriba).
 
 > Álvarez León, L., Coll Vicens, B., Vicens Colom, J. y Vicens Gómez, J. M.
 > (2026). *La calidad de vida en Illes Balears: una visión multidimensional*.
-> https://github.com/lalvarezmat/icv-illes-balears
+> https://lalvarezmat.github.io/icv-illes-balears/
