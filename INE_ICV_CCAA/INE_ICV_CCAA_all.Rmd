@@ -2564,8 +2564,7 @@ estaba, y en los últimos tres años ha vuelto a abrirse.
 El perfil es muy concreto: no faltan tanto estudios básicos como estudios
 superiores, y lo que sobra es el nivel intermedio. Eso casa con una economía
 básicamente de servicios que genera mucho empleo para el que basta el
-bachillerato o la FP de grado medio o trabajadores sin formación, como la
-turística. Hay otra pieza que estos datos no permiten
+bachillerato o la FP de grado medio o trabajadores sin formación. Hay otra pieza que estos datos no permiten
 separar: el indicador mide a quien **reside** en las islas, y Illes Balears
 es la comunidad cuya población más ha crecido desde 2000 (+43 %). Si la
 distancia viene del sistema educativo de las islas o de quién llega a
