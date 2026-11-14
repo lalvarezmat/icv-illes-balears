@@ -35,6 +35,21 @@ cada una de las 10 ramas de actividad en el valor añadido bruto. Cada
 indicador se clasifica según la distancia de cada isla a la media peninsular,
 y el resultado se compara con el de las 136 parejas posibles de comunidades.
 
+## Estudio europeo: ¿qué distingue a los archipiélagos de Europa?
+
+**Leerlo:** <https://lalvarezmat.github.io/icv-illes-balears/europa.html>
+(versión compilada de `EUROSTAT_INSULARES/EUROSTAT_INSULARES.Rmd`, en `docs/europa.html`).
+
+Compara **10 archipiélagos y 8 islas grandes de la Unión Europea** (regiones
+NUTS 2) **con la parte continental de su propio país**, con 53 indicadores de
+Eurostat convertidos en relativos (por habitante, en porcentaje o sobre el
+PIB) y la **distancia de cada archipiélago al continente**. La referencia de
+cada isla es su país sin sus islas, calculada restando valores absolutos, para
+que los indicadores sean comparables entre países. Incluye el PIB real por
+habitante, versiones por población presente (residentes más turistas) de los
+servicios y sucesos, y una prueba de qué rasgos se repiten en todos los
+archipiélagos.
+
 ## Contenido
 
 | Carpeta | Qué hay |
@@ -48,6 +63,7 @@ y el resultado se compara con el de las 136 parejas posibles de comunidades.
 | `POBLACION_CCAA/` | Población residente a 1 de enero por comunidad, 1971-2025, y su crecimiento (INE, Estadística Continua de Población). Estudio de los archipiélagos. |
 | `MIVAU/` | Viviendas iniciadas (estadística del Ministerio de Vivienda y Agenda Urbana, en la serie que republica el ISTAC) y compraventas de vivienda según la residencia del comprador (Ministerio de Vivienda y Agenda Urbana), con los ficheros originales. Estudio de los archipiélagos. |
 | `VIVIENDA_TURISTICA/` | Viviendas turísticas (INE, estadística experimental) y noches en alojamientos reservados por plataformas en línea (Eurostat). Estudio de los archipiélagos. |
+| `EUROSTAT_INSULARES/` | **El estudio europeo** (`EUROSTAT_INSULARES.Rmd`) y sus scripts: la descarga de 69 series de Eurostat por región y por país (`EUROSTAT_INSULARES_Series.xlsx`), las distancias al continente (`EUROSTAT_INSULARES_Distancias.xlsx`) y los indicadores relativos con sus referencias continentales y comparaciones (`EUROSTAT_INSULARES_Indicadores.xlsx`). |
 
 ## Cómo reproducirlo
 
@@ -75,7 +91,8 @@ RStudio y con Quarto.
 
 Todos los datos que usa el informe ya están en el repositorio. Basta con
 abrir `INE_ICV_CCAA/INE_ICV_CCAA_all.Rmd` en RStudio y pulsar *Knit*. Lo mismo
-para el estudio de los archipiélagos, con `INE_ICV_CCAA/INE_ICV_CCAA_Insulares.Rmd`.
+para el estudio de los archipiélagos, con `INE_ICV_CCAA/INE_ICV_CCAA_Insulares.Rmd`,
+y para el europeo, con `EUROSTAT_INSULARES/EUROSTAT_INSULARES.Rmd`.
 
 ### Opción 2: rehacer el conjunto de datos sin conexión
 
@@ -109,6 +126,17 @@ Eurostat, sin fichero original que guardar: sus resultados
 (`POBLACION_CCAA/POBLACION_CCAA.xlsx` y
 `VIVIENDA_TURISTICA/VIVIENDA_TURISTICA_CCAA.xlsx`) están incluidos.
 
+Para el estudio europeo, a partir de las series de Eurostat y las distancias
+incluidas:
+
+```
+EUROSTAT_INSULARES/EUROSTAT_INSULARES_Consolidar.R   # indicadores relativos y referencias continentales
+EUROSTAT_INSULARES/EUROSTAT_INSULARES.Rmd            # el estudio
+```
+
+También se ha comprobado que el estudio de los archipiélagos y el europeo
+regeneran exactamente los mismos datos a partir de lo incluido.
+
 ### Opción 3: volver a descargar todo de las fuentes
 
 Los scripts de descarga son independientes entre sí y se ejecutan antes que
@@ -125,6 +153,8 @@ IPC_CCAA/IPC_CCAA_DataExtraction.R
 POBLACION_CCAA/POBLACION_CCAA_DataExtraction.R            # estudio de los archipiélagos
 MIVAU/MIVAU_DataExtraction.R              # borrar antes sus dos ficheros originales para descargarlos de nuevo
 VIVIENDA_TURISTICA/VIVIENDA_TURISTICA_DataExtraction.R
+EUROSTAT_INSULARES/EUROSTAT_INSULARES_DataExtraction.R    # estudio europeo: API de Eurostat (caché en cache/)
+EUROSTAT_INSULARES/EUROSTAT_INSULARES_Distancias.R        # descarga las geometrías de GISCO y calcula las distancias
 ```
 
 Los anuarios de la Estadística Registral Inmobiliaria y la base de datos
@@ -143,6 +173,8 @@ cambiado la dirección de algún fichero, los resultados pueden variar.
 | [Ministerio de Vivienda y Agenda Urbana](https://apps.fomento.gob.es/BoletinOnline2/?nivel=2&orden=34000000), Estadística de Transacciones Inmobiliarias (tabla 1.6) | Compraventas de vivienda según la residencia del comprador | [Aviso legal del Ministerio](https://www.mivau.gob.es/ministerio/aviso-legal): reutilización citando la fuente y la fecha de actualización (descarga de noviembre de 2026, datos hasta el 2.º trimestre de 2026) |
 | [Instituto Canario de Estadística (ISTAC)](https://datos.canarias.es/catalogos/estadisticas/dataset/urn-siemac-org-siemac-metamac-infomodel-statisticalresources-dataset-istac-e25004a_000001), datos abiertos: serie de viviendas libres y protegidas iniciadas y terminadas del Ministerio de Vivienda y Agenda Urbana | Viviendas iniciadas | [Aviso legal del ISTAC](https://www.gobiernodecanarias.org/istac/aviso_legal.html): reutilización libre citando «Fuente: Instituto Canario de Estadística (ISTAC)» |
 | [Eurostat](https://ec.europa.eu/eurostat/databrowser/product/page/tour_ce_omn12), `tour_ce_omn12` | Noches en alojamientos de corta estancia reservados por plataformas en línea | [Aviso de copyright de Eurostat](https://ec.europa.eu/eurostat/help/copyright-notice): reutilización libre citando la fuente e indicando las modificaciones (aquí, el cociente por habitante) |
+| [Eurostat](https://ec.europa.eu/eurostat/web/regions/database), base de datos regional (NUTS 2) y nacional | Las 69 series del estudio europeo (catálogo en `EUROSTAT_INSULARES_Series.xlsx`) | [Aviso de copyright de Eurostat](https://ec.europa.eu/eurostat/help/copyright-notice): reutilización libre citando la fuente e indicando las modificaciones (aquí, los cocientes, las referencias continentales y las comparaciones) |
+| [GISCO](https://ec.europa.eu/eurostat/web/gisco/geodata/statistical-units) (Eurostat), regiones NUTS 2021 | Geometrías para calcular las distancias al continente | Uso **no comercial**, citando «© EuroGeographics for the administrative boundaries». No se incluyen en el repositorio: las descarga `EUROSTAT_INSULARES_Distancias.R` |
 
 El precio de compraventa procede de una base de datos con licencia ODbL, que
 exige que las bases de datos derivadas se compartan con la misma licencia: los
@@ -153,7 +185,9 @@ distribuyen bajo **ODbL 1.0**.
 
 - **Código** (`.R`, `.Rmd`): [MIT](LICENSE).
 - **Texto del informe, figuras y datos elaborados**: [CC BY 4.0](LICENSE-CC-BY-4.0.txt),
-  salvo los datos derivados del Colegio de Registradores, que mantienen la ODbL 1.0.
+  salvo los datos derivados del Colegio de Registradores, que mantienen la ODbL 1.0,
+  y las distancias del estudio europeo (`EUROSTAT_INSULARES_Distancias.xlsx`), que
+  salen de las geometrías de GISCO y mantienen su condición de uso no comercial.
 
 Los datos de origen mantienen las condiciones de cada fuente (tabla de arriba).
 

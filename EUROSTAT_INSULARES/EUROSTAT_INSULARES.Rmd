@@ -1,0 +1,738 @@
+---
+title: '¿Qué distingue a los archipiélagos de Europa?'
+pagetitle: "Qué distingue a los archipiélagos de Europa"
+subtitle: "Diez archipiélagos y ocho islas de la Unión Europea frente a la parte continental de su país: 53 indicadores de Eurostat"
+date: "`r format(Sys.Date(), '%d de %B de %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    toc_depth: 2
+    number_sections: true
+    theme: flatly
+---
+
+<!-- Estudio europeo de las regiones insulares (2026-11-14). Lee los ficheros que
+     generan, en este orden, EUROSTAT_INSULARES_DataExtraction.R,
+     EUROSTAT_INSULARES_Distancias.R y EUROSTAT_INSULARES_Consolidar.R. -->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+library(openxlsx)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plotly)
+library(gt)
+library(scales)
+library(tibble)
+
+# --- Paleta (la de los informes anteriores) -----------------------------------
+COLOR_ARCHI   <- "#eb6834"  # archipielagos
+COLOR_ISLA    <- "#1baf7a"  # islas grandes
+COLOR_RESTO   <- "#b9b8b1"
+COLOR_Z_BAJO  <- "#e34948"
+COLOR_Z_MEDIO <- "#f0efec"
+COLOR_Z_ALTO  <- "#2a78d6"
+
+es <- function(x, d = 1) formatC(x, format = "f", digits = d, decimal.mark = ",", big.mark = ".")
+fmt_valor <- function(x) vapply(x, function(v) {
+  if (is.na(v)) return("–")
+  s <- es(v, if (abs(v) >= 100) 0 else if (abs(v) >= 10) 1 else 2)
+  if (grepl(",", s)) sub(",$", "", sub("0+$", "", s)) else s
+}, character(1))
+# Signo + explicito y signo menos tipografico
+con_signo <- function(x, d = 1) ifelse(x > 0, paste0("+", es(x, d)), sub("^-", "−", es(x, d)))
+fmt_es <- function(tabla) {
+  tabla %>% fmt_number(columns = where(is.numeric), decimals = 3,
+                       dec_mark = ",", sep_mark = ".", drop_trailing_zeros = TRUE)
+}
+estilo_tabla <- function(tabla) {
+  tabla %>% opt_row_striping() %>%
+    tab_options(table.font.size = px(13), heading.title.font.size = px(15))
+}
+N_FIG <- 0
+N_TAB <- 0
+fig_cap <- function(txt) {
+  N_FIG <<- N_FIG + 1
+  paste0('<p class="leyenda leyenda-fig"><b>Figura ', N_FIG, '.</b> ', txt, '</p>')
+}
+tab_cap <- function(txt) {
+  N_TAB <<- N_TAB + 1
+  paste0('<p class="leyenda leyenda-tab"><b>Tabla ', N_TAB, '.</b> ', txt, '</p>')
+}
+
+# --- Regiones -------------------------------------------------------------------
+NOMBRE <- c(ES53 = "Illes Balears", ES70 = "Canarias", PT20 = "Açores", PT30 = "Madeira",
+            EL41 = "Egeo Septentrional", EL42 = "Egeo Meridional", EL62 = "Islas Jónicas",
+            FI20 = "Åland", MT00 = "Malta", FRY1 = "Guadalupe",
+            ITG1 = "Sicilia", ITG2 = "Cerdeña", FRM0 = "Córcega", EL43 = "Creta", CY00 = "Chipre",
+            FRY2 = "Martinica", FRY4 = "La Reunión", FRY5 = "Mayotte")
+PAIS <- c(ES = "España", PT = "Portugal", EL = "Grecia", IT = "Italia", FR = "Francia",
+          FI = "Finlandia", MT = "Malta", CY = "Chipre")
+ARCHI_REF <- c("ES53", "ES70", "PT20", "PT30", "EL41", "EL42", "EL62", "FI20", "FRY1")
+ISLAS_REF <- c("ITG1", "ITG2", "FRM0", "EL43", "FRY2", "FRY4", "FRY5")
+SIN_REF   <- c("MT00", "CY00")
+ULTRAPERIFERICAS <- c("ES70", "PT20", "PT30", "FRY1", "FRY2", "FRY4", "FRY5")
+CON_REF <- c(ARCHI_REF, ISLAS_REF)
+
+# --- Datos ----------------------------------------------------------------------
+catalogo <- read.xlsx("EUROSTAT_INSULARES_Indicadores.xlsx", sheet = "catalogo")
+cmp      <- read.xlsx("EUROSTAT_INSULARES_Indicadores.xlsx", sheet = "comparacion")
+valores  <- read.xlsx("EUROSTAT_INSULARES_Indicadores.xlsx", sheet = "valores")
+ctx      <- read.xlsx("EUROSTAT_INSULARES_Indicadores.xlsx", sheet = "contexto_ue")
+series_cat <- read.xlsx("EUROSTAT_INSULARES_Series.xlsx", sheet = "catalogo")
+dis      <- read.xlsx("EUROSTAT_INSULARES_Distancias.xlsx", sheet = "regiones")
+dis3     <- read.xlsx("EUROSTAT_INSULARES_Distancias.xlsx", sheet = "nuts3")
+stopifnot(setequal(names(NOMBRE), dis$nuts2))
+
+base_ids <- catalogo$id[!grepl("_presente$", catalogo$id)]
+n_ind <- length(base_ids)
+n_presente <- sum(grepl("_presente$", catalogo$id))
+stopifnot(n_ind == 53)   # el subtitulo lo dice con la cifra escrita
+temas <- unique(catalogo$tema)
+ind_nombre <- setNames(catalogo$nombre, catalogo$id)
+ind_unidad <- setNames(catalogo$unidad, catalogo$id)
+ind_comp   <- setNames(catalogo$comparacion, catalogo$id)
+km <- setNames(dis$dist_continente_km, dis$nuts2)
+
+# Comparacion legible: indice ("813") o diferencia con signo ("+12,5")
+fmt_comp <- function(v, ind) ifelse(ind_comp[ind] == "indice", es(v, 0), con_signo(v, 1))
+# "similar a" / "superior a" / "inferior a" segun un indice (continente = 100)
+comparativo <- function(v) if (v > 105) "superior a" else if (v < 95) "inferior a" else "similar a"
+
+# --- Coincidencia de sentido entre regiones ------------------------------------
+# Para cada indicador: en cuantas regiones del grupo la isla esta por encima de
+# su continente y en cuantas por debajo. Si fuera azar (cada region al 50 %),
+# que las 9 de un grupo coincidan pasaria 1 vez de cada 256, y que coincidan
+# 8 de 9, 1 de cada 26.
+coincidencia <- function(geos) {
+  cmp %>% filter(geo %in% geos, z != 0) %>%
+    group_by(indicador) %>%
+    summarise(n = n(), arriba = sum(z > 0), abajo = sum(z < 0),
+              mediana_comp = median(comparacion), mediana_z = median(z),
+              p = binom.test(max(arriba, abajo), n)$p.value, .groups = "drop") %>%
+    mutate(coinciden = pmax(arriba, abajo),
+           sentido = ifelse(arriba >= abajo, "más", "menos"),
+           clase = case_when(coinciden == n & n >= 6 ~ "Todas",
+                             coinciden == n - 1 & n >= 7 ~ "Todas menos una",
+                             TRUE ~ "Sin un sentido común"))
+}
+co_archi <- coincidencia(ARCHI_REF)
+co_islas <- coincidencia(ISLAS_REF)
+co_todas <- coincidencia(CON_REF)
+rasgo_archi <- co_archi %>% filter(clase != "Sin un sentido común")
+n_todos_archi <- sum(co_archi$clase == "Todas")
+n_casi_archi  <- sum(co_archi$clase == "Todas menos una")
+comunes_16 <- co_todas %>% filter(clase == "Todas") %>% pull(indicador)
+med <- function(co, ind) co$mediana_comp[co$indicador == ind]
+cuenta <- function(co, ind) { x <- co[co$indicador == ind, ]; paste0(x$coinciden, " de ", x$n) }
+sentido <- function(co, ind) co$sentido[co$indicador == ind]
+n_arriba <- function(co, ind) co$arriba[co$indicador == ind]
+n_abajo  <- function(co, ind) co$abajo[co$indicador == ind]
+n_de     <- function(co, ind) co$n[co$indicador == ind]
+# Archipielago que va en sentido contrario al de la mayoria
+excepcion <- function(ind) {
+  x <- cmp %>% filter(indicador == ind, geo %in% ARCHI_REF, z != 0)
+  unname(NOMBRE[x$geo[sign(x$z) != sign(median(x$z))]])
+}
+plural <- function(n, uno, varios) paste(n, if (n == 1) uno else varios)
+lista <- function(x) if (length(x) <= 1) x else paste(paste(head(x, -1), collapse = ", "), "y", tail(x, 1))
+cmp_de <- function(ind, g) cmp$comparacion[cmp$indicador == ind & cmp$geo == g]
+val_de <- function(ind, g, col = "valor_isla") cmp[[col]][cmp$indicador == ind & cmp$geo == g]
+PERIODO_CREC <- cmp$anios[cmp$indicador == "crec_pib_hab"][1]
+```
+
+```{css, echo=FALSE}
+.nota {
+  background-color: #f4f7fb;
+  border-left: 4px solid #2a78d6;
+  padding: 0.8em 1.1em;
+  margin: 1.2em 0;
+  border-radius: 3px;
+}
+.nota p:last-child { margin-bottom: 0; }
+.clave {
+  background-color: #fdf5f1;
+  border-left: 4px solid #eb6834;
+  padding: 0.8em 1.1em;
+  margin: 1.2em 0;
+  border-radius: 3px;
+}
+.clave p:last-child { margin-bottom: 0; }
+h2 { margin-top: 2em; }
+.leyenda { font-size: 0.92em; text-align: center; margin: 0.6em 0 1.4em 0; }
+.leyenda-tab { margin: 1.4em 0 0.4em 0; }
+```
+
+```{r cifras}
+# Ejemplo de por que la referencia es el continente y no el total del pais:
+# peso de las islas griegas en la poblacion y en las noches turisticas de Grecia
+geos_ej <- c("EL", "EL_CONT", "EL41", "ES", "ES_CONT")
+x <- valores %>% filter(indicador == "noches_hab", geo %in% geos_ej)
+ANIO_EJ <- max(Reduce(intersect, split(x$anio, x$geo)))   # ultimo año con dato para todas
+x <- x %>% filter(anio == ANIO_EJ)
+v_ <- function(g, col = "valor") x[[col]][x$geo == g]
+peso_islas <- function(p) c(pob = 100 * (1 - v_(paste0(p, "_CONT"), "den") / v_(p, "den")),
+                            noches = 100 * (1 - v_(paste0(p, "_CONT"), "num") / v_(p, "num")))
+pe_EL <- peso_islas("EL"); pe_ES <- peso_islas("ES")
+idx_el41_pais <- 100 * v_("EL41") / v_("EL")
+idx_el41_cont <- 100 * v_("EL41") / v_("EL_CONT")
+stopifnot(idx_el41_pais < 100, idx_el41_cont > 100)
+
+# Poblacion turistica equivalente (noches / 365) por cada 100 residentes, en el
+# ultimo año con dato para todos los archipielagos: cociente entre la poblacion
+# presente y la residente (denominadores de medicos_presente y medicos)
+pte <- valores %>% filter(indicador %in% c("medicos", "medicos_presente"), geo %in% CON_REF) %>%
+  select(indicador, geo, anio, den) %>% pivot_wider(names_from = indicador, values_from = den) %>%
+  filter(!is.na(medicos), !is.na(medicos_presente))
+ANIO_PTE <- max(Reduce(intersect, split(pte$anio, pte$geo)[ARCHI_REF]))
+pte <- pte %>% mutate(pct = 100 * (medicos_presente / medicos - 1))
+pct_pte_bal_2020 <- pte$pct[pte$geo == "ES53" & pte$anio == 2020]
+pte <- pte %>% filter(anio == ANIO_PTE)
+pct_pte <- setNames(pte$pct, pte$geo)
+```
+
+# Presentación {-}
+
+Los dos estudios anteriores compararon Illes Balears con las demás comunidades autónomas ([*La “Calidad de Vida” en Illes Balears*](https://lalvarezmat.github.io/icv-illes-balears/)) y a Illes Balears y Canarias con las comunidades peninsulares ([*¿Qué distingue a los archipiélagos?*](https://lalvarezmat.github.io/icv-illes-balears/insulares.html)). Este da el paso a Europa: **¿qué distingue a los archipiélagos de la Unión Europea de la parte continental de su propio país?** Con diez archipiélagos de cinco países, en lugar de dos, se puede ver qué rasgos se repiten en casi todos y cuáles son propios de cada uno.
+
+El estudio usa `r n_ind` indicadores de Eurostat por región (NUTS 2) sobre población, estructura productiva, economía, trabajo, turismo, vivienda, educación, salud, pobreza, transporte y seguridad. Compara cada isla con **la parte continental de su país**, para que los indicadores sean comparables entre países, y añade la **distancia de cada archipiélago al continente** como dato propio.
+
+<p style="font-size: 0.9em; color: #6b6a64;">Datos: Eurostat. Límites administrativos: © EuroGeographics for the administrative boundaries.</p>
+
+# Resumen: las ideas principales {#resumen}
+
+1. **Hay rasgos de toda región insular, sea archipiélago o isla grande.** En las `r length(CON_REF)` regiones insulares con parte continental de referencia pesan menos que en su continente la industria (una mediana de `r con_signo(med(co_todas, "vab_B-E"))` puntos del valor añadido), la información y las comunicaciones y las actividades profesionales, y hay menos población con estudios superiores (`r con_signo(med(co_todas, "superiores"))` puntos). Es una economía con menos industria y menos servicios de alto conocimiento.
+
+2. **El turismo es el rasgo propio de los archipiélagos.** En `r cuenta(co_archi, "noches_hab")` archipiélagos hay más noches turísticas por habitante que en su continente (la mediana multiplica por `r es(med(co_archi, "noches_hab") / 100)`), y lo mismo ocurre con las noches en plataformas y las plazas turísticas. El comercio, el transporte y la hostelería pesan más en los `r co_archi$n[co_archi$indicador == "vab_G-I"]` (una mediana de `r con_signo(med(co_archi, "vab_G-I"))` puntos). Las islas grandes, en cambio, no son más turísticas que su continente: solo `r n_arriba(co_islas, "noches_hab")` de `r n_de(co_islas, "noches_hab")` lo son.
+
+3. **El turismo no les ha hecho crecer más.** Entre `r sub("–", " y ", PERIODO_CREC)`, el PIB real por habitante creció `r sentido(co_archi, "crec_pib_hab")` que en su continente en `r cuenta(co_archi, "crec_pib_hab")` archipiélagos (`r con_signo(med(co_archi, "crec_pib_hab"), 2)` puntos al año de mediana). En algunos, como Illes Balears, el PIB total sí creció más que en su continente, pero lo hizo a la par que la población: por habitante, menos. Hay, además, más jóvenes que ni estudian ni trabajan (`r cuenta(co_archi, "neet")`) y se invierte menos en I+D (`r cuenta(co_archi, "id_pib")`).
+
+4. **El nivel de vida no es un rasgo de los archipiélagos.** En renta de los hogares, PIB real por habitante, paro, pobreza o esperanza de vida unos archipiélagos están por encima de su continente y otros por debajo. Las islas grandes, en cambio, sí comparten un nivel más bajo: menos renta, PIB y productividad en las `r co_islas$n[co_islas$indicador == "renta_hab"]`.
+
+5. **La lejanía pesa, pero se confunde con la ultraperiferia.** Cuanto más lejos del continente, más privación material, menos empleo y menor esperanza de vida en relación con su país. Pero las islas más lejanas son también las regiones ultraperiféricas (Canarias, Açores, Madeira y las islas francesas de ultramar), y sin las francesas la relación se debilita mucho.
+
+6. **Contar a los turistas importa.** Por residente, los archipiélagos tienen menos médicos que su continente en `r n_abajo(co_archi, "medicos")` de `r n_de(co_archi, "medicos")`; contando también la población que está de paso, en `r n_abajo(co_archi, "medicos_presente")` de `r n_de(co_archi, "medicos_presente")`, y la diferencia se agranda en los más turísticos.
+
+<div class="clave">
+**En una frase.** Lo que comparten todas las islas europeas frente a su continente es una economía con menos industria y menos conocimiento; lo que añaden los archipiélagos es el turismo. Ese turismo no les ha hecho crecer más que su continente por habitante, y el nivel de vida depende de cada archipiélago y, sobre todo, de su lejanía.
+</div>
+
+# Las regiones {#regiones}
+
+Eurostat divide la Unión Europea en regiones de tamaño parecido (NUTS 2). `r length(NOMBRE)` de ellas están formadas solo por islas. Se separan en dos grupos: **diez archipiélagos** y **ocho islas grandes o únicas**, para ver si un rasgo es de los archipiélagos o de cualquier isla.
+
+`r tab_cap("Las regiones insulares de la Unión Europea (NUTS 2). Distancia: media de la distancia de cada isla o grupo de islas al punto más cercano del continente de su país, ponderada por su población.")`
+
+```{r tabla-regiones}
+reg <- dis %>%
+  transmute(geo = nuts2,
+            Región = unname(NOMBRE[nuts2]),
+            País = unname(PAIS[pais]),
+            Tipo = ifelse(nuts2 %in% c(ARCHI_REF, "MT00"), "Archipiélago", "Isla grande o única"),
+            Ultraperiférica = ifelse(nuts2 %in% ULTRAPERIFERICAS, "Sí", ""),
+            `Población (miles)` = round(poblacion / 1000),
+            `Distancia al continente (km)` = round(dist_continente_km),
+            `Distancia a la capital del país (km)` = round(dist_capital_km),
+            Referencia = ifelse(nuts2 %in% SIN_REF, "Regiones continentales de la UE",
+                                paste(unname(PAIS[pais]), "continental"))) %>%
+  arrange(Tipo, `Distancia al continente (km)`)
+reg %>% select(-geo) %>%
+  gt(groupname_col = "Tipo") %>%
+  fmt_es() %>%
+  sub_missing(missing_text = "–") %>%
+  estilo_tabla() %>%
+  tab_source_note("Malta y Chipre no tienen parte continental: su distancia es a la costa continental de la UE más cercana, y su referencia, las regiones continentales de la UE. Fuente: GISCO y Eurostat.")
+```
+
+```{r fig-distancias, fig.width=9, fig.height=5.5, out.width="80%", fig.align="center"}
+dd <- reg %>% mutate(Región = reorder(Región, `Distancia al continente (km)`),
+                     texto = paste0("<b>", Región, "</b> (", País, ")<br>", es(`Distancia al continente (km)`, 0),
+                                    " km al continente", ifelse(Ultraperiférica == "Sí", "<br>Región ultraperiférica", "")))
+gg <- ggplot(dd, aes(x = `Distancia al continente (km)`, y = Región, fill = Tipo, text = texto)) +
+  geom_col(width = 0.72) +
+  scale_x_log10(labels = function(x) es(x, 0), breaks = c(30, 100, 300, 1000, 3000, 10000)) +
+  scale_fill_manual(values = c("Archipiélago" = COLOR_ARCHI, "Isla grande o única" = COLOR_ISLA), name = NULL) +
+  labs(x = "Distancia al continente (km, escala logarítmica)", y = NULL) +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor = element_blank(), legend.position = "bottom")
+ggplotly(gg, tooltip = "text") %>% layout(legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.15))
+```
+
+`r fig_cap("Distancia de cada región insular al continente, en escala logarítmica: cada marca multiplica la anterior por tres o por diez.")`
+
+Las distancias van de unas decenas de kilómetros (las Islas Jónicas están frente a la costa griega) a más de 8.000 (La Reunión, en el Índico). Las regiones lejanas son, casi todas, **regiones ultraperiféricas**, una categoría de la Unión Europea con un régimen propio: Canarias, Açores, Madeira y las islas francesas de ultramar. Las cercanas son las del Mediterráneo y el Báltico.
+
+<div class="nota">
+**Cómo se mide la distancia.** Cada región se divide en sus islas o grupos de islas (unidades NUTS 3: en Illes Balears, Mallorca, Menorca e Eivissa y Formentera; en Canarias, sus siete islas). Para cada una se mide la distancia en línea recta desde su centro hasta el punto más cercano del **continente de su país**: la península en España, Portugal continental, la Grecia continental... De cada región continental se toma solo su masa de tierra principal, para no contar como continente islas como Elba. La excepción es Eubea, unida a la Grecia continental por dos puentes sobre un estrecho de 40 metros. La distancia de la región es la media de las de sus islas, ponderada por su población. Las islas francesas de ultramar se miden frente a la Francia continental europea.
+</div>
+
+# Los datos y el método {#metodo}
+
+## Los indicadores
+
+`r tab_cap(paste0("Los ", n_ind, " indicadores, por tema. El detalle de cada uno está en el Anexo A."))`
+
+```{r tabla-temas}
+catalogo %>% filter(id %in% base_ids) %>%
+  group_by(Tema = tema) %>%
+  summarise(Indicadores = n(), Ejemplos = paste(head(nombre, 4), collapse = " · "), .groups = "drop") %>%
+  arrange(match(Tema, temas)) %>%
+  gt() %>% estilo_tabla()
+```
+
+## De valores absolutos a relativos
+
+Para comparar regiones de tamaño muy distinto, cada indicador se expresa en términos relativos:
+
+- **por habitante** los flujos y los stocks (noches turísticas, pasajeros, médicos, homicidios...), con la población media del año o la del 1 de enero según el caso;
+- **como porcentaje de un total** las partes de un todo (cada rama sobre el valor añadido, el empleo a tiempo parcial sobre el empleo, las viviendas vacías sobre el parque);
+- **por superficie** la densidad, y **sobre el PIB** la inversión y el gasto en I+D;
+- **en términos reales** el PIB: el de cada año se obtiene a partir del PIB de `r substr(PERIODO_CREC, 6, 9)` en paridad de poder adquisitivo (que corrige las diferencias de precios entre países) y del índice de volumen regional de Eurostat (que descuenta la inflación de cada año). Con él se calculan el PIB real por habitante y su crecimiento medio anual en los últimos diez años, por habitante y en total: la diferencia entre los dos es, aproximadamente, lo que crece la población.
+
+Siempre que se puede, numerador y denominador salen de la misma tabla de Eurostat, para no mezclar definiciones. Los sucesos poco numerosos (homicidios, robos, muertes en carretera, mortalidad infantil) se suman en cinco años antes de dividir, porque en una región pequeña un solo caso cambia mucho la tasa de un año.
+
+## La referencia: el continente del propio país
+
+Cada isla se compara con **la parte continental de su país**: España peninsular, Portugal continental, la Grecia continental, Italia sin Sicilia ni Cerdeña, la Francia continental europea y Finlandia sin Åland. Así se comparan territorios que comparten instituciones, nivel de precios y forma de medir: las diferencias de definición entre países (qué es una vivienda no ocupada, cómo registra la policía un robo) se cancelan.
+
+La referencia tiene que ser el país **sin sus islas**, no el total nacional, porque en algunos indicadores las islas pesan mucho en el total de su país. En `r ANIO_EJ`, las islas griegas tenían el `r es(pe_EL[["pob"]], 0)` % de la población de Grecia, pero el `r es(pe_EL[["noches"]], 0)` % de sus noches turísticas; Illes Balears y Canarias, el `r es(pe_ES[["pob"]], 0)` % de la población de España y el `r es(pe_ES[["noches"]], 0)` % de sus noches. Frente al total de Grecia, el Egeo Septentrional parecería menos turístico que la media del país (índice `r es(idx_el41_pais, 0)`); frente a la Grecia continental, tiene `r es(idx_el41_cont / 100)` veces sus noches por habitante.
+
+<div class="nota">
+**Cómo se calcula la referencia.** Se suman los valores absolutos del país y se restan los de sus regiones insulares (y los de Ceuta, Melilla y la Guayana Francesa, que no son islas ni continente europeo): primero el numerador, luego el denominador, y después se divide. En los indicadores que Eurostat solo publica como tasa (pobreza, esperanza de vida...) la resta se hace ponderando por la población. Malta y Chipre no tienen parte continental y se comparan con la mediana de las regiones continentales de la UE ([ver el apartado sobre Malta y Chipre](#malta-chipre)).
+</div>
+
+## La población presente
+
+En los archipiélagos turísticos hay muchas más personas que residentes. En `r ANIO_PTE`, las noches turísticas del año divididas entre 365 equivalían a `r es(pct_pte[["EL42"]], 0)` personas más por cada 100 residentes en el Egeo Meridional, `r es(pct_pte[["ES53"]], 0)` en Illes Balears y `r es(pct_pte[["ES70"]], 0)` en Canarias, frente a unas pocas en la mayoría de las regiones continentales. Para los servicios y sucesos que afectan también a los visitantes (médicos, camas de hospital, homicidios, robos, muertes en carretera) se calcula, además de la tasa por residente, una tasa por **población presente**: residentes más el equivalente de los turistas. Es un mínimo, porque no cuenta las segundas residencias ni el alojamiento no registrado.
+
+## Cómo se mide la diferencia
+
+- **Valor típico**: la mediana de los últimos cinco años en que hay dato para la isla y para su referencia, **sin contar 2020 ni 2021**: en los años de la pandemia el turismo se hundió (en 2020, los turistas equivalían en Illes Balears a `r es(pct_pte_bal_2020, 0)` personas por cada 100 residentes, frente a `r es(pct_pte[["ES53"]], 0)` en `r ANIO_PTE`), y con él los indicadores turísticos y el PIB. La excepción son los datos del censo, que son de 2021.
+- **Comparación**: en las intensidades (por habitante, por superficie), un **índice** con el continente = 100 (un 200 es el doble); en los porcentajes, las tasas y los años, la **diferencia** en puntos o en años.
+- **Una escala común**: para poder poner todos los indicadores en el mismo gráfico, la diferencia se divide por lo que varían normalmente las regiones continentales de la UE en ese indicador (en escala logarítmica en los índices). Una diferencia de 1 equivale a la separación típica entre dos regiones continentales europeas; de 2, a una diferencia grande.
+- **Rasgo de los archipiélagos**: un indicador en que todos los archipiélagos, o todos menos uno, se apartan de su continente **en el mismo sentido**. Si fuera azar, que los nueve coincidan pasaría una vez de cada 256, y que coincidan ocho de nueve, una de cada 26.
+
+# El mapa de las diferencias {#mapa}
+
+La figura resume el estudio: cada fila es un indicador y cada columna, una región insular. El color indica si la isla está por encima (azul) o por debajo (rojo) de su continente, y su intensidad, cuánto. **El color indica la dirección, no si es bueno o malo**: más paro y más esperanza de vida salen los dos en azul. Al pasar el cursor se ven los valores.
+
+```{r fig-mapa, fig.width=11, fig.height=15, out.width="100%"}
+ord_ind <- catalogo %>% filter(id %in% base_ids) %>% arrange(match(tema, temas), orden) %>% pull(id)
+cols <- c(ARCHI_REF, ISLAS_REF)
+M <- cmp %>% filter(indicador %in% ord_ind, geo %in% cols) %>%
+  mutate(texto = paste0("<b>", ind_nombre[indicador], "</b><br>", NOMBRE[geo], ": ", fmt_valor(valor_isla), " ",
+                        ind_unidad[indicador], "<br>Su continente: ", fmt_valor(valor_ref),
+                        "<br>", ifelse(ind_comp[indicador] == "indice", "Índice (continente = 100): ", "Diferencia: "),
+                        fmt_comp(comparacion, indicador), "<br>Años: ", anios))
+zmat <- matrix(NA_real_, length(ord_ind), length(cols), dimnames = list(ord_ind, cols))
+tmat <- matrix("Sin dato", length(ord_ind), length(cols), dimnames = list(ord_ind, cols))
+for (k in seq_len(nrow(M))) {
+  zmat[M$indicador[k], M$geo[k]] <- max(-3, min(3, M$z[k]))
+  tmat[M$indicador[k], M$geo[k]] <- M$texto[k]
+}
+etiq_fila <- unname(ind_nombre[ord_ind])
+etiq_col <- unname(NOMBRE[cols])
+corte_tema <- which(diff(match(catalogo$tema[match(ord_ind, catalogo$id)], temas)) != 0)
+p <- plot_ly(x = etiq_col, y = etiq_fila, z = zmat, text = tmat, hoverinfo = "text", type = "heatmap",
+             colorscale = list(c(0, COLOR_Z_BAJO), c(0.5, COLOR_Z_MEDIO), c(1, COLOR_Z_ALTO)),
+             zmin = -3, zmax = 3, xgap = 1, ygap = 1,
+             colorbar = list(title = "Diferencia<br>con su<br>continente", tickvals = c(-3, -2, -1, 0, 1, 2, 3),
+                             ticktext = c("≤ −3", "−2", "−1", "0", "+1", "+2", "≥ +3"))) %>%
+  layout(xaxis = list(side = "top", tickangle = -40, title = ""),
+         yaxis = list(autorange = "reversed", title = "", tickfont = list(size = 11)),
+         margin = list(l = 320, t = 120),
+         shapes = c(list(list(type = "line", x0 = length(ARCHI_REF) - 0.5, x1 = length(ARCHI_REF) - 0.5,
+                              y0 = -0.5, y1 = length(ord_ind) - 0.5, line = list(color = "#33322e", width = 2))),
+                    lapply(corte_tema, function(k) list(type = "line", x0 = -0.5, x1 = length(cols) - 0.5,
+                                                        y0 = k - 0.5, y1 = k - 0.5,
+                                                        line = list(color = "#ffffff", width = 4)))),
+         annotations = list(
+           list(x = (length(ARCHI_REF) - 1) / 2, y = 1.07, yref = "paper", text = "<b>Archipiélagos</b>",
+                showarrow = FALSE, font = list(color = COLOR_ARCHI)),
+           list(x = length(ARCHI_REF) + (length(ISLAS_REF) - 1) / 2, y = 1.07, yref = "paper",
+                text = "<b>Islas grandes</b>", showarrow = FALSE, font = list(color = COLOR_ISLA))))
+p
+```
+
+`r fig_cap(paste0("Diferencia de cada región insular con la parte continental de su país en los ", n_ind, " indicadores, en la escala común (1 = la separación típica entre dos regiones continentales de la UE). Azul: por encima de su continente; rojo: por debajo. Gris: sin dato."))`
+
+**Qué se ve.** Hay filas casi enteras de un solo color, que son los rasgos compartidos: el peso de la industria, de la información y las comunicaciones y de las actividades profesionales, y los estudios superiores, en rojo en todas las columnas; el comercio, el transporte y la hostelería, en azul en casi todas. Las filas del turismo son azules en los archipiélagos y mezcladas en las islas grandes. Las del nivel de vida (renta, paro, pobreza, esperanza de vida) cambian de color de una columna a otra: ahí cada isla va por su lado. Las columnas de las islas francesas de ultramar, sobre todo Mayotte, son las más intensas: son las que más se apartan de su continente en casi todo.
+
+# Lo que comparten los archipiélagos {#comparten}
+
+`r tab_cap(paste0("Indicadores en que todos los archipiélagos con parte continental de referencia, o todos menos uno, se apartan de su continente en el mismo sentido. Comparación: mediana de los archipiélagos (índice, continente = 100, o diferencia)."))`
+
+```{r tabla-rasgos}
+tabla_rasgos <- function(co, extra = NULL) {
+  out <- co %>% filter(clase != "Sin un sentido común") %>%
+    left_join(catalogo %>% select(indicador = id, Tema = tema, Indicador = nombre, Unidad = unidad, orden), by = "indicador") %>%
+    arrange(desc(clase == "Todas"), match(Tema, temas), orden) %>%
+    transmute(Tema, Indicador, Unidad,
+              `Sentido` = paste(sentido, "que en su continente"),
+              `Cuántos` = paste0(coinciden, " de ", n),
+              `Comparación (mediana)` = fmt_comp(mediana_comp, indicador),
+              `Escala común (mediana)` = round(mediana_z, 2),
+              Clase = clase)
+  out %>% gt(groupname_col = "Clase") %>%
+    data_color(columns = `Escala común (mediana)`,
+               colors = col_numeric(c(COLOR_Z_BAJO, COLOR_Z_MEDIO, COLOR_Z_ALTO), domain = c(-3, 3))) %>%
+    fmt_es() %>% estilo_tabla() %>%
+    tab_source_note("Índice: continente = 100 (200 = el doble). Diferencia: en puntos o en años. Escala común: diferencia dividida por la separación típica entre regiones continentales de la UE.")
+}
+tabla_rasgos(co_archi)
+```
+
+```{r comprobaciones-rasgos}
+# Lo que el texto da por hecho
+stopifnot(all(c("vab_B-E", "vab_J", "vab_M_N", "superiores", "vab_G-I") %in%
+                co_archi$indicador[co_archi$clase == "Todas"]),
+          sentido(co_archi, "crec_pib_hab") == "menos",
+          identical(excepcion("noches_hab"), "Guadalupe"), identical(excepcion("plazas_hab"), "Guadalupe"),
+          identical(excepcion("pasajeros_hab"), "Åland"),
+          co_archi$clase[co_archi$indicador == "productividad"] != "Sin un sentido común",
+          sentido(co_islas, "homicidios") == "más", co_islas$clase[co_islas$indicador == "homicidios"] == "Todas",
+          cmp_de("crec_pib_total", "ES53") > 0, cmp_de("crec_pib_hab", "ES53") < 0,
+          all(c("noches_hab", "plataformas_hab", "plazas_hab", "pasajeros_hab") %in%
+                co_archi$indicador[co_archi$clase != "Sin un sentido común" & co_archi$sentido == "más"]),
+          all(c("vab_B-E", "vab_J", "vab_M_N", "superiores") %in% comunes_16),
+          co_islas$clase[co_islas$indicador == "noches_hab"] == "Sin un sentido común",
+          all(co_islas$clase[co_islas$indicador %in% c("renta_hab", "pib_real_hab", "productividad")] == "Todas"),
+          all(co_archi$clase[co_archi$indicador %in% c("renta_hab", "pib_real_hab", "paro", "arope", "esperanza")] == "Sin un sentido común"))
+```
+
+**Qué significa.** Los rasgos comunes de los archipiélagos forman tres bloques:
+
+- **Una economía de servicios ligada al turismo**: más comercio, transporte y hostelería en todos, y más noches turísticas, más noches en plataformas, más plazas y más pasajeros aéreos por habitante en todos menos uno. Las excepciones: `r lista(unique(c(excepcion("noches_hab"), excepcion("plazas_hab"))))` en las noches y las plazas (menos turística por habitante que la Francia continental), `r excepcion("plataformas_hab")` en las plataformas y `r excepcion("pasajeros_hab")` en los pasajeros aéreos (se comunica sobre todo por barco).
+- **Poca industria y poco conocimiento**: menos industria, menos información y comunicaciones, menos actividades profesionales, menos gasto en I+D, menos población con estudios superiores y en formación continua, y menos PIB por hora trabajada.
+- **Jóvenes fuera del sistema**: hay más jóvenes que ni estudian ni trabajan en todos los archipiélagos con dato. Encaja con una economía de servicios con muchos empleos que piden poca formación.
+
+Hay además menos robos en vivienda por habitante (todos menos uno) y menos médicos por persona presente (`r cuenta(co_archi, "medicos_presente")`).
+
+**Lo que no comparten: el crecimiento.** El turismo no se ha traducido en un crecimiento mayor. Entre `r sub("–", " y ", PERIODO_CREC)`, el PIB real por habitante creció `r sentido(co_archi, "crec_pib_hab")` que en su continente en `r cuenta(co_archi, "crec_pib_hab")` archipiélagos, y el PIB total, `r sentido(co_archi, "crec_pib_total")` en `r cuenta(co_archi, "crec_pib_total")`. Illes Balears ilustra la diferencia entre los dos: su PIB real total creció un `r es(val_de("crec_pib_total", "ES53"), 1)` % al año, más que el de la España peninsular (`r es(val_de("crec_pib_total", "ES53", "valor_ref"), 1)` %), pero por habitante creció un `r es(val_de("crec_pib_hab", "ES53"), 1)` %, menos que en la península (`r es(val_de("crec_pib_hab", "ES53", "valor_ref"), 1)` %), porque su población creció mucho más. Tampoco el crecimiento de la población es común a los archipiélagos: crece más que en su continente en `r co_archi$arriba[co_archi$indicador == "crec_pob"]` de `r co_archi$n[co_archi$indicador == "crec_pob"]`.
+
+# ¿Es cosa de archipiélagos o de cualquier isla? {#islas}
+
+Las ocho islas grandes o únicas sirven de contraste. Si un rasgo aparece también en ellas, es un rasgo de la insularidad; si no, es propio de los archipiélagos.
+
+`r tab_cap("Comparación de los rasgos entre los dos grupos: en cuántas regiones de cada grupo la isla se aparta de su continente en el sentido mayoritario.")`
+
+```{r tabla-grupos}
+sel <- union(rasgo_archi$indicador, co_islas$indicador[co_islas$clase != "Sin un sentido común"])
+cmp_grupos <- tibble(indicador = sel) %>%
+  left_join(co_archi %>% select(indicador, a_n = n, a_arr = arriba, a_abj = abajo, a_clase = clase, a_comp = mediana_comp), by = "indicador") %>%
+  left_join(co_islas %>% select(indicador, i_n = n, i_arr = arriba, i_abj = abajo, i_clase = clase, i_comp = mediana_comp), by = "indicador") %>%
+  left_join(catalogo %>% select(indicador = id, Tema = tema, Indicador = nombre, orden), by = "indicador") %>%
+  mutate(Conclusión = case_when(a_clase != "Sin un sentido común" & i_clase != "Sin un sentido común" &
+                                  (a_arr >= a_abj) == (i_arr >= i_abj) ~ "De toda isla",
+                                a_clase != "Sin un sentido común" ~ "Solo de los archipiélagos",
+                                TRUE ~ "Solo de las islas grandes")) %>%
+  arrange(match(Conclusión, c("De toda isla", "Solo de los archipiélagos", "Solo de las islas grandes")),
+          match(Tema, temas), orden) %>%
+  transmute(Conclusión, Tema, Indicador,
+            `Archipiélagos: por encima / por debajo` = paste0(a_arr, " / ", a_abj),
+            `Archipiélagos: mediana` = fmt_comp(a_comp, indicador),
+            `Islas grandes: por encima / por debajo` = paste0(i_arr, " / ", i_abj),
+            `Islas grandes: mediana` = fmt_comp(i_comp, indicador))
+n_de_toda_isla <- sum(cmp_grupos$Conclusión == "De toda isla")
+cmp_grupos %>% gt(groupname_col = "Conclusión") %>% estilo_tabla() %>%
+  tab_source_note("Mediana: índice (continente = 100) o diferencia en puntos o años.")
+```
+
+```{r grupos-listas}
+# "VAB: industria y energía" -> "peso de industria y energía"; "Estudios..." ->
+# "estudios..."; las siglas (PIB) se dejan como estan
+en_minuscula <- function(x) {
+  x <- sub("^VAB: ", "peso de ", x)
+  ifelse(grepl("^[A-ZÁÉÍÓÚ][a-záéíóúñ]", x), sub("^(.)", "\\L\\1", x, perl = TRUE), x)
+}
+grupo_lista <- function(g) lista(en_minuscula(cmp_grupos$Indicador[cmp_grupos$Conclusión == g]))
+```
+
+**Qué significa.** El retrato se aclara:
+
+- **De toda isla** (`r grupo_lista("De toda isla")`): es lo que tienen en común Mallorca, Sicilia, Creta o La Reunión frente a su continente. Una explicación plausible es que la industria y los servicios avanzados buscan grandes mercados conectados por tierra, y los titulados universitarios se van a donde están esos empleos; y, sin conexión por tierra, el avión es imprescindible.
+- **Solo de los archipiélagos** (`r grupo_lista("Solo de los archipiélagos")`): el turismo y lo que lo acompaña. Las islas grandes como Sicilia o Cerdeña no son más turísticas por habitante que su continente.
+- **Solo de las islas grandes** (`r grupo_lista("Solo de las islas grandes")`): un nivel económico más bajo que el de su continente (menos PIB real y renta por habitante, menos empleo, más paro de larga duración), más peso del sector público y de la agricultura, y más homicidios. Es el caso de Sicilia, Cerdeña, Creta, Córcega y las islas francesas de ultramar.
+
+```{r comprobaciones-islas}
+solo_islas <- co_islas %>% filter(clase != "Sin un sentido común")
+s_ <- function(ind) solo_islas$sentido[solo_islas$indicador == ind]
+stopifnot(s_("pib_real_hab") == "menos", s_("renta_hab") == "menos", s_("empleo") == "menos",
+          s_("paro_ld") == "más", s_("vab_O-Q") == "más", s_("vab_A") == "más", s_("homicidios") == "más")
+```
+
+# Lo que no es común: el nivel de vida {#nivel}
+
+En los indicadores de nivel de vida, los archipiélagos no siguen un patrón. Unos están por encima de su continente y otros por debajo, y la diferencia depende de cada caso.
+
+`r tab_cap("Nivel de vida de cada archipiélago frente a su continente: índice de la renta de los hogares por habitante (continente = 100) y diferencia en puntos o años en el resto.")`
+
+```{r tabla-nivel}
+ind_nivel <- c("renta_hab", "pib_real_hab", "crec_pib_hab", "empleo", "paro", "arope", "esperanza")
+cmp %>% filter(indicador %in% ind_nivel, geo %in% ARCHI_REF) %>%
+  mutate(v = fmt_comp(comparacion, indicador), Indicador = ind_nombre[indicador]) %>%
+  select(geo, indicador, v) %>%
+  pivot_wider(names_from = indicador, values_from = v) %>%
+  mutate(`Distancia (km)` = round(km[geo]), Archipiélago = unname(NOMBRE[geo])) %>%
+  arrange(`Distancia (km)`) %>%
+  select(Archipiélago, `Distancia (km)`, all_of(ind_nivel)) %>%
+  rename_with(~ unname(ind_nombre[.x]), all_of(ind_nivel)) %>%
+  gt() %>% fmt_es() %>% sub_missing(missing_text = "–") %>% estilo_tabla() %>%
+  tab_source_note(paste0("Renta y PIB real por habitante: índice (continente = 100). Crecimiento del PIB real por habitante: diferencia en puntos del crecimiento medio anual ", PERIODO_CREC, ". Resto: diferencia en puntos (años en la esperanza de vida). Ordenados por distancia al continente."))
+```
+
+```{r nivel-cifras}
+LEJOS <- 500   # km: separa los archipielagos mediterraneos y del Baltico de los atlanticos y de ultramar
+niv <- cmp %>% filter(geo %in% ARCHI_REF) %>% mutate(lejano = km[geo] > LEJOS)
+rango <- function(ind, lej, d = 0) {
+  v <- niv$comparacion[niv$indicador == ind & niv$lejano == lej]
+  paste0(con_signo(min(v), d), " y ", con_signo(max(v), d))
+}
+lejanos <- unname(NOMBRE[ARCHI_REF[km[ARCHI_REF] > LEJOS]])
+# Lo que el texto afirma: los lejanos, todos con menos empleo, mas pobreza y menos esperanza de vida
+stopifnot(all(niv$comparacion[niv$indicador == "empleo" & niv$lejano] < 0),
+          all(niv$comparacion[niv$indicador == "arope" & niv$lejano] > 0),
+          all(niv$comparacion[niv$indicador == "esperanza" & niv$lejano] < 0),
+          # los cercanos, mas cerca de su continente que los lejanos en empleo y pobreza
+          max(abs(niv$comparacion[niv$indicador == "arope" & !niv$lejano]), na.rm = TRUE) <
+            min(abs(niv$comparacion[niv$indicador == "arope" & niv$lejano])),
+          all(ARCHI_REF[km[ARCHI_REF] > LEJOS] %in% ULTRAPERIFERICAS))
+rho_arch <- function(ind) { x <- niv %>% filter(indicador == ind); cor(km[x$geo], x$comparacion, method = "spearman") }
+```
+
+**Qué significa.** Ordenados por distancia, aparece un patrón. Los cuatro archipiélagos lejanos (`r paste(lejanos, collapse = ", ")`), todos ultraperiféricos, tienen menos empleo que su continente (entre `r rango("empleo", TRUE)` puntos), más población en riesgo de pobreza (entre `r rango("arope", TRUE)` puntos) y menos esperanza de vida (entre `r rango("esperanza", TRUE, 1)` años). Los cercanos se parecen mucho más a su continente: entre `r rango("empleo", FALSE)` puntos de empleo, entre `r rango("arope", FALSE)` de pobreza y entre `r rango("esperanza", FALSE, 1)` años de esperanza de vida. En la renta de los hogares la frontera es menos nítida: el Egeo Septentrional, aunque está cerca, es más pobre que la Grecia continental. Entre los nueve, la correlación de rangos entre la distancia y la diferencia de empleo es `r es(rho_arch("empleo"), 2)`, y con la de pobreza, `r es(rho_arch("arope"), 2)`. Illes Balears tiene una renta de los hogares por habitante `r comparativo(cmp_de("renta_hab", "ES53"))` la de la España peninsular (índice `r es(cmp_de("renta_hab", "ES53"), 0)`) y Canarias, `r comparativo(cmp_de("renta_hab", "ES70"))` ella (`r es(cmp_de("renta_hab", "ES70"), 0)`). El apartado siguiente mira esa relación con la distancia en todas las regiones insulares.
+
+# ¿Pesa la distancia? {#distancia}
+
+```{r distancia-calculo}
+d <- cmp %>% filter(geo %in% CON_REF, indicador %in% base_ids) %>% mutate(km = km[geo])
+rho <- d %>% group_by(indicador) %>% filter(n() >= 10) %>%
+  summarise(n = n(),
+            rho = cor(km, z, method = "spearman"),
+            n_sin = sum(!grepl("^FRY", geo)),
+            rho_sin = cor(km[!grepl("^FRY", geo)], z[!grepl("^FRY", geo)], method = "spearman"),
+            .groups = "drop") %>%
+  mutate(nombre = ind_nombre[indicador]) %>% arrange(desc(abs(rho)))
+fuertes <- rho %>% filter(abs(rho) >= 0.6)
+fuertes_sin <- rho %>% filter(abs(rho_sin) >= 0.6)
+```
+
+Si la lejanía del continente importa, las diferencias con el continente deberían crecer con la distancia. La tabla mide esa relación con una correlación de rangos (de −1 a +1) entre la distancia y la diferencia de cada isla con su continente, con las `r length(CON_REF)` regiones insulares que tienen referencia, y repite el cálculo sin las cuatro islas francesas de ultramar, que están a más de 6.000 km.
+
+`r tab_cap("Indicadores cuya diferencia con el continente más se relaciona con la distancia: correlación de rangos con todas las regiones insulares y sin las islas francesas de ultramar.")`
+
+```{r tabla-distancia}
+rho %>% head(12) %>%
+  transmute(Indicador = nombre,
+            `Correlación (todas)` = round(rho, 2),
+            `Regiones` = n,
+            `Correlación (sin ultramar francés)` = round(rho_sin, 2),
+            `Regiones ` = n_sin) %>%
+  gt() %>%
+  data_color(columns = c(`Correlación (todas)`, `Correlación (sin ultramar francés)`),
+             colors = col_numeric(c(COLOR_Z_BAJO, COLOR_Z_MEDIO, COLOR_Z_ALTO), domain = c(-1, 1))) %>%
+  fmt_es() %>% estilo_tabla() %>%
+  tab_source_note("Con 16 regiones, una correlación por encima de 0,5 en valor absoluto ya es poco probable por azar; con 12, hace falta más de 0,6. Azul: la diferencia con el continente crece con la distancia; rojo: disminuye.")
+```
+
+```{r fig-distancia, fig.width=11, fig.height=7, out.width="100%"}
+sel_d <- head(rho$indicador, 6)
+gd <- d %>% filter(indicador %in% sel_d) %>%
+  mutate(panel = factor(ind_nombre[indicador], levels = ind_nombre[sel_d]),
+         Grupo = ifelse(geo %in% ARCHI_REF, "Archipiélago", "Isla grande"),
+         texto = paste0("<b>", NOMBRE[geo], "</b><br>", es(km, 0), " km<br>", ind_nombre[indicador], ": ",
+                        fmt_valor(valor_isla), " (continente: ", fmt_valor(valor_ref), ")"))
+gg <- ggplot(gd, aes(km, z, color = Grupo, text = texto)) +
+  geom_hline(yintercept = 0, color = "#b9b8b1") +
+  geom_point(size = 2.4) +
+  facet_wrap(~ panel, ncol = 3, scales = "free_y") +
+  scale_x_log10(labels = function(x) es(x, 0), breaks = c(30, 300, 3000)) +
+  scale_color_manual(values = c("Archipiélago" = COLOR_ARCHI, "Isla grande" = COLOR_ISLA), name = NULL) +
+  labs(x = "Distancia al continente (km, escala logarítmica)", y = "Diferencia con su continente (escala común)") +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.minor = element_blank(), legend.position = "bottom",
+        strip.text = element_text(face = "bold", size = 10), panel.spacing = unit(1.2, "lines"))
+ggplotly(gg, tooltip = "text") %>% layout(legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.12))
+```
+
+`r fig_cap("Distancia al continente y diferencia con él en los seis indicadores más relacionados con la distancia.")`
+
+**Qué significa.** Con todas las regiones, la distancia se relaciona con `r nrow(fuertes)` indicadores con una correlación de 0,6 o más: las islas lejanas tienen, respecto a su continente, más privación material, menos empleo, menor esperanza de vida y un turismo menos estacional (el clima subtropical o tropical permite turismo todo el año). Pero buena parte de esa relación la marcan las cuatro islas francesas de ultramar, muy lejanas y con niveles de vida muy por debajo de los de Francia. Sin ellas, solo `r plural(nrow(fuertes_sin), "indicador mantiene", "indicadores mantienen")` una correlación de 0,6 o más. Entre las regiones restantes, las lejanas son Canarias, Açores y Madeira, también ultraperiféricas: con estos datos no se puede separar el efecto de la distancia del de ser región ultraperiférica.
+
+# La población presente cambia algunas conclusiones {#presente}
+
+`r tab_cap("Médicos, camas de hospital y delitos en los archipiélagos frente a su continente, por residente y por población presente (residentes más el equivalente de los turistas). Índice: continente = 100.")`
+
+```{r tabla-presente}
+pares <- c("medicos", "camas", "homicidios", "robos", "muertos_carr")
+cmp %>% filter(geo %in% ARCHI_REF, indicador %in% c(pares, paste0(pares, "_presente"))) %>%
+  mutate(base = sub("_presente$", "", indicador),
+         version = ifelse(grepl("_presente$", indicador), "Presente", "Residente")) %>%
+  select(geo, base, version, comparacion) %>%
+  pivot_wider(names_from = version, values_from = comparacion) %>%
+  mutate(v = paste0(es(Residente, 0), " → ", es(Presente, 0))) %>%
+  select(geo, base, v) %>%
+  pivot_wider(names_from = base, values_from = v) %>%
+  mutate(Archipiélago = unname(NOMBRE[geo]), `Turistas por 100 residentes` = round(pct_pte[geo])) %>%
+  arrange(desc(`Turistas por 100 residentes`)) %>%
+  select(Archipiélago, `Turistas por 100 residentes`, all_of(pares)) %>%
+  rename_with(~ unname(ind_nombre[.x]), all_of(pares)) %>%
+  gt() %>% sub_missing(missing_text = "–") %>% estilo_tabla() %>%
+  tab_source_note(paste0("«Turistas por 100 residentes»: noches turísticas de ", ANIO_PTE, " (alojamientos y plataformas) / 365, por cada 100 residentes. Cada celda: índice por residente → índice por población presente (valor típico, sin 2020 ni 2021)."))
+```
+
+**Qué significa.** En los archipiélagos más turísticos, contar a los visitantes cambia la lectura de los servicios. Illes Balears pasa de un índice de `r es(cmp_de("medicos", "ES53"), 0)` médicos por residente (continente = 100) a `r es(cmp_de("medicos_presente", "ES53"), 0)` por persona presente; el Egeo Meridional, de `r es(cmp_de("medicos", "EL42"), 0)` a `r es(cmp_de("medicos_presente", "EL42"), 0)`. Con los delitos y los accidentes pasa lo contrario: una parte de los que se cuentan por residente los sufren o los cometen personas que no residen allí, y la tasa por persona presente es menor.
+
+# Malta y Chipre, frente a la Europa continental {#malta-chipre}
+
+Malta y Chipre son países enteros formados por islas, sin parte continental. Se comparan con la mediana de las regiones continentales de la UE, una referencia distinta de la del resto: sus diferencias mezclan lo insular con lo nacional y no entran en los recuentos anteriores.
+
+`r tab_cap("Indicadores en que Malta y Chipre más se apartan de la mediana de las regiones continentales de la UE (escala común).")`
+
+```{r tabla-mt-cy}
+cmp %>% filter(geo %in% SIN_REF, indicador %in% base_ids) %>%
+  group_by(geo) %>% arrange(desc(abs(z))) %>% slice_head(n = 8) %>% ungroup() %>%
+  transmute(País = unname(NOMBRE[geo]), Indicador = ind_nombre[indicador],
+            Valor = fmt_valor(valor_isla), `Mediana UE continental` = fmt_valor(valor_ref),
+            `Escala común` = round(z, 2)) %>%
+  gt(groupname_col = "País") %>%
+  data_color(columns = `Escala común`, colors = col_numeric(c(COLOR_Z_BAJO, COLOR_Z_MEDIO, COLOR_Z_ALTO), domain = c(-9, 9))) %>%
+  fmt_es() %>% estilo_tabla()
+```
+
+**Qué significa.** Los dos tienen un turismo casi solo extranjero (las noches de no residentes son el `r es(val_de("no_resid", "MT00"), 0)` % en Malta y el `r es(val_de("no_resid", "CY00"), 0)` % en Chipre, frente al `r es(val_de("no_resid", "MT00", "valor_ref"), 0)` % de una región continental típica), pero, a diferencia de los demás archipiélagos, un crecimiento muy rápido de la población y del PIB (el PIB real creció un `r es(val_de("crec_pib_total", "MT00"), 1)` % al año en Malta y un `r es(val_de("crec_pib_total", "CY00"), 1)` % en Chipre) y mucho peso de la información y las comunicaciones. Malta destaca además por el peso del ocio, que en su caso recoge la industria del juego en línea, y por la vivienda nueva.
+
+```{r comprobaciones-mt-cy}
+top_mt <- cmp %>% filter(geo == "MT00", indicador %in% base_ids) %>% arrange(desc(abs(z))) %>% head(8) %>% pull(indicador)
+top_cy <- cmp %>% filter(geo == "CY00", indicador %in% base_ids) %>% arrange(desc(abs(z))) %>% head(8) %>% pull(indicador)
+stopifnot(all(c("vab_R-U", "viv_recientes", "no_resid", "vab_J", "crec_pib_total") %in% top_mt),
+          all(c("no_resid", "vab_J", "crec_pib_total") %in% top_cy))
+```
+
+# Illes Balears y Canarias entre los archipiélagos europeos {#balears-canarias}
+
+`r tab_cap("Illes Balears y Canarias frente a los demás archipiélagos en algunos de los rasgos comunes: comparación con su continente y puesto entre los nueve (1 = el que más se aparta hacia arriba).")`
+
+```{r tabla-bc}
+sel_bc <- c("noches_hab", "plataformas_hab", "vab_G-I", "vab_B-E", "superiores", "crec_pib_total", "crec_pib_hab", "renta_hab", "arope")
+cmp %>% filter(geo %in% ARCHI_REF, indicador %in% sel_bc) %>%
+  group_by(indicador) %>% mutate(puesto = rank(-z, ties.method = "min"), n = n()) %>% ungroup() %>%
+  filter(geo %in% c("ES53", "ES70")) %>%
+  mutate(v = paste0(fmt_comp(comparacion, indicador), " (", puesto, ".º de ", n, ")")) %>%
+  select(indicador, geo, v) %>%
+  pivot_wider(names_from = geo, values_from = v) %>%
+  mutate(Indicador = ind_nombre[indicador],
+         `Mediana de los archipiélagos` = fmt_comp(co_archi$mediana_comp[match(indicador, co_archi$indicador)], indicador)) %>%
+  arrange(match(indicador, sel_bc)) %>%
+  select(Indicador, `Illes Balears` = ES53, Canarias = ES70, `Mediana de los archipiélagos`) %>%
+  gt() %>% estilo_tabla() %>%
+  tab_source_note("Índice (continente = 100) o diferencia en puntos. Referencia de ambas: la España peninsular.")
+```
+
+```{r comprobaciones-bc}
+puesto_arch <- function(ind, g) { x <- cmp %>% filter(indicador == ind, geo %in% ARCHI_REF); rank(-x$z)[x$geo == g] }
+stopifnot(puesto_arch("noches_hab", "ES53") <= 4, puesto_arch("noches_hab", "ES70") <= 4,
+          abs(cmp_de("renta_hab", "ES53") - 100) < 10, cmp_de("renta_hab", "ES70") < 95,
+          cmp_de("empleo", "ES70") < 0, cmp_de("arope", "ES70") > 0)
+```
+
+**Qué significa.** Las dos islas españolas son archipiélagos típicos en lo que comparten todos (turismo, servicios, poca industria, menos titulados) y están entre los que más se apartan de su continente en la intensidad turística. Coincide con lo que mostraba el estudio de las comunidades autónomas con datos del INE. Donde se separan entre sí es, otra vez, en el nivel de vida: Illes Balears está a la altura de la España peninsular, y Canarias tiene menos renta, menos empleo y más pobreza, como los demás archipiélagos lejanos en el empleo y la pobreza.
+
+# Conclusiones {#conclusiones}
+
+1. **La insularidad tiene una firma económica clara en Europa.** Las islas, archipiélagos o no, tienen menos industria, menos servicios de alto conocimiento y menos población con estudios superiores que la parte continental de su país.
+2. **Lo que distingue a los archipiélagos es el turismo.** Sobre esa base común, los archipiélagos añaden una especialización turística (más noches, plazas, plataformas y hostelería) que las islas grandes no tienen. Esa especialización no les ha dado más crecimiento: en la última década, el PIB real por habitante creció menos que en su continente en la mayoría, y donde el PIB total creció más fue porque creció la población.
+3. **El nivel de vida no lo marca ser archipiélago, sino la distancia o la ultraperiferia.** Los archipiélagos cercanos se parecen mucho más a su continente; los lejanos, que son también ultraperiféricos, tienen menos empleo, más pobreza y menor esperanza de vida.
+4. **Contar a los visitantes importa.** En los archipiélagos más turísticos, los servicios por residente sobrestiman los que hay por persona presente.
+
+<div class="nota">
+**Límites del estudio.**
+
+- **Pocos casos.** Nueve archipiélagos y siete islas grandes con referencia: suficientes para ver qué se repite, no para medir con precisión cuánto. Las correlaciones con la distancia son orientativas.
+- **Distancia y ultraperiferia van juntas.** Las islas lejanas son, casi todas, regiones ultraperiféricas, con un régimen fiscal y unas ayudas propias. Los datos no permiten separar los dos efectos.
+- **Indicadores que faltan.** Eurostat no publica por región los precios de la vivienda, el alquiler, las licencias de construcción ni las compras de vivienda por no residentes. Tampoco la mayoría de indicadores subjetivos de calidad de vida. Algunas regiones pequeñas (Åland, Mayotte) no tienen dato en varios indicadores.
+- **La población presente es un mínimo.** No cuenta segundas residencias ni alojamiento no registrado, y las noches en plataformas pueden solaparse en parte con las de los alojamientos.
+- **Tasas restadas.** En los indicadores que solo existen como tasa, la referencia continental es una aproximación (resta ponderada por población).
+</div>
+
+# Anexos {-}
+
+## Anexo A. Los indicadores {-}
+
+`r tab_cap(paste0("Los ", n_ind, " indicadores y sus ", n_presente, " versiones por población presente: cómo se calculan, cómo se comparan y de qué tabla de Eurostat salen."))`
+
+```{r anexo-indicadores}
+ds <- setNames(series_cat$dataset, series_cat$serie)
+fuente <- function(s) {
+  if (is.na(s)) return("")
+  if (s == "pob_presente") return("nama_10r_3popgdp + tour_occ_nin2 + tour_ce_omn12")
+  paste(unique(ds[strsplit(s, "+", fixed = TRUE)[[1]]]), collapse = " + ")
+}
+calculo <- c(cociente = "Numerador / denominador", tasa = "Tasa publicada; la referencia, por resta ponderada",
+             densidad = "Población / superficie de tierra",
+             pib_real = "PIB en PPA del último año encadenado con el índice de volumen, / población",
+             crec_real_hab = "Crecimiento medio anual del PIB real por habitante (10 años)",
+             crec_real_total = "Crecimiento medio anual del PIB real total (10 años)",
+             estacionalidad = "% de las noches del año en los 3 meses de más noches")
+anios_ind <- valores %>% filter(geo %in% CON_REF) %>% group_by(indicador) %>%
+  summarise(años = paste0(min(anio), "–", max(anio)), .groups = "drop")
+catalogo %>%
+  left_join(anios_ind, by = c("id" = "indicador")) %>%
+  mutate(Fuente = vapply(seq_len(n()), function(i) {
+           f <- c(fuente(num[i]), fuente(den[i])); paste(unique(f[f != ""]), collapse = " / ")
+         }, character(1)),
+         Cálculo = paste0(calculo[tipo], ifelse(agrupado, " (5 años sumados)", "")),
+         Comparación = ifelse(comparacion == "indice", "Índice (continente = 100)", "Diferencia")) %>%
+  arrange(match(tema, temas), orden) %>%
+  transmute(Tema = tema, Indicador = nombre, Unidad = unidad, Cálculo, Comparación, Fuente, Años = años) %>%
+  gt(groupname_col = "Tema") %>% estilo_tabla()
+```
+
+## Anexo B. Todas las comparaciones {-}
+
+`r tab_cap("Comparación de cada región insular con su referencia en cada indicador: índice (referencia = 100) o diferencia en puntos o años. Malta y Chipre, frente a la mediana de las regiones continentales de la UE.")`
+
+```{r anexo-comparaciones}
+ord_all <- catalogo %>% arrange(match(tema, temas), orden) %>% pull(id)
+cmp %>% mutate(v = fmt_comp(comparacion, indicador)) %>%
+  select(indicador, geo, v) %>%
+  pivot_wider(names_from = geo, values_from = v) %>%
+  arrange(match(indicador, ord_all)) %>%
+  mutate(Tema = catalogo$tema[match(indicador, catalogo$id)], Indicador = ind_nombre[indicador]) %>%
+  select(Tema, Indicador, any_of(c(ARCHI_REF, "MT00", ISLAS_REF, "CY00"))) %>%
+  rename_with(~ unname(NOMBRE[.x]), any_of(names(NOMBRE))) %>%
+  gt(groupname_col = "Tema") %>% sub_missing(missing_text = "–") %>% estilo_tabla() %>%
+  tab_options(table.font.size = px(11))
+```
+
+## Anexo C. Las distancias, isla a isla {-}
+
+`r tab_cap("Distancia de cada isla o grupo de islas (unidades NUTS 3) al continente de su país y a su capital.")`
+
+```{r anexo-distancias}
+dis3 %>%
+  transmute(Región = unname(NOMBRE[nuts2]), `Isla o grupo de islas` = nombre,
+            `Población` = poblacion, `Distancia al continente (km)` = round(dist_continente_km),
+            `Región continental más cercana` = region_continental_mas_cercana,
+            `Distancia a la capital (km)` = round(dist_capital_km)) %>%
+  arrange(Región, `Distancia al continente (km)`) %>%
+  gt(groupname_col = "Región") %>% fmt_es() %>% sub_missing(missing_text = "–") %>% estilo_tabla()
+```
+
+## Anexo D. Datos y reproducibilidad {-}
+
+Todos los datos son de Eurostat: la base de datos regional (NUTS 2) y los totales de cada país, descargados con su API, y las geometrías de las regiones de GISCO (NUTS 2021). Los programas, en la carpeta `EUROSTAT_INSULARES/`, se ejecutan en este orden:
+
+1. `EUROSTAT_INSULARES_DataExtraction.R`: descarga las series (con caché en `cache/`: borrarla para actualizar) y escribe `EUROSTAT_INSULARES_Series.xlsx`.
+2. `EUROSTAT_INSULARES_Distancias.R`: calcula las distancias al continente y escribe `EUROSTAT_INSULARES_Distancias.xlsx`.
+3. `EUROSTAT_INSULARES_Consolidar.R`: calcula los indicadores relativos, las referencias continentales y las comparaciones, y escribe `EUROSTAT_INSULARES_Indicadores.xlsx`.
+4. Este documento.
+
+**Código y datos del estudio.** El código, las series descargadas de Eurostat y los datos elaborados a partir de ellas están en el repositorio [github.com/lalvarezmat/icv-illes-balears](https://github.com/lalvarezmat/icv-illes-balears), junto con los de los otros dos estudios. El código se distribuye con licencia MIT, y el texto, las figuras y los datos elaborados, con licencia CC BY 4.0, salvo las distancias, que salen de los límites administrativos de GISCO y heredan su condición de uso no comercial.
+
+**Fuentes.** Elaboración propia con datos de Eurostat. Los datos de Eurostat se pueden reutilizar citando la fuente e indicando las modificaciones; aquí, los cocientes, las referencias continentales y las comparaciones son cálculos propios. Las geometrías de las regiones son de GISCO (Eurostat), © EuroGeographics for the administrative boundaries, de uso no comercial; el repositorio no las incluye, las descarga `EUROSTAT_INSULARES_Distancias.R`.

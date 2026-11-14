@@ -15,6 +15,12 @@
 REGISTRADORES/ERI_Anuarios/
 SERPAVI/BD_SERPAVI_*.xlsx
 
+# Estudio europeo: cache de descargas y geometrias de GISCO (licencia de uso no
+# comercial y no transferible: no se redistribuyen, las descarga el script)
+EUROSTAT_INSULARES/cache/
+EUROSTAT_INSULARES/*.geojson
+
 # Los informes compilados que publica GitHub Pages
 !docs/index.html
 !docs/insulares.html
+!docs/europa.html
