@@ -15,5 +15,6 @@
 REGISTRADORES/ERI_Anuarios/
 SERPAVI/BD_SERPAVI_*.xlsx
 
-# El informe compilado que publica GitHub Pages
+# Los informes compilados que publica GitHub Pages
 !docs/index.html
+!docs/insulares.html

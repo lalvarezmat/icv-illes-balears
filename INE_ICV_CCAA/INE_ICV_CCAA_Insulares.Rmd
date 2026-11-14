@@ -1,0 +1,1048 @@
+---
+title: '¿Qué distingue a los archipiélagos?'
+pagetitle: "Qué distingue a los archipiélagos"
+subtitle: "Illes Balears y Canarias frente a las 15 comunidades peninsulares: los 82 indicadores de calidad de vida y 15 más de población, vivienda, turismo y estructura productiva"
+date: "`r format(Sys.Date(), '%d de %B de %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    toc_depth: 2
+    number_sections: true
+    theme: flatly
+---
+
+<!-- Estudio de los archipielagos (2026-11-14). Toma de INE_ICV_CCAA_all.Rmd los
+     82 indicadores (INE_ICV_CCAA_Consolidado.xlsx), la mediana de los ultimos 5
+     años, la lista de indicadores redundantes y el estilo, y añade 15
+     indicadores nuevos (INE_ICV_CCAA_Insulares_Indicadores.xlsx, que construye
+     INE_ICV_CCAA_Insulares_Consolidar.R). No modifica nada del informe principal. -->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+library(openxlsx)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plotly)
+library(gt)
+library(scales)
+library(tibble)
+
+# --- Paleta -----------------------------------------------------------------
+# La del informe principal (naranja Illes Balears, lenguaje divergente rojo -
+# gris - azul del z-score, verde/morado de la polaridad) mas un color para
+# Canarias: el verde que ya usa COLORES_GRUPO en el informe principal.
+# Naranja, verde y gris validados como paleta categorica (validador de la
+# skill dataviz, modo claro: separacion minima para daltonismo dE 9,2). El
+# verde tiene contraste < 3:1 con el fondo: por eso todas las figuras llevan
+# leyenda y tooltip, y el Anexo B da todos los valores en tabla.
+COLOR_BALEARS   <- "#eb6834"
+COLOR_CANARIAS  <- "#1baf7a"
+COLOR_PENINSULA <- "#6b6a64"  # mediana de las 15 peninsulares (linea discontinua)
+COLOR_BANDA     <- "#e1e0d9"  # rango minimo-maximo de las 15 peninsulares
+COLOR_RESTO     <- "#b9b8b1"  # barras/puntos de las comunidades peninsulares
+COLOR_NUEVO     <- "#2a78d6"  # indicadores nuevos en el mapa de rasgos
+COLOR_ICV       <- "#a9a8a1"  # indicadores de calidad de vida en el mapa de rasgos
+COLOR_PAREJA    <- "#33322e"  # la pareja Illes Balears-Canarias entre las 136
+COLOR_Z_BAJO  <- "#e34948"
+COLOR_Z_MEDIO <- "#f0efec"
+COLOR_Z_ALTO  <- "#2a78d6"
+COLOR_POL_MEJOR <- "#d3efe2"
+COLOR_POL_PEOR  <- "#e4d9f2"
+
+# Polaridad de los 82 indicadores: copiada de INE_ICV_CCAA_all.Rmd (si cambia
+# alli, cambiarla aqui; el stopifnot de abajo avisa si falta alguno). Los 15
+# nuevos son todos "depende": describen el modelo economico y la presion sobre
+# el territorio, no el bienestar de los hogares (mas viviendas turisticas o
+# mas compras de no residentes traen renta y, a la vez, encarecen la vivienda).
+POLARIDAD <- c(
+  "Abandono educativo 18-24" = "peor", "Carencia material" = "peor",
+  "Carencia material severa" = "peor", "Fin mes: cierta dificultad" = "peor",
+  "Fin mes: dificultad" = "peor", "Fin mes: mucha dificultad" = "peor",
+  "Gastos imprevistos" = "peor", "Morbilidad crónica" = "peor",
+  "Nec. médicas: otras razones" = "peor", "Nec. médicas: razones" = "peor",
+  "Form. total: nivel 0-2" = "peor", "Form. total: nivel 3-4" = "depende",
+  "Form. total: nivel 3-8" = "mejor", "Form. total: nivel 5-8" = "mejor",
+  "Form. 25-64: nivel 0-2" = "peor", "Form. 25-64: nivel 3-4" = "depende",
+  "Form. 25-64: nivel 3-8" = "mejor", "Form. 25-64: nivel 5-8" = "mejor",
+  "Form. 65+: nivel 0-2" = "peor", "Form. 65+: nivel 3-4" = "depende",
+  "Form. 65+: nivel 3-8" = "mejor", "Form. 65+: nivel 5-8" = "mejor",
+  "Form. 18-24: nivel 0-2" = "peor", "Form. 18-24: nivel 3-4" = "depende",
+  "Form. 18-24: nivel 3-8" = "mejor", "Form. 18-24: nivel 5-8" = "mejor",
+  "Limit. actividad: grave" = "peor", "Limit. actividad: leve" = "peor",
+  "Limit. actividad: ninguna" = "mejor", "Formación continua 25-64" = "mejor",
+  "Falta espacio vivienda" = "peor", "PM10 anual" = "peor", "PM2,5 anual" = "peor",
+  "PM10 días superación" = "peor", "Retrasos en pagos" = "peor",
+  "Salud: buena" = "mejor", "Salud: mala" = "peor", "Salud: muy buena" = "mejor",
+  "Salud: muy mala" = "peor", "Salud: regular" = "depende",
+  "Empleo parcial involuntario" = "peor", "Jornada larga 40-48h" = "depende",
+  "Jornada larga 49h+" = "peor", "Tasa de empleo" = "mejor",
+  "Paro de larga duración" = "peor", "Tasa de paro" = "peor",
+  "Trabajo temporal" = "peor", "Desigualdad S80/S20" = "peor",
+  "Gasto elevado vivienda" = "peor", "Pobreza umbral fijo 2008" = "peor",
+  "Pobreza relativa" = "peor", "Renta media real" = "mejor",
+  "Renta mediana real" = "mejor", "Tasa de criminalidad" = "peor",
+  "Tasa de homicidios" = "peor", "Confianza en los demás" = "mejor",
+  "Satisfacción vital" = "mejor", "Esperanza de vida" = "mejor",
+  "Delincuencia/vandalismo" = "peor", "Contaminación ambiental" = "peor",
+  "Ruidos vecinos/exterior" = "peor", "Deficiencias en vivienda" = "peor",
+  "Salarios bajos" = "peor", "Fumadores diarios" = "peor",
+  "IMC: normopeso" = "mejor", "IMC: obesidad" = "peor", "IMC: bajo peso" = "peor",
+  "IMC: sobrepeso" = "peor", "Ejercicio físico regular" = "mejor",
+  "Sedentarismo" = "peor", "Satisf. trabajo 0-4" = "peor",
+  "Satisf. trabajo 5-6" = "depende", "Satisf. trabajo 7-8" = "mejor",
+  "Satisf. trabajo 9-10" = "mejor", "Satisf. trabajo (media)" = "mejor",
+  "Satisf. vivienda: algo insat." = "peor", "Satisf. vivienda: muy insat." = "peor",
+  "Satisf. vivienda: muy satisf." = "mejor", "Satisf. vivienda: satisfecho" = "mejor",
+  "Precio compraventa (€/m²)" = "peor", "Precio alquiler (€/m²/mes)" = "peor",
+  "PIB per cápita real" = "mejor",
+  # Los 15 nuevos
+  "Crecimiento de la población" = "depende", "Viviendas iniciadas" = "depende",
+  "Compras no residentes" = "depende", "Viviendas turísticas" = "depende",
+  "Noches en plataformas" = "depende",
+  "VAB: agricultura y pesca" = "depende", "VAB: industria y energía" = "depende",
+  "VAB: construcción" = "depende", "VAB: comercio, transporte y hostelería" = "depende",
+  "VAB: información y comunicaciones" = "depende", "VAB: finanzas y seguros" = "depende",
+  "VAB: actividades inmobiliarias" = "depende",
+  "VAB: act. profesionales y administrativas" = "depende",
+  "VAB: AAPP, educación y sanidad" = "depende", "VAB: ocio y otros servicios" = "depende"
+)
+
+# Unidades legibles: copiadas de INE_ICV_CCAA_all.Rmd (solo para mostrarlas)
+UNIDADES_LEGIBLES <- c(
+  "Tasa de criminalidad"     = "Infracciones por 1.000 hab.",
+  "Tasa de homicidios"       = "Por 100.000 hab.",
+  "PM10 anual"               = "µg/m³",
+  "PM2,5 anual"              = "µg/m³",
+  "PM10 días superación"     = "Días al año",
+  "Tasa de empleo"           = "%",
+  "Tasa de paro"             = "%",
+  "Deficiencias en vivienda" = "%",
+  "Desigualdad S80/S20"      = "Veces (cociente)",
+  "Satisf. trabajo 0-4"      = "%",
+  "Satisf. trabajo 5-6"      = "%",
+  "Satisf. trabajo 7-8"      = "%",
+  "Satisf. trabajo 9-10"     = "%",
+  "Satisf. trabajo (media)"  = "Puntuación de 0 a 10"
+)
+
+# Indicadores redundantes POR CONSTRUCCION (categorias que suman 100 y la
+# formacion "total"): la misma lista que REDUNDANTES_PCA del informe principal.
+# Aqui no cuentan en los recuentos de rasgos, en la comparacion de parejas ni
+# en el analisis de componentes principales, para no contar dos veces la
+# misma informacion; si aparecen en el Anexo B. Las 10 ramas del VAB tambien
+# suman 100, pero con 10 partes la restriccion apenas pesa y se mantienen
+# todas: quitar una obligaria a elegir cual, y la mayor (comercio, transporte
+# y hosteleria) es justo la que mas distingue a las islas.
+REDUNDANTES <- c(
+  "Form. total: nivel 0-2", "Form. total: nivel 3-4", "Form. total: nivel 5-8",
+  "Form. total: nivel 3-8", "Form. 18-24: nivel 3-4", "Form. 25-64: nivel 3-4",
+  "Form. 65+: nivel 3-4", "Form. 18-24: nivel 3-8", "Form. 25-64: nivel 3-8",
+  "Form. 65+: nivel 3-8", "Salud: buena", "Limit. actividad: ninguna",
+  "IMC: normopeso", "Satisf. trabajo 7-8", "Satisf. vivienda: satisfecho"
+)
+
+# --- Utilidades (las mismas que el informe principal) -----------------------
+es <- function(x, d = 1) formatC(x, format = "f", digits = d, decimal.mark = ",", big.mark = ".")
+# Decimales segun la magnitud, para valores de indicadores con unidades muy
+# distintas, sin ceros finales ("2,90" -> "2,9"; "10,0" -> "10")
+fmt_valor <- function(x) vapply(x, function(v) {
+  s <- es(v, if (abs(v) >= 100) 0 else if (abs(v) >= 10) 1 else 2)
+  if (grepl(",", s)) sub(",$", "", sub("0+$", "", s)) else s
+}, character(1))
+fmt_es <- function(tabla) {
+  tabla %>%
+    fmt_number(columns = where(is.numeric), decimals = 3,
+               dec_mark = ",", sep_mark = ".", drop_trailing_zeros = TRUE)
+}
+colorear_polaridad <- function(tabla, df, columna = "Indicador") {
+  pol <- unname(POLARIDAD[df[[columna]]])
+  tabla %>%
+    tab_style(style = cell_fill(color = COLOR_POL_MEJOR),
+              locations = cells_body(columns = all_of(columna), rows = which(pol == "mejor"))) %>%
+    tab_style(style = cell_fill(color = COLOR_POL_PEOR),
+              locations = cells_body(columns = all_of(columna), rows = which(pol == "peor"))) %>%
+    tab_source_note(html(paste0(
+      "Columna <i>", columna, "</i>: <span style='background:", COLOR_POL_MEJOR,
+      ";padding:0 4px'>verde</span> = que suba es bueno; <span style='background:",
+      COLOR_POL_PEOR, ";padding:0 4px'>morado</span> = que suba es malo; sin color = depende.")))
+}
+# Columnas z con el lenguaje divergente del informe, dominio simetrico comun
+colorear_z <- function(tabla, df, columnas) {
+  m <- max(abs(unlist(df[columnas])), na.rm = TRUE)
+  tabla %>%
+    data_color(columns = all_of(columnas),
+               colors = col_numeric(palette = c(COLOR_Z_BAJO, COLOR_Z_MEDIO, COLOR_Z_ALTO),
+                                    domain = c(-m, m)))
+}
+estilo_tabla <- function(tabla) {
+  tabla %>% opt_row_striping() %>%
+    tab_options(table.font.size = px(13), heading.title.font.size = px(15))
+}
+
+N_FIG <- 0
+N_TAB <- 0
+fig_cap <- function(txt) {
+  N_FIG <<- N_FIG + 1
+  paste0('<p class="leyenda leyenda-fig"><b>Figura ', N_FIG, '.</b> ', txt, '</p>')
+}
+tab_cap <- function(txt) {
+  N_TAB <<- N_TAB + 1
+  paste0('<p class="leyenda leyenda-tab"><b>Tabla ', N_TAB, '.</b> ', txt, '</p>')
+}
+
+ORDINAL <- c("primera", "segunda", "tercera", "cuarta", "quinta", "sexta", "séptima",
+             "octava", "novena", "décima", "undécima", "duodécima", "decimotercera",
+             "decimocuarta", "decimoquinta", "decimosexta", "decimoséptima")
+
+# --- Datos ------------------------------------------------------------------
+d_icv <- read.xlsx("INE_ICV_CCAA_Consolidado.xlsx", sheet = "datos") %>% mutate(bloque = "icv")
+d_nue <- read.xlsx("INE_ICV_CCAA_Insulares_Indicadores.xlsx", sheet = "datos") %>% mutate(bloque = "nuevo")
+stopifnot(identical(names(d_icv), names(d_nue)))
+d <- bind_rows(d_icv, d_nue) %>%
+  mutate(unidad = coalesce(unname(UNIDADES_LEGIBLES[nombre_corto]), unidad))
+
+nombres <- d %>% distinct(nombre_corto, dimension, unidad, fuente, bloque)
+stopifnot(!any(duplicated(nombres$nombre_corto)),
+          setequal(names(POLARIDAD), nombres$nombre_corto),
+          all(REDUNDANTES %in% nombres$nombre_corto))
+n_icv <- sum(nombres$bloque == "icv")
+n_nue <- sum(nombres$bloque == "nuevo")
+n_ind <- nrow(nombres)
+n_red <- length(REDUNDANTES)
+
+ccaa17 <- c("01.Andalucía", "02.Aragón", "03.Asturias,.Principado.de", "04.Balears,.Illes",
+            "05.Canarias", "06.Cantabria", "07.Castilla.y.León", "08.Castilla.-.La.Mancha",
+            "09.Cataluña", "10.Comunitat.Valenciana", "11.Extremadura", "12.Galicia",
+            "13.Madrid,.Comunidad.de", "14.Murcia,.Región.de", "15.Navarra,.Comunidad.Foral.de",
+            "16.País.Vasco", "17.Rioja,.La")
+# Nombres para el texto y los graficos, en la forma que usa la prosa del informe principal
+CORTO <- setNames(c("Andalucía", "Aragón", "Asturias", "Illes Balears", "Canarias", "Cantabria",
+                    "Castilla y León", "Castilla-La Mancha", "Cataluña", "Comunitat Valenciana",
+                    "Extremadura", "Galicia", "Madrid", "Murcia", "Navarra", "País Vasco",
+                    "La Rioja"), ccaa17)
+BAL <- "04.Balears,.Illes"
+CAN <- "05.Canarias"
+ISLAS <- c(BAL, CAN)
+PEN <- setdiff(ccaa17, ISLAS)
+stopifnot(all(ccaa17 %in% names(d)), length(PEN) == 15)
+ANIO_INI <- 2004
+```
+
+```{css, echo=FALSE}
+.nota {
+  background-color: #f4f7fb;
+  border-left: 4px solid #2a78d6;
+  padding: 0.8em 1.1em;
+  margin: 1.2em 0;
+  border-radius: 3px;
+}
+.nota p:last-child { margin-bottom: 0; }
+.clave {
+  background-color: #fdf5f1;
+  border-left: 4px solid #eb6834;
+  padding: 0.8em 1.1em;
+  margin: 1.2em 0;
+  border-radius: 3px;
+}
+.clave p:last-child { margin-bottom: 0; }
+h2 { margin-top: 2em; }
+.leyenda { font-size: 0.92em; text-align: center; margin: 0.6em 0 1.4em 0; }
+.leyenda-tab { margin: 1.4em 0 0.4em 0; }
+```
+
+```{r calculos}
+# --- Valor tipico: mediana de los ultimos 5 años (como el informe principal) --
+mediana5 <- d %>%
+  group_by(nombre_corto) %>%
+  filter(fecha > max(fecha) - 5) %>%
+  summarise(across(all_of(ccaa17), ~ median(.x, na.rm = TRUE)),
+            periodo = paste0(min(fecha), "–", max(fecha)), .groups = "drop")
+mat <- mediana5 %>%
+  select(nombre_corto, all_of(ccaa17)) %>%
+  column_to_rownames("nombre_corto") %>%
+  as.matrix() %>%
+  t()
+stopifnot(!anyNA(mat))
+
+# --- Distancia de cada isla a las 15 peninsulares (z) -----------------------
+pen_media <- colMeans(mat[PEN, ])
+pen_sd    <- apply(mat[PEN, ], 2, sd)
+z_isla <- sweep(sweep(mat[ISLAS, ], 2, pen_media), 2, pen_sd, "/")
+# Puesto entre las 17, de mayor a menor valor (empates: el mejor puesto)
+puesto <- apply(mat, 2, function(x) rank(-x, ties.method = "min"))
+
+UMBRAL <- 1          # rasgo compartido u opuesto: las dos islas con |z| >= 1
+UMBRAL_PROPIO <- 1.5 # rasgo propio: una isla con |z| >= 1,5 y la otra con |z| < 1
+
+rasgos <- tibble(indicador = colnames(mat)) %>%
+  left_join(nombres %>% rename(indicador = nombre_corto), by = "indicador") %>%
+  left_join(mediana5 %>% select(indicador = nombre_corto, periodo), by = "indicador") %>%
+  mutate(
+    bal = mat[BAL, indicador], can = mat[CAN, indicador],
+    pen_med = apply(mat[PEN, indicador], 2, median),
+    pen_min = apply(mat[PEN, indicador], 2, min),
+    pen_max = apply(mat[PEN, indicador], 2, max),
+    ccaa_min = unname(CORTO[PEN][apply(mat[PEN, indicador], 2, which.min)]),
+    ccaa_max = unname(CORTO[PEN][apply(mat[PEN, indicador], 2, which.max)]),
+    zB = z_isla[BAL, indicador], zC = z_isla[CAN, indicador],
+    puestoB = puesto[BAL, indicador], puestoC = puesto[CAN, indicador],
+    redundante = indicador %in% REDUNDANTES,
+    tipo = case_when(
+      redundante ~ "No cuenta (redundante)",
+      sign(zB) == sign(zC) & pmin(abs(zB), abs(zC)) >= UMBRAL ~ "Compartido",
+      sign(zB) != sign(zC) & pmin(abs(zB), abs(zC)) >= UMBRAL ~ "Opuesto",
+      abs(zB) >= UMBRAL_PROPIO & abs(zC) < UMBRAL ~ "Propio de Illes Balears",
+      abs(zC) >= UMBRAL_PROPIO & abs(zB) < UMBRAL ~ "Propio de Canarias",
+      TRUE ~ "Sin diferencia clara"
+    )
+  )
+ok <- rasgos %>% filter(!redundante)
+n_ok <- nrow(ok)
+n_ok_icv <- sum(ok$bloque == "icv")
+n_ok_nue <- sum(ok$bloque == "nuevo")
+cuenta_tipo <- function(t, b = c("icv", "nuevo")) sum(ok$tipo == t & ok$bloque %in% b)
+n_comp <- cuenta_tipo("Compartido"); n_opu <- cuenta_tipo("Opuesto")
+n_propB <- cuenta_tipo("Propio de Illes Balears"); n_propC <- cuenta_tipo("Propio de Canarias")
+n_sin <- cuenta_tipo("Sin diferencia clara")
+
+# Atajos para citar indicadores en el texto
+r_ <- function(ind) { x <- rasgos[rasgos$indicador == ind, ]; stopifnot(nrow(x) == 1); x }
+vb <- function(ind) fmt_valor(r_(ind)$bal)
+vc <- function(ind) fmt_valor(r_(ind)$can)
+pb <- function(ind) ORDINAL[r_(ind)$puestoB]
+pc <- function(ind) ORDINAL[r_(ind)$puestoC]
+vmed <- function(ind) fmt_valor(r_(ind)$pen_med)
+vmax <- function(ind) paste0(fmt_valor(r_(ind)$pen_max), " (", r_(ind)$ccaa_max, ")")
+vmin <- function(ind) paste0(fmt_valor(r_(ind)$pen_min), " (", r_(ind)$ccaa_min, ")")
+# La comunidad con el valor mas alto de las 17 (y su valor)
+lider <- function(ind, k = 1) unname(CORTO[names(sort(mat[, ind], decreasing = TRUE))[k]])
+vlider <- function(ind, k = 1) fmt_valor(sort(mat[, ind], decreasing = TRUE)[k])
+
+# Las dos islas, las dos primeras o las dos ultimas de las 17
+es_duo <- function(a, b, ind) {
+  x <- mat[, ind]
+  arriba <- rank(-x, ties.method = "max"); abajo <- rank(x, ties.method = "max")
+  (arriba[a] <= 2 && arriba[b] <= 2) || (abajo[a] <= 2 && abajo[b] <= 2)
+}
+duo_islas <- ok$indicador[vapply(ok$indicador, function(i) es_duo(BAL, CAN, i), logical(1))]
+n_duo <- length(duo_islas)
+# Comprobaciones de lo que el texto afirma sin cifra
+stopifnot(all(c("Viviendas turísticas", "Noches en plataformas", "VAB: comercio, transporte y hostelería",
+                "VAB: industria y energía", "Gasto elevado vivienda", "Falta espacio vivienda") %in% duo_islas))
+
+# --- Comparacion con las 136 parejas de comunidades --------------------------
+# Para cada pareja (a, b), cada una se compara con las OTRAS 15 (media y
+# desviacion tipica de las 15 que no son la pareja), igual que las islas con
+# las peninsulares, y se cuentan los rasgos compartidos (las dos con |z| >= u,
+# del mismo lado) y los opuestos.
+rasgos_pareja <- function(a, b, inds, u) {
+  resto <- setdiff(ccaa17, c(a, b))
+  m <- mat[, inds, drop = FALSE]
+  mu <- colMeans(m[resto, , drop = FALSE]); s <- apply(m[resto, , drop = FALSE], 2, sd)
+  za <- (m[a, ] - mu) / s; zb <- (m[b, ] - mu) / s
+  c(comp = sum(sign(za) == sign(zb) & pmin(abs(za), abs(zb)) >= u),
+    opu  = sum(sign(za) != sign(zb) & pmin(abs(za), abs(zb)) >= u))
+}
+BLOQUES <- list(todos = ok$indicador,
+                icv = ok$indicador[ok$bloque == "icv"],
+                nuevos = ok$indicador[ok$bloque == "nuevo"])
+pares <- combn(ccaa17, 2)
+n_pares <- ncol(pares)
+bench <- bind_rows(lapply(c(UMBRAL, UMBRAL_PROPIO), function(u) {
+  bind_rows(lapply(names(BLOQUES), function(b) {
+    x <- t(apply(pares, 2, function(p) rasgos_pareja(p[1], p[2], BLOQUES[[b]], u)))
+    tibble(u = u, bloque = b, a = pares[1, ], b_ = pares[2, ], comp = x[, "comp"], opu = x[, "opu"],
+           duo = vapply(seq_len(n_pares), function(k)
+             sum(vapply(BLOQUES[[b]], function(i) es_duo(pares[1, k], pares[2, k], i), logical(1))), integer(1)))
+  }))
+})) %>%
+  mutate(islas = a == BAL & b_ == CAN,
+         pareja = paste0(CORTO[a], "–", CORTO[b_]))
+# OJO: summarise() evalua en orden; comp, opu y duo se sobrescriben al final
+# para que las columnas anteriores sigan usando los vectores de las 136 parejas.
+pos_islas <- bench %>%
+  group_by(u, bloque) %>%
+  summarise(puesto = 1 + sum(comp > comp[islas]),         # 1 + parejas que comparten MAS rasgos
+            empatadas = paste(pareja[comp == comp[islas] & !islas], collapse = ", "),
+            mediana = median(comp), maximo = max(comp),
+            pareja_max = paste(pareja[comp == max(comp) & !islas], collapse = ", "),
+            puesto_duo = 1 + sum(duo > duo[islas]),
+            opu = opu[islas], duo = duo[islas], comp = comp[islas],
+            .groups = "drop")
+pi_ <- function(b, u = UMBRAL) pos_islas %>% filter(bloque == b, u == !!u)
+# ", empatada con X" si alguna otra pareja comparte los mismos rasgos que las islas
+empate <- function(b, u = UMBRAL) {
+  e <- pi_(b, u)$empatadas
+  if (e == "") "" else paste0(", empatada con ", sub(", ([^,]*)$", " y \\1", e))
+}
+# Parejas que comparten mas "dos primeras o dos ultimas" que las islas
+mas_duo <- bench %>% filter(u == UMBRAL, bloque == "todos", duo > duo[islas]) %>% arrange(desc(duo))
+
+# Con quien comparte mas rasgos cada archipielago (umbral 1)
+socios <- function(isla, b) {
+  bench %>% filter(u == UMBRAL, bloque == b, a == isla | b_ == isla) %>%
+    mutate(otra = ifelse(a == isla, b_, a)) %>%
+    arrange(desc(comp)) %>%
+    transmute(otra = unname(CORTO[otra]), comp)
+}
+socio1 <- function(isla, b) socios(isla, b)$otra[1]
+
+# --- Crecimiento de la poblacion a largo plazo ------------------------------
+pob <- read.xlsx("../POBLACION_CCAA/POBLACION_CCAA.xlsx", sheet = "datos")
+ANIO_POB_FIN <- max(pob$anio)
+crec_largo <- pob %>%
+  filter(anio %in% c(ANIO_INI, ANIO_POB_FIN)) %>%
+  group_by(codigo_ccaa) %>%
+  summarise(crec = 100 * (poblacion[anio == ANIO_POB_FIN] / poblacion[anio == ANIO_INI] - 1), .groups = "drop")
+crec_largo <- setNames(crec_largo$crec, crec_largo$codigo_ccaa)[substr(ccaa17, 1, 2)]
+names(crec_largo) <- ccaa17
+stopifnot(!anyNA(crec_largo))
+puesto_crec <- rank(-crec_largo, ties.method = "min")
+
+# --- Viviendas turisticas: evolucion comparando la misma epoca del año ------
+# Las fotos del INE fueron de febrero y agosto hasta 2024 y de mayo y
+# noviembre despues; en una comunidad muy estacional (Illes Balears) el cambio
+# de meses mueve la media anual. Para hablar de la tendencia se compara agosto
+# con agosto, la primera y la ultima foto de agosto.
+vut_fotos <- read.xlsx("../VIVIENDA_TURISTICA/VIVIENDA_TURISTICA_CCAA.xlsx", sheet = "ine")
+agostos <- sort(unique(vut_fotos$fecha[substr(vut_fotos$fecha, 6, 7) == "08" & vut_fotos$anio >= 2021]))
+AGO_INI <- agostos[1]; AGO_FIN <- tail(agostos, 1)
+var_agosto <- function(cod) {
+  x <- vut_fotos[vut_fotos$codigo_ccaa == cod, ]
+  100 * (x$viviendas[x$fecha == AGO_FIN] / x$viviendas[x$fecha == AGO_INI] - 1)
+}
+var_vut_bal <- var_agosto("04"); var_vut_can <- var_agosto("05")
+var_vut_pen <- median(vapply(substr(PEN, 1, 2), var_agosto, numeric(1)))
+stopifnot(var_vut_bal < 0, var_vut_can > 0)
+
+# --- Componentes principales con los indicadores no redundantes -------------
+pca <- prcomp(mat[, ok$indicador], scale. = TRUE)
+# El signo de cada componente es arbitrario: se orienta PC1 para que suba con
+# la renta y PC2 para que suba con el peso del comercio, transporte y hosteleria
+if (cor(pca$x[, 1], mat[, "Renta media real"]) < 0) { pca$x[, 1] <- -pca$x[, 1]; pca$rotation[, 1] <- -pca$rotation[, 1] }
+if (cor(pca$x[, 2], mat[, "VAB: comercio, transporte y hostelería"]) < 0) { pca$x[, 2] <- -pca$x[, 2]; pca$rotation[, 2] <- -pca$rotation[, 2] }
+var_pct <- 100 * pca$sdev^2 / sum(pca$sdev^2)
+pc_puesto <- function(k, ccaa) rank(-pca$x[, k], ties.method = "min")[[ccaa]]
+r_pc2_crec <- cor(pca$x[, 2], crec_largo[rownames(pca$x)])
+```
+
+# Presentación {-}
+
+El informe [*La “Calidad de Vida” en Illes Balears*](https://lalvarezmat.github.io/icv-illes-balears/) comparaba Illes Balears con el resto de comunidades autónomas a partir de 82 indicadores de calidad de vida. Este estudio usa los mismos datos para hacer otra pregunta: **¿qué tienen en común los dos archipiélagos, Illes Balears y Canarias, que no tengan las comunidades peninsulares?** ¿Hay rasgos que aparezcan en las dos islas a la vez, o cada archipiélago se parece más a alguna comunidad peninsular que al otro?
+
+Para responderla, a los `r n_icv` indicadores del informe se suman **`r n_nue` indicadores nuevos**, elegidos para describir el modelo económico y la presión sobre el territorio: el crecimiento de la población, la construcción de vivienda, las compras de vivienda por no residentes, la vivienda turística (cuánta hay y cuánto se usa) y el peso de cada rama de actividad en la economía. En total, `r n_ind` indicadores para las 17 comunidades autónomas; como en el informe principal, Ceuta y Melilla quedan fuera.
+
+El estudio compara cada archipiélago con **las 15 comunidades no insulares**, que son todas peninsulares; en el texto se las llama así, *las peninsulares*.
+
+# Resumen: las ideas principales {#resumen}
+
+1. **Lo que más une a las dos islas es el turismo dentro de la vivienda.** Illes Balears tiene `r vb("Viviendas turísticas")` viviendas turísticas por cada 1.000 habitantes y Canarias `r vc("Viviendas turísticas")`; la comunidad peninsular con más, `r r_("Viviendas turísticas")$ccaa_max`, tiene `r fmt_valor(r_("Viviendas turísticas")$pen_max)`, y la mediana de las peninsulares es `r vmed("Viviendas turísticas")`. En noches vendidas a través de plataformas por habitante, Canarias (`r vc("Noches en plataformas")`) e Illes Balears (`r vb("Noches en plataformas")`) también son las dos primeras, frente a un máximo peninsular de `r vmax("Noches en plataformas")`.
+
+2. **Comparten un mismo modelo productivo.** El comercio, el transporte y la hostelería suponen el `r vb("VAB: comercio, transporte y hostelería")` % de la economía de Illes Balears y el `r vc("VAB: comercio, transporte y hostelería")` % de la de Canarias, cuando en ninguna peninsular pasan del `r fmt_valor(r_("VAB: comercio, transporte y hostelería")$pen_max)` %. La industria pesa un `r vb("VAB: industria y energía")` % y un `r vc("VAB: industria y energía")` %, menos que en cualquier peninsular (la que menos, `r r_("VAB: industria y energía")$ccaa_min`, con un `r fmt_valor(r_("VAB: industria y energía")$pen_min)` %).
+
+3. **Ese modelo deja huella en la vivienda de quienes viven en las islas.** De los indicadores de calidad de vida, los rasgos que comparten son sobre todo de vivienda: las dos son las dos primeras de España en hogares con un **gasto elevado en vivienda** y en hogares con **falta de espacio** (las siguen Madrid y Cataluña), y destacan también en retrasos en los pagos, en deficiencias de la vivienda y en hogares muy insatisfechos con ella.
+
+4. **Otros rasgos son de la costa turística, no solo de las islas.** Las compras de vivienda por no residentes son altas en las dos (Illes Balears, `r pb("Compras no residentes")`; Canarias, `r pc("Compras no residentes")`), pero la primera es la `r lider("Compras no residentes")`. La población de las dos islas es la que más crece desde `r ANIO_INI` (`r es(crec_largo[[BAL]])` % y `r es(crec_largo[[CAN]])` % hasta `r ANIO_POB_FIN`), aunque en los últimos cinco años Canarias ya es la `r pc("Crecimiento de la población")` de 17 en crecimiento. La construcción de vivienda no es un rasgo común: Illes Balears es la `r pb("Viviendas iniciadas")` que más viviendas inicia por habitante; Canarias, la `r pc("Viviendas iniciadas")`.
+
+5. **El trabajo y la pobreza las separan.** Canarias es la primera en paro de larga duración, empleo a tiempo parcial no deseado y hogares con mucha dificultad para llegar a fin de mes; Illes Balears está entre las que menos. En calidad de vida, Canarias comparte más rasgos con `r socio1(CAN, "icv")` que con ninguna otra comunidad, e Illes Balears con `r socio1(BAL, "icv")`.
+
+6. **¿Se parecen más que otras parejas?** En los `r n_ok_nue` indicadores nuevos, Illes Balears–Canarias es la pareja de comunidades que más rasgos comparte de las `r n_pares` posibles cuando se exige una diferencia grande (`r pi_("nuevos", UMBRAL_PROPIO)$comp` rasgos`r empate("nuevos", UMBRAL_PROPIO)`), y la `r ORDINAL[pi_("nuevos")$puesto]` con un criterio más suave. En los `r n_ok_icv` de calidad de vida queda en el puesto `r pi_("icv")$puesto`: hay parejas mucho más parecidas, empezando por `r pi_("icv")$pareja_max`.
+
+7. **En el mapa de conjunto, mismo modelo, distinto nivel.** Un análisis de componentes principales sitúa a las dos islas en lo más alto del eje de la economía de servicios y la presión sobre la vivienda, y muy separadas en el eje del nivel socioeconómico (Illes Balears, la `r ORDINAL[pc_puesto(1, BAL)]` de 17; Canarias, la `r ORDINAL[pc_puesto(1, CAN)]`).
+
+<div class="clave">
+**En una frase.** Lo que distingue a los dos archipiélagos de las comunidades peninsulares es su especialización turística y lo que esta hace con la vivienda: más viviendas dedicadas al turismo, una economía volcada en los servicios y casi sin industria, y hogares con más gasto y menos espacio en casa. En lo demás —renta, empleo, pobreza, salud— no hay una «condición insular»: Canarias se parece más a `r socios(CAN, "icv")$otra[1]` y `r socios(CAN, "icv")$otra[2]`, e Illes Balears a `r socios(BAL, "icv")$otra[1]` y `r socios(BAL, "icv")$otra[2]`.
+</div>
+
+# Los datos
+
+## Los 82 indicadores de calidad de vida
+
+Son los del informe principal, sin cambios: los indicadores del marco de Calidad de Vida del INE disponibles por comunidad autónoma, más el precio de compraventa y de alquiler de la vivienda y el PIB por habitante, con la renta y los precios en euros constantes. Su definición y sus fuentes están en los anexos B y C de [ese informe](https://lalvarezmat.github.io/icv-illes-balears/).
+
+## Los 15 indicadores nuevos
+
+Se eligieron para medir lo que la calidad de vida no recoge directamente: cuánto crece la población, cuánta vivienda se construye y quién la compra, qué parte de la vivienda se dedica al turismo y de qué vive la economía de cada comunidad.
+
+`r tab_cap("Los 15 indicadores nuevos. «Años» es el periodo disponible para las 17 comunidades.")`
+
+```{r tabla-nuevos}
+QUE_MIDE <- c(
+  "Crecimiento de la población" = "Cuánto crece la población residente durante el año (del 1 de enero al 1 de enero siguiente)",
+  "Viviendas iniciadas" = "Viviendas cuya construcción empieza en el año (libres y protegidas), por cada 1.000 habitantes",
+  "Compras no residentes" = "Compraventas de vivienda hechas por personas que no residen en España, por cada 1.000 habitantes",
+  "Viviendas turísticas" = "Viviendas anunciadas para uso turístico en las grandes plataformas, por cada 1.000 habitantes",
+  "Noches en plataformas" = "Noches vendidas en alojamientos de corta estancia reservados por plataformas en línea, por habitante",
+  "VAB: agricultura y pesca" = "Peso de la rama en el valor añadido bruto (VAB) de la comunidad",
+  "VAB: industria y energía" = "Ídem (industrias extractivas y manufactureras, energía, agua y residuos)",
+  "VAB: construcción" = "Ídem",
+  "VAB: comercio, transporte y hostelería" = "Ídem",
+  "VAB: información y comunicaciones" = "Ídem",
+  "VAB: finanzas y seguros" = "Ídem",
+  "VAB: actividades inmobiliarias" = "Ídem (incluye el alquiler imputado a las viviendas en propiedad)",
+  "VAB: act. profesionales y administrativas" = "Ídem",
+  "VAB: AAPP, educación y sanidad" = "Ídem (administración pública, defensa, educación, sanidad y servicios sociales)",
+  "VAB: ocio y otros servicios" = "Ídem (actividades artísticas y recreativas, hogares que emplean personal doméstico y otros servicios)"
+)
+FUENTE_LARGA <- c(INE = "INE", MIVAU = "Ministerio de Vivienda y Agenda Urbana", Eurostat = "Eurostat")
+anios_nue <- d %>% filter(bloque == "nuevo") %>% group_by(nombre_corto) %>%
+  summarise(anios = paste0(min(fecha), "–", max(fecha)), .groups = "drop")
+tabla_nue <- nombres %>% filter(bloque == "nuevo") %>%
+  left_join(anios_nue, by = "nombre_corto") %>%
+  transmute(Dimensión = dimension, Indicador = nombre_corto,
+            `Qué mide` = unname(QUE_MIDE[nombre_corto]), Unidad = unidad,
+            Fuente = unname(FUENTE_LARGA[fuente]), Años = anios)
+stopifnot(!anyNA(tabla_nue$`Qué mide`), !anyNA(tabla_nue$Fuente))
+tabla_nue %>%
+  gt(groupname_col = "Dimensión") %>%
+  estilo_tabla() %>%
+  tab_source_note("Viviendas turísticas: estadística experimental del INE, con dos o tres «fotos» al año; el valor anual es la media de las fotos del año. Fuentes y cálculo, en el Anexo A.")
+```
+
+<div class="nota">
+**Por habitante quiere decir por residente.** Las viviendas, las compras y las noches se dividen entre la población residente a 1 de enero (Estadística Continua de Población del INE). En las comunidades turísticas, la población presente a lo largo del año es mayor que la residente, y estos cocientes salen más altos. No es un error: miden la presión que soporta cada residente, que es lo que importa para su vivienda y sus servicios. El peso de cada rama en la economía no se divide por la población: es un porcentaje del valor añadido de la comunidad.
+</div>
+
+# Cómo se mide lo que distingue a las islas
+
+El método sigue tres pasos sencillos, pensados para una comparación con solo dos casos frente a quince.
+
+**1. Un valor típico por comunidad.** Como en el informe principal, cada indicador se resume en la **mediana de sus últimos cinco años**, para que un año raro no decida el resultado.
+
+**2. Las peninsulares como vara de medir.** Para cada indicador se calcula la media de las 15 peninsulares y cuánto se separan normalmente de ella (su desviación típica). La distancia de cada isla a esa media, medida en esas unidades, es su **z**: `z = 2` quiere decir que la isla se aparta de la media peninsular el doble de lo que se aparta una comunidad peninsular normal. Con `|z| ≥ 1` la diferencia ya es clara; con `|z| ≥ 2`, la isla queda casi siempre fuera del abanico de las peninsulares.
+
+**3. Cuatro tipos de rasgos.** Con los dos valores de z de cada indicador, uno por isla:
+
+`r tab_cap("Cómo se clasifica cada indicador según la distancia de las dos islas a la media peninsular.")`
+
+```{r tabla-tipos}
+tibble(
+  `Tipo de rasgo` = c("Compartido", "Opuesto", "Propio de Illes Balears", "Propio de Canarias", "Sin diferencia clara"),
+  `Regla` = c(paste0("Las dos islas se apartan de las peninsulares hacia el mismo lado, las dos con |z| ≥ ", es(UMBRAL, 0)),
+              paste0("Las dos se apartan con |z| ≥ ", es(UMBRAL, 0), ", pero hacia lados contrarios"),
+              paste0("Illes Balears se aparta con |z| ≥ ", es(UMBRAL_PROPIO), " y Canarias no (|z| < ", es(UMBRAL, 0), ")"),
+              paste0("Canarias se aparta con |z| ≥ ", es(UMBRAL_PROPIO), " e Illes Balears no (|z| < ", es(UMBRAL, 0), ")"),
+              "Ninguno de los casos anteriores"),
+  `Qué indica` = c("Un candidato a rasgo «insular»", "Las islas van cada una por su lado",
+                   "Algo de Illes Balears, no de las islas", "Algo de Canarias, no de las islas",
+                   "Las islas no se distinguen de las peninsulares, o solo una y poco")
+) %>% gt() %>% estilo_tabla()
+```
+
+Para no contar dos veces lo mismo, en los recuentos no entran los `r n_red` indicadores que el informe principal ya quitaba de su análisis de conjunto porque se deducen de otros (por ejemplo, el porcentaje de personas con salud «buena» es 100 menos las demás respuestas). Quedan **`r n_ok` indicadores: `r n_ok_icv` de calidad de vida y los `r n_ok_nue` nuevos**.
+
+<div class="nota">
+**¿Mucho o poco? La comparación con las demás parejas.** Con solo dos islas, cualquier pareja de comunidades compartirá algún rasgo por casualidad o por vecindad. Por eso, además de contar los rasgos de Illes Balears y Canarias, se repite exactamente el mismo cálculo para las **`r n_pares` parejas posibles** de las 17 comunidades (cada pareja, comparada con las otras 15). Si las islas comparten muchos más rasgos que una pareja cualquiera, hay algo común en ellas; si comparten tantos como dos vecinas cualesquiera, no.
+</div>
+
+# Panorama: los indicadores nuevos, año a año {#panorama .tabset .tabset-pills}
+
+Cada panel muestra la evolución de un indicador en **Illes Balears** y **Canarias** frente a las comunidades peninsulares: la línea discontinua es su mediana y la banda gris, el abanico entre la peninsular con el valor más bajo y la del más alto. Si una isla sale de la banda, ninguna peninsular está como ella. Al pasar el cursor por los puntos se ven los valores, y en la mediana, qué comunidades marcan el mínimo y el máximo.
+
+```{r panel-funcion}
+SERIES <- c("Illes Balears", "Canarias", "Peninsulares (mediana)")
+COLORES_SERIE <- c("Illes Balears" = COLOR_BALEARS, "Canarias" = COLOR_CANARIAS,
+                   "Peninsulares (mediana)" = COLOR_PENINSULA)
+ETIQ_BANDA <- "Peninsulares (mínimo–máximo)"
+
+# ggplotly nombra las trazas "(Canarias,2)" cuando hay mas de una escala: se
+# deja solo el nombre, para poder quitar las entradas repetidas de la leyenda
+limpiar_nombre <- function(n) sub(",[0-9]+$", "", gsub("^\\(|\\)$", "", n))
+dedup_leyenda <- function(p, ocultar = character(0)) {
+  nombres_traza <- vapply(p$x$data, function(tr) limpiar_nombre(if (is.null(tr$name)) "" else tr$name),
+                          character(1))
+  for (i in seq_along(p$x$data)) p$x$data[[i]]$name <- nombres_traza[i]
+  style(p, showlegend = FALSE,
+        traces = which(duplicated(nombres_traza) | nombres_traza %in% c("", ocultar)))
+}
+
+panel_nuevos <- function(dims, ncol = 3) {
+  # Paneles en el orden del fichero de indicadores (el logico), no el alfabetico
+  base <- d %>% filter(bloque == "nuevo", dimension %in% dims)
+  orden <- unique(base$nombre_corto)
+  base <- base %>% mutate(nombre_corto = factor(nombre_corto, levels = orden))
+  pen <- base %>%
+    select(nombre_corto, unidad, fecha, all_of(PEN)) %>%
+    pivot_longer(all_of(PEN), names_to = "ccaa", values_to = "valor") %>%
+    filter(!is.na(valor)) %>%
+    group_by(nombre_corto, unidad, fecha) %>%
+    summarise(mediana = median(valor), minimo = min(valor), maximo = max(valor),
+              ccaa_min = unname(CORTO[ccaa[which.min(valor)]]),
+              ccaa_max = unname(CORTO[ccaa[which.max(valor)]]), .groups = "drop") %>%
+    mutate(texto = paste0("<b>", nombre_corto, "</b><br>Peninsulares, mediana: ", es(mediana, 2), " ", unidad,
+                          "<br>Mínimo: ", es(minimo, 2), " (", ccaa_min, ")",
+                          "<br>Máximo: ", es(maximo, 2), " (", ccaa_max, ")<br>Año: ", fecha),
+           serie = "Peninsulares (mediana)")
+  islas <- base %>%
+    select(nombre_corto, unidad, fecha, `Illes Balears` = all_of(BAL), Canarias = all_of(CAN)) %>%
+    pivot_longer(c(`Illes Balears`, Canarias), names_to = "serie", values_to = "valor") %>%
+    filter(!is.na(valor)) %>%
+    mutate(texto = paste0("<b>", nombre_corto, "</b><br>", serie, ": ", es(valor, 2), " ", unidad,
+                          "<br>Año: ", fecha))
+  gg <- ggplot() +
+    geom_ribbon(data = pen, aes(x = fecha, ymin = minimo, ymax = maximo, fill = ETIQ_BANDA)) +
+    geom_line(data = pen, aes(x = fecha, y = mediana, color = serie, group = serie),
+              linewidth = 0.5, linetype = "dashed") +
+    geom_point(data = pen, aes(x = fecha, y = mediana, color = serie, text = texto), size = 0.8) +
+    geom_line(data = islas, aes(x = fecha, y = valor, color = serie, group = serie), linewidth = 0.7) +
+    geom_point(data = islas, aes(x = fecha, y = valor, color = serie, text = texto), size = 1.3) +
+    facet_wrap(~ nombre_corto, scales = "free", ncol = ncol) +
+    scale_color_manual(values = COLORES_SERIE, breaks = SERIES, name = NULL) +
+    scale_fill_manual(values = setNames(COLOR_BANDA, ETIQ_BANDA), name = NULL) +
+    labs(x = NULL, y = NULL) +
+    theme_minimal(base_size = 12) +
+    theme(legend.position = "bottom",
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(color = "#eceae4", linewidth = 0.3),
+          strip.text = element_text(size = 10, face = "bold"),
+          axis.text = element_text(size = 8),
+          panel.spacing = unit(1.2, "lines"))
+  p <- ggplotly(gg, tooltip = "text") %>%
+    layout(legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.08))
+  # Tooltip solo en los puntos: las lineas y la banda no responden al cursor
+  for (i in seq_along(p$x$data)) {
+    if (!identical(p$x$data[[i]]$mode, "markers")) p$x$data[[i]]$hoverinfo <- "skip"
+  }
+  # ggplotly repite cada entrada de leyenda por panel (y por capa): se deja una
+  dedup_leyenda(p)
+}
+```
+
+## Población y vivienda
+
+```{r fig-poblacion, fig.width=13, fig.height=4.2, out.width="100%"}
+panel_nuevos("Población y vivienda", ncol = 3)
+```
+
+`r fig_cap("Crecimiento de la población, viviendas iniciadas por 1.000 habitantes y compras de vivienda por no residentes por 1.000 habitantes: Illes Balears y Canarias frente a la mediana y el abanico de las 15 peninsulares.")`
+
+```{r fig-crec-largo, fig.width=9, fig.height=5.5, out.width="80%", fig.align="center"}
+crec_df <- tibble(ccaa = ccaa17, nombre = unname(CORTO[ccaa17]), crec = unname(crec_largo[ccaa17])) %>%
+  mutate(tipo = case_when(ccaa == BAL ~ "Illes Balears", ccaa == CAN ~ "Canarias", TRUE ~ "Peninsular"),
+         nombre = reorder(nombre, crec),
+         texto = paste0("<b>", nombre, "</b><br>", es(crec), " % (", ANIO_INI, "–", ANIO_POB_FIN, ")"))
+gg <- ggplot(crec_df, aes(x = crec, y = nombre, fill = tipo, text = texto)) +
+  geom_col(width = 0.72) +
+  geom_vline(xintercept = 0, color = "#6b6a64", linewidth = 0.4) +
+  scale_fill_manual(values = c("Illes Balears" = COLOR_BALEARS, "Canarias" = COLOR_CANARIAS,
+                               "Peninsular" = COLOR_RESTO), name = NULL) +
+  labs(x = paste0("Crecimiento de la población, ", ANIO_INI, "–", ANIO_POB_FIN, " (%)"), y = NULL) +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor = element_blank(),
+        legend.position = "bottom")
+ggplotly(gg, tooltip = "text") %>%
+  layout(legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.15))
+```
+
+`r fig_cap(paste0("Crecimiento acumulado de la población residente entre ", ANIO_INI, " y ", ANIO_POB_FIN, ", por comunidad autónoma."))`
+
+**Qué se ve.** La población de las dos islas es la que más ha crecido en dos décadas: un `r es(crec_largo[[BAL]])` % Illes Balears y un `r es(crec_largo[[CAN]])` % Canarias, frente a un `r es(median(crec_largo[PEN]))` % de mediana peninsular. Pero el crecimiento canario fue sobre todo de la primera década; en los últimos cinco años, Illes Balears sigue entre las que más crecen (`r pb("Crecimiento de la población")`), y Canarias ya está en la zona media (`r pc("Crecimiento de la población")`), por detrás de la `r lider("Crecimiento de la población")` o Madrid.
+
+La construcción no acompaña ese crecimiento de la misma forma en las dos. Illes Balears es la `r pb("Viviendas iniciadas")` comunidad que más viviendas inicia por habitante (`r vb("Viviendas iniciadas")` por 1.000); Canarias, la `r pc("Viviendas iniciadas")` (`r vc("Viviendas iniciadas")`). Las compras por no residentes, en cambio, sí son un rasgo de las dos: `r vb("Compras no residentes")` por 1.000 habitantes en Illes Balears y `r vc("Compras no residentes")` en Canarias, frente a una mediana peninsular de `r vmed("Compras no residentes")`. Pero no es un rasgo exclusivo: la `r lider("Compras no residentes")` (`r vlider("Compras no residentes")`) y `r lider("Compras no residentes", 3)` (`r vlider("Compras no residentes", 3)`) están a su altura. Es más un rasgo de las costas que atraen compradores de fuera de España que de las islas como tales.
+
+## Turismo
+
+```{r fig-turismo, fig.width=10, fig.height=4.2, out.width="80%", fig.align="center"}
+panel_nuevos("Turismo", ncol = 2)
+```
+
+`r fig_cap("Viviendas turísticas por 1.000 habitantes (INE) y noches en alojamientos reservados por plataformas por habitante (Eurostat): Illes Balears y Canarias frente a la mediana y el abanico de las 15 peninsulares.")`
+
+**Qué se ve.** Es la diferencia más grande de todo el estudio, y la comparten las dos islas. Cualquiera de las dos medidas —la oferta anunciada (viviendas turísticas) o la actividad vendida (noches)— sitúa a los dos archipiélagos muy por encima de la peninsular con el valor más alto, todos los años. Las noches en plataformas caen en 2020 por la pandemia y desde entonces crecen en todas partes.
+
+La tendencia de la oferta, en cambio, no es la misma en las dos islas. Comparando la misma época del año (agosto de `r substr(AGO_INI, 1, 4)` con agosto de `r substr(AGO_FIN, 1, 4)`), las viviendas turísticas anunciadas bajan un `r es(abs(var_vut_bal))` % en Illes Balears y suben un `r es(var_vut_can)` % en Canarias (la mediana peninsular cambia un `r es(var_vut_pen)` %). Desde finales de 2024 el INE hace sus fotos en mayo y noviembre, y no en febrero y agosto; en Illes Balears, donde la temporada turística es muy marcada, eso hace que la media de 2025 caiga más de lo que cae la oferta.
+
+```{r comprobaciones-series}
+# "Todos los años" / "desde el principio de la serie": las dos islas por encima
+# del maximo peninsular (o por debajo del minimo) en cada año disponible
+fuera_todos_los_anios <- function(ind, lado) {
+  x <- d %>% filter(nombre_corto == ind)
+  if (lado == "arriba") all(apply(x[, ISLAS], 1, min) > apply(x[, PEN], 1, max))
+  else all(apply(x[, ISLAS], 1, max) < apply(x[, PEN], 1, min))
+}
+stopifnot(fuera_todos_los_anios("Viviendas turísticas", "arriba"),
+          fuera_todos_los_anios("Noches en plataformas", "arriba"),
+          fuera_todos_los_anios("VAB: comercio, transporte y hostelería", "arriba"),
+          fuera_todos_los_anios("VAB: industria y energía", "abajo"))
+```
+
+<div class="nota">
+**Dos fuentes que miden cosas distintas.** El INE cuenta las viviendas anunciadas en Airbnb, Booking y Vrbo en unas fechas concretas: es la **oferta**. Eurostat cuenta las noches realmente vendidas en Airbnb, Booking, Expedia y Tripadvisor a lo largo del año: es la **actividad**. Que las dos coincidan en el resultado lo hace más sólido. Ninguna de las dos distingue si la vivienda está registrada como turística o no.
+</div>
+
+## Estructura productiva
+
+```{r fig-vab, fig.width=13, fig.height=12, out.width="100%"}
+panel_nuevos("Estructura productiva", ncol = 3)
+```
+
+`r fig_cap("Peso de cada rama de actividad en el valor añadido bruto (VAB), a precios corrientes: Illes Balears y Canarias frente a la mediana y el abanico de las 15 peninsulares.")`
+
+**Qué se ve.** Dos ramas separan a las islas de toda la península, y lo hacen desde el principio de la serie: el **comercio, el transporte y la hostelería**, que en las dos pesan alrededor de un tercio de la economía, y la **industria**, que en las dos pesa menos que en cualquier peninsular. El resto de ramas las diferencia menos, y a veces en sentidos contrarios: la **construcción** y las **actividades inmobiliarias** pesan más en Illes Balears que en ninguna otra comunidad (`r vb("VAB: construcción")` % y `r vb("VAB: actividades inmobiliarias")` %), y la **administración pública, la educación y la sanidad** pesan más en Canarias (`r vc("VAB: AAPP, educación y sanidad")` %, la `r pc("VAB: AAPP, educación y sanidad")`) que en Illes Balears, que es la última (`r vb("VAB: AAPP, educación y sanidad")` %).
+
+# El mapa de los rasgos {#mapa}
+
+La figura siguiente resume todo el estudio en un solo gráfico. Cada punto es un indicador; su posición horizontal es la distancia de Illes Balears a la media peninsular (z) y la vertical, la de Canarias. Los puntos de las esquinas sombreadas de arriba a la derecha y de abajo a la izquierda son **rasgos compartidos**: las dos islas se apartan de las peninsulares hacia el mismo lado. Los de las otras dos esquinas son **rasgos opuestos**. Los puntos cerca de los ejes son rasgos de una sola isla, y los del centro, indicadores en que ninguna se aparta.
+
+```{r fig-mapa, fig.width=10, fig.height=8.5, out.width="90%", fig.align="center"}
+lim <- ceiling(max(abs(c(ok$zB, ok$zC)))) + 0.5
+mapa <- ok %>%
+  mutate(grupo = ifelse(bloque == "nuevo", "Indicador nuevo", "Indicador de calidad de vida"),
+         texto = paste0("<b>", indicador, "</b> (", dimension, ")",
+                        "<br>Illes Balears: ", fmt_valor(bal), " ", unidad, " (", puestoB, ".ª de 17) · z = ", es(zB, 2),
+                        "<br>Canarias: ", fmt_valor(can), " ", unidad, " (", puestoC, ".ª de 17) · z = ", es(zC, 2),
+                        "<br>Peninsulares: mediana ", fmt_valor(pen_med), ", de ", fmt_valor(pen_min),
+                        " a ", fmt_valor(pen_max), "<br>Rasgo: ", tipo))
+# Etiquetas directas solo para unos pocos indicadores, desplazadas a mano para que no se pisen
+ETIQUETAS <- tribble(
+  ~indicador,                                 ~dx,   ~dy,
+  "Noches en plataformas",                     0,    -0.45,
+  "Viviendas turísticas",                     -1.3,   0.45,
+  "VAB: comercio, transporte y hostelería",   -1.1,  -0.5,
+  "VAB: industria y energía",                  0,    -0.45,
+  "Falta espacio vivienda",                    0,     0.45,
+  "VAB: construcción",                         0,     0.45,
+  "PM10 días superación",                      0,     0.45,
+  "Paro de larga duración",                    0,     0.45
+) %>% left_join(ok %>% select(indicador, zB, zC), by = "indicador") %>%
+  mutate(x = zB + dx, y = zC + dy)
+stopifnot(!anyNA(ETIQUETAS$zB))
+zonas <- tibble(
+  xmin = c(UMBRAL, -lim, UMBRAL, -lim), xmax = c(lim, -UMBRAL, lim, -UMBRAL),
+  ymin = c(UMBRAL, -lim, -lim, UMBRAL), ymax = c(lim, -UMBRAL, -UMBRAL, lim),
+  zona = c("compartido", "compartido", "opuesto", "opuesto")
+)
+gg <- ggplot() +
+  geom_rect(data = zonas, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = zona),
+            alpha = 0.5, show.legend = FALSE) +
+  geom_hline(yintercept = 0, color = "#b9b8b1", linewidth = 0.4) +
+  geom_vline(xintercept = 0, color = "#b9b8b1", linewidth = 0.4) +
+  geom_abline(slope = 1, intercept = 0, color = "#b9b8b1", linewidth = 0.3, linetype = "dotted") +
+  geom_point(data = mapa, aes(x = zB, y = zC, color = grupo, text = texto), size = 2.6, alpha = 0.9) +
+  geom_text(data = ETIQUETAS, aes(x = x, y = y, label = indicador), size = 3.3, color = "#33322e") +
+  scale_fill_manual(values = c(compartido = "#fbe9df", opuesto = "#eceef2")) +
+  scale_color_manual(values = c("Indicador nuevo" = COLOR_NUEVO, "Indicador de calidad de vida" = COLOR_ICV),
+                     name = NULL) +
+  coord_cartesian(xlim = c(-lim, lim), ylim = c(-lim, lim)) +
+  labs(x = "Illes Balears: distancia a la media peninsular (z)",
+       y = "Canarias: distancia a la media peninsular (z)") +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.minor = element_blank(), legend.position = "bottom")
+# Rotulos de las cuatro esquinas, anclados al area del grafico (ggplotly no
+# respeta el hjust de annotate() y los cortaba por el borde)
+esquina <- function(x, y, texto) {
+  list(xref = "paper", yref = "paper", x = x, y = y, text = texto, showarrow = FALSE,
+       xanchor = ifelse(x > 0.5, "right", "left"), yanchor = ifelse(y > 0.5, "top", "bottom"),
+       font = list(size = 11, color = "#6b6a64"))
+}
+p_mapa <- ggplotly(gg, tooltip = "text") %>%
+  layout(legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.1),
+         annotations = list(esquina(1, 1, "Compartidos: las dos por encima"),
+                            esquina(0, 0, "Compartidos: las dos por debajo"),
+                            esquina(0, 1, "Opuestos: Canarias arriba, Illes Balears abajo"),
+                            esquina(1, 0, "Opuestos: Illes Balears arriba, Canarias abajo")))
+for (i in seq_along(p_mapa$x$data)) {
+  if (!identical(p_mapa$x$data[[i]]$mode, "markers")) p_mapa$x$data[[i]]$hoverinfo <- "skip"
+}
+dedup_leyenda(p_mapa, ocultar = c("compartido", "opuesto"))
+```
+
+`r fig_cap(paste0("Los ", n_ok, " indicadores no redundantes según la distancia de Illes Balears (horizontal) y de Canarias (vertical) a la media de las 15 peninsulares. Zonas sombreadas: las dos islas con |z| ≥ ", es(UMBRAL, 0), ". Línea de puntos: las dos islas igual de apartadas."))`
+
+**Qué se ve.** De los `r n_ok` indicadores, `r n_comp` son rasgos compartidos, `r n_opu` son opuestos, `r n_propB` son propios de Illes Balears, `r n_propC` son propios de Canarias y en los `r n_sin` restantes no hay una diferencia clara. Los puntos más alejados del centro, arriba a la derecha, son casi todos indicadores nuevos: la vivienda turística, las noches en plataformas y el peso del comercio, el transporte y la hostelería. El indicador más alejado abajo a la izquierda también es nuevo: el peso de la industria. Los indicadores de calidad de vida se reparten mucho más, y bastantes caen en las esquinas de los rasgos opuestos.
+
+# Lo que comparten las dos islas {#comparten}
+
+`r tab_cap(paste0("Rasgos compartidos: indicadores en que las dos islas se apartan de las peninsulares hacia el mismo lado (las dos con |z| ≥ ", es(UMBRAL, 0), "), ordenados por la distancia de la isla que menos se aparta. Entre paréntesis, el puesto entre las 17 comunidades, de mayor a menor valor."))`
+
+```{r tabla-compartidos}
+tabla_rasgos <- function(df) {
+  out <- df %>%
+    transmute(Indicador = indicador, Dimensión = dimension, Unidad = unidad,
+              `Illes Balears` = paste0(fmt_valor(bal), " (", puestoB, ".ª)"),
+              Canarias = paste0(fmt_valor(can), " (", puestoC, ".ª)"),
+              `Peninsulares: mediana (mín.–máx.)` = paste0(fmt_valor(pen_med), " (", fmt_valor(pen_min),
+                                                           "–", fmt_valor(pen_max), ")"),
+              `z Illes Balears` = round(zB, 2), `z Canarias` = round(zC, 2))
+  out %>% gt() %>%
+    colorear_z(out, c("z Illes Balears", "z Canarias")) %>%
+    colorear_polaridad(out) %>%
+    fmt_es() %>%
+    estilo_tabla() %>%
+    tab_source_note("z: distancia a la media de las 15 peninsulares, en desviaciones típicas de esas 15. Azul = por encima de la media peninsular; rojo = por debajo. El color dice la dirección, no si es bueno o malo.")
+}
+compartidos <- ok %>% filter(tipo == "Compartido") %>% arrange(desc(pmin(abs(zB), abs(zC))))
+tabla_rasgos(compartidos)
+```
+
+**Qué significa.** Casi todos los `r n_comp` rasgos compartidos caben en tres bloques:
+
+- **El modelo económico y el turismo** (`r sum(compartidos$bloque == "nuevo")` de los `r n_comp`, todos indicadores nuevos): más vivienda turística y más noches vendidas en plataformas, más peso del comercio, el transporte y la hostelería y de las actividades inmobiliarias, menos industria y más compras de vivienda por no residentes. Son las diferencias más grandes: en `r n_duo` indicadores las dos islas son las dos primeras o las dos últimas de las 17, y `r sum(duo_islas %in% ok$indicador[ok$bloque == "nuevo"])` de ellos son de este bloque.
+- **La vivienda**: más hogares con un gasto elevado en vivienda, con falta de espacio, con deficiencias en la vivienda, con retrasos en los pagos y muy insatisfechos con su casa. Es lo que cabría esperar donde una parte del parque de viviendas se dedica al turismo o a compradores de fuera y la población crece: más competencia por cada vivienda. No es un problema exclusivo de las islas —en gasto elevado y en falta de espacio las siguen Madrid y Cataluña—, pero en ellas es mayor.
+- **El trabajo y la formación**: jornadas de 40 a 48 horas más frecuentes (las dos islas son las dos primeras) y menos jóvenes de 18 a 24 años con estudios superiores. Encaja con una economía de servicios que demanda mucho empleo de cualificación media.
+
+Fuera de estos bloques quedan dos rasgos más: en las dos islas hay más hogares con *cierta* dificultad para llegar a fin de mes y menos personas que, necesitando atención médica, no la buscan por falta de tiempo, por miedo o por esperar a ver si el problema mejora (las razones económicas, la distancia y las listas de espera se cuentan aparte, en otro indicador).
+
+```{r comprobaciones-compartidos}
+# Lo que dicen los bloques de arriba
+siguientes <- function(ind) unname(CORTO[names(sort(mat[, ind], decreasing = TRUE))[3:4]])
+stopifnot(setequal(siguientes("Gasto elevado vivienda"), c("Madrid", "Cataluña")),
+          setequal(siguientes("Falta espacio vivienda"), c("Madrid", "Cataluña")),
+          setequal(compartidos$indicador,
+                   c("Viviendas turísticas", "Noches en plataformas", "VAB: comercio, transporte y hostelería",
+                     "VAB: actividades inmobiliarias", "VAB: industria y energía", "Compras no residentes",
+                     "Gasto elevado vivienda", "Falta espacio vivienda", "Deficiencias en vivienda",
+                     "Retrasos en pagos", "Satisf. vivienda: muy insat.", "Jornada larga 40-48h",
+                     "Form. 18-24: nivel 5-8", "Fin mes: cierta dificultad", "Nec. médicas: otras razones")))
+```
+
+<div class="nota">
+**Lo que no se puede decir con estos datos.** Que estos rasgos se deban a ser islas. Las dos islas son, a la vez, los dos territorios más turísticos de España, y con dos casos no se puede separar el efecto de la insularidad del de la especialización turística. Lo que sí muestran los datos es que lo común a los dos archipiélagos es justamente lo relacionado con el turismo y la vivienda.
+</div>
+
+# Lo que las separa {#separa}
+
+## Rasgos opuestos
+
+`r tab_cap(paste0("Rasgos opuestos: indicadores en que las dos islas se apartan claramente de las peninsulares (|z| ≥ ", es(UMBRAL, 0), "), pero hacia lados contrarios."))`
+
+```{r tabla-opuestos}
+opuestos <- ok %>% filter(tipo == "Opuesto") %>% arrange(desc(pmin(abs(zB), abs(zC))))
+tabla_rasgos(opuestos)
+```
+
+**Qué significa.** Lo que separa a las islas es, sobre todo, **el mercado de trabajo y la pobreza**. Canarias tiene más paro de larga duración, más empleo a tiempo parcial no deseado y más hogares con mucha dificultad para llegar a fin de mes que ninguna peninsular; Illes Balears, menos que casi todas. Las dos economías viven del turismo, pero el turismo no da el mismo resultado en el empleo y en la renta de los hogares de las dos islas. La satisfacción con la vivienda también va en sentidos contrarios: Illes Balears es la primera en hogares *muy satisfechos* con su vivienda y Canarias está entre las últimas (es un dato de un solo año, 2023).
+
+## Rasgos propios de cada archipiélago
+
+`r tab_cap(paste0("Rasgos propios: indicadores en que una isla se aparta mucho de las peninsulares (|z| ≥ ", es(UMBRAL_PROPIO), ") y la otra no (|z| < ", es(UMBRAL, 0), "). Ordenados por isla y por distancia."))`
+
+```{r tabla-propios}
+propios <- ok %>% filter(tipo %in% c("Propio de Illes Balears", "Propio de Canarias")) %>%
+  mutate(orden = ifelse(tipo == "Propio de Illes Balears", -abs(zB), -abs(zC))) %>%
+  arrange(tipo != "Propio de Illes Balears", orden)
+out_p <- propios %>%
+  transmute(Rasgo = tipo, Indicador = indicador, Dimensión = dimension, Unidad = unidad,
+            `Illes Balears` = paste0(fmt_valor(bal), " (", puestoB, ".ª)"),
+            Canarias = paste0(fmt_valor(can), " (", puestoC, ".ª)"),
+            `Peninsulares: mediana (mín.–máx.)` = paste0(fmt_valor(pen_med), " (", fmt_valor(pen_min),
+                                                         "–", fmt_valor(pen_max), ")"),
+            `z Illes Balears` = round(zB, 2), `z Canarias` = round(zC, 2))
+out_p %>%
+  gt(groupname_col = "Rasgo") %>%
+  colorear_z(out_p, c("z Illes Balears", "z Canarias")) %>%
+  colorear_polaridad(out_p) %>%
+  fmt_es() %>%
+  estilo_tabla()
+```
+
+**Qué significa.** Los rasgos propios de **Canarias** son, sobre todo, de condiciones materiales: más carencia material, más hogares sin capacidad para afrontar gastos imprevistos, más desigualdad, más paro. Destaca también la contaminación por partículas (PM10), que en buena parte se debe a un fenómeno natural, las entradas de polvo del Sáhara (la calima). Los de **Illes Balears** son más variados: el peso de la construcción en su economía (el más alto de España), el precio de compraventa de la vivienda (también el más alto; Canarias es la `r pc("Precio compraventa (€/m²)")`), la tasa de empleo más alta, una salud declarada mejor que en ninguna peninsular (menos enfermedad crónica, menos personas con mala salud y más con muy buena), más abandono educativo temprano y la tasa de criminalidad más alta. Esta última se calcula sobre la población residente y es probable que el turismo la infle, como advierte el informe principal.
+
+# ¿Se parecen más que otras parejas de comunidades? {#parejas}
+
+Que las dos islas compartan `r n_comp` rasgos, ¿es mucho? La forma de saberlo es hacer la misma cuenta con todas las parejas posibles de comunidades: cada pareja se compara con las otras 15, igual que las islas con las peninsulares.
+
+```{r fig-parejas, fig.width=11, fig.height=9, out.width="95%", fig.align="center"}
+ETIQ_BLOQUE <- c(todos = paste0("Los ", n_ok, " indicadores"),
+                 icv = paste0("Los ", n_ok_icv, " indicadores de calidad de vida"),
+                 nuevos = paste0("Los ", n_ok_nue, " indicadores nuevos"))
+barras <- bench %>%
+  filter(u == UMBRAL) %>%
+  group_by(bloque, comp) %>%
+  summarise(n = n(), islas = any(islas),
+            ejemplo = {
+              pp <- pareja[order(-islas)]
+              paste0(paste(head(pp, 6), collapse = "<br>"), if (length(pp) > 6) paste0("<br>… y ", length(pp) - 6, " más") else "")
+            }, .groups = "drop") %>%
+  mutate(bloque = factor(ETIQ_BLOQUE[bloque], levels = ETIQ_BLOQUE),
+         color = ifelse(islas, "La pareja Illes Balears–Canarias", "Otras parejas"),
+         texto = paste0("<b>", n, ifelse(n == 1, " pareja comparte ", " parejas comparten "), comp,
+                        ifelse(comp == 1, " rasgo", " rasgos"), "</b><br>", ejemplo))
+etiq_islas <- barras %>% filter(islas) %>% mutate(label = "Illes Balears–Canarias")
+gg <- ggplot(barras, aes(x = comp, y = n, fill = color, text = texto)) +
+  geom_col(width = 0.8) +
+  geom_text(data = etiq_islas, aes(x = comp, y = n, label = label), inherit.aes = FALSE,
+            nudge_y = 6, size = 3.3, color = COLOR_PAREJA) +
+  facet_wrap(~ bloque, ncol = 1, scales = "free") +
+  scale_fill_manual(values = c("La pareja Illes Balears–Canarias" = COLOR_PAREJA, "Otras parejas" = COLOR_RESTO),
+                    name = NULL) +
+  labs(x = "Número de rasgos compartidos", y = "Número de parejas") +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.minor = element_blank(), legend.position = "bottom",
+        strip.text = element_text(size = 11, face = "bold"),
+        panel.spacing = unit(2.5, "lines"))
+p_par <- ggplotly(gg, tooltip = "text") %>%
+  layout(legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.08))
+for (i in seq_along(p_par$x$data)) {
+  if (identical(p_par$x$data[[i]]$mode, "text")) p_par$x$data[[i]]$hoverinfo <- "skip"
+}
+dedup_leyenda(p_par)
+```
+
+`r fig_cap(paste0("Cuántos rasgos comparten las ", n_pares, " parejas posibles de comunidades autónomas (cada una comparada con las otras 15, con |z| ≥ ", es(UMBRAL, 0), "). En oscuro, la barra en que está la pareja Illes Balears–Canarias; al pasar el cursor se ven las parejas de cada barra."))`
+
+**Qué se ve.**
+
+- **En los indicadores nuevos, las islas son una pareja excepcional.** Comparten `r pi_("nuevos")$comp` rasgos, cuando la mitad de las parejas no comparte `r ifelse(pi_("nuevos")$mediana == 0, "ninguno", paste("más de", pi_("nuevos")$mediana))`. `r ifelse(pi_("nuevos")$puesto == 1, "Ninguna pareja comparte más", paste0("Solo ", pi_("nuevos")$pareja_max, " comparte más (", pi_("nuevos")$maximo, ")"))``r sub("^, empatada", "; la pareja de las islas está empatada", empate("nuevos"))`. Con un criterio más exigente (las dos con |z| ≥ `r es(UMBRAL_PROPIO)`), Illes Balears–Canarias pasa a ser la primera de las `r n_pares`, con `r pi_("nuevos", UMBRAL_PROPIO)$comp` rasgos`r empate("nuevos", UMBRAL_PROPIO)`.
+- **En la calidad de vida, no.** Con los `r n_ok_icv` indicadores de calidad de vida, la pareja de las islas comparte `r pi_("icv")$comp` rasgos y está en el puesto `r pi_("icv")$puesto` de `r n_pares`. La pareja que más comparte, con `r pi_("icv")$maximo`, es `r pi_("icv")$pareja_max`.
+- **Con todos los indicadores juntos**, las islas comparten `r pi_("todos")$comp` rasgos (puesto `r pi_("todos")$puesto`). La medida más estricta lleva a lo mismo: las islas son las dos primeras o las dos últimas de las 17 en `r pi_("todos")$duo` indicadores, y `r nrow(mas_duo)` parejas lo son más veces (`r paste(paste0(mas_duo$pareja, ", ", mas_duo$duo), collapse = "; ")`).
+
+`r tab_cap("Con qué comunidades comparte más rasgos cada archipiélago (entre paréntesis, el número de rasgos compartidos).")`
+
+```{r tabla-socios}
+fila_socios <- function(isla, b) {
+  s <- socios(isla, b)
+  paste0(s$otra[1:4], " (", s$comp[1:4], ")", collapse = ", ")
+}
+tibble(Indicadores = unname(ETIQ_BLOQUE[c("icv", "nuevos", "todos")]),
+       `Illes Balears comparte más rasgos con` = vapply(c("icv", "nuevos", "todos"), function(b) fila_socios(BAL, b), character(1)),
+       `Canarias comparte más rasgos con` = vapply(c("icv", "nuevos", "todos"), function(b) fila_socios(CAN, b), character(1))) %>%
+  gt() %>% estilo_tabla()
+```
+
+**Qué significa.** En calidad de vida, cada archipiélago tiene su pareja peninsular: Canarias se parece sobre todo a `r socio1(CAN, "icv")` (es la pareja que más rasgos comparte de las `r n_pares`) y a `r socios(CAN, "icv")$otra[2]`; Illes Balears, a `r socio1(BAL, "icv")` y `r socios(BAL, "icv")$otra[2]`. El otro archipiélago no aparece en primer lugar para ninguno de los dos. En los indicadores nuevos, en cambio, el primer socio de cada isla es la otra isla. En el caso de Illes Balears, empatada con Madrid, con la que comparte un crecimiento alto de la población y una economía de servicios con poca industria, poca agricultura y poco peso del sector público, pero no el turismo.
+
+```{r comprobaciones-parejas}
+# Lo que el texto da por hecho
+stopifnot(socios(CAN, "nuevos")$otra[1] == "Illes Balears",
+          setequal(socios(BAL, "nuevos") %>% filter(comp == max(comp)) %>% pull(otra), c("Canarias", "Madrid")),
+          socio1(CAN, "icv") != "Illes Balears", socio1(BAL, "icv") != "Canarias",
+          pi_("icv")$pareja_max == paste0(socio1(CAN, "icv"), "–Canarias"),
+          pi_("nuevos", UMBRAL_PROPIO)$puesto == 1)
+```
+
+# Una visión de conjunto {#conjunto}
+
+Los recuentos anteriores miran los indicadores uno a uno. El **análisis de componentes principales** (el mismo que usa el informe principal) los mira todos a la vez: busca las pocas direcciones en que más se diferencian las comunidades entre sí y sitúa a cada una en ellas. Aquí se aplica a los `r n_ok` indicadores no redundantes.
+
+```{r fig-pca, fig.width=10, fig.height=7}
+scores <- as_tibble(pca$x[, 1:2], rownames = "ccaa") %>%
+  mutate(nombre = unname(CORTO[ccaa]),
+         tipo = case_when(ccaa == BAL ~ "Illes Balears", ccaa == CAN ~ "Canarias", TRUE ~ "Peninsular"))
+ggplot(scores, aes(PC1, PC2, color = tipo, label = nombre)) +
+  geom_hline(yintercept = 0, color = "#e1e0d9") +
+  geom_vline(xintercept = 0, color = "#e1e0d9") +
+  geom_point(size = 3.5) +
+  ggrepel::geom_text_repel(size = 4, show.legend = FALSE, max.overlaps = 20, seed = 1) +
+  scale_color_manual(values = c("Illes Balears" = COLOR_BALEARS, "Canarias" = COLOR_CANARIAS,
+                                "Peninsular" = COLOR_PENINSULA), name = NULL) +
+  labs(x = paste0("PC1 — nivel socioeconómico (", es(var_pct[1]), " % de la variación)"),
+       y = paste0("PC2 — economía de servicios y presión sobre la vivienda (", es(var_pct[2]), " %)")) +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.minor = element_blank(), legend.position = "bottom")
+```
+
+`r fig_cap(paste0("Las 17 comunidades autónomas en el plano de los dos primeros componentes principales de los ", n_ok, " indicadores no redundantes."))`
+
+`r tab_cap("Los indicadores que más pesan en cada eje: los que suben cuando el eje sube y los que bajan.")`
+
+```{r tabla-pca}
+cargas <- function(k, n = 7) {
+  l <- sort(pca$rotation[, k])
+  c(sube = paste(rev(names(tail(l, n))), collapse = " · "), baja = paste(names(head(l, n)), collapse = " · "))
+}
+tibble(Eje = c(paste0("PC1 — nivel socioeconómico (", es(var_pct[1]), " %)"),
+               paste0("PC2 — economía de servicios y presión sobre la vivienda (", es(var_pct[2]), " %)")),
+       `Sube con` = c(cargas(1)["sube"], cargas(2)["sube"]),
+       `Baja con` = c(cargas(1)["baja"], cargas(2)["baja"])) %>%
+  gt() %>% estilo_tabla()
+```
+
+**Qué se ve.** El primer eje es el mismo que encontraba el informe principal: el **nivel socioeconómico** (renta, PIB por habitante y esperanza de vida, frente a pobreza y paro). En él, las dos islas están muy lejos: Illes Balears, en la `r ORDINAL[pc_puesto(1, BAL)]` posición de 17, y Canarias, la `r ORDINAL[pc_puesto(1, CAN)]`. El segundo eje reúne el peso del comercio, el transporte y la hostelería y los problemas de vivienda, frente a la industria y la agricultura. Ahí las dos islas están arriba: Illes Balears, la `r ORDINAL[pc_puesto(2, BAL)]`, y Canarias, la `r ORDINAL[pc_puesto(2, CAN)]`, con `r unname(CORTO[names(sort(pca$x[, 2], decreasing = TRUE))[setdiff(1:3, c(pc_puesto(2, BAL), pc_puesto(2, CAN)))]])` entre ellas o junto a ellas. Este eje también va de la mano del crecimiento de la población desde `r ANIO_INI` (correlación de `r es(r_pc2_crec, 2)`), como el segundo eje del informe principal.
+
+Madrid comparte con las islas la parte alta de ese eje por otras razones: también es una economía de servicios con poca industria y vivienda cara, pero de servicios financieros, profesionales y de información, no turísticos.
+
+```{r comprobaciones-pca}
+stopifnot(pc_puesto(2, BAL) <= 3, pc_puesto(2, CAN) <= 3, pc_puesto(1, CAN) >= 16,
+          r_("Paro de larga duración")$puestoC == 1, r_("Empleo parcial involuntario")$puestoC == 1,
+          r_("Fin mes: mucha dificultad")$puestoC == 1, r_("Satisf. vivienda: muy satisf.")$puestoB == 1,
+          r_("VAB: construcción")$puestoB == 1, r_("VAB: actividades inmobiliarias")$puestoB == 1,
+          r_("VAB: AAPP, educación y sanidad")$puestoB == 17,
+          puesto_crec[[BAL]] == 1, puesto_crec[[CAN]] == 2,
+          all(c("Jornada larga 40-48h") %in% duo_islas),
+          # rasgos propios de Illes Balears que el texto da como extremos
+          r_("Morbilidad crónica")$puestoB == 17, r_("Salud: mala")$puestoB == 17,
+          r_("Salud: muy buena")$puestoB == 1, r_("Tasa de empleo")$puestoB == 1,
+          r_("Tasa de criminalidad")$puestoB == 1, r_("Precio compraventa (€/m²)")$puestoB == 1,
+          r_("Precio compraventa (€/m²)")$tipo == "Propio de Illes Balears",
+          # Madrid, entre las tres primeras del eje 2 junto a las islas
+          "13.Madrid,.Comunidad.de" %in% names(sort(pca$x[, 2], decreasing = TRUE))[1:3],
+          # crecimiento canario concentrado en la primera decada
+          with(pob[pob$codigo_ccaa == "05", ], poblacion[anio == 2014] / poblacion[anio == ANIO_INI] >
+                 poblacion[anio == ANIO_POB_FIN] / poblacion[anio == 2014]))
+```
+
+# Conclusiones {#conclusiones}
+
+1. **Hay un perfil común a los dos archipiélagos, y es turístico.** Lo que Illes Balears y Canarias comparten frente a las 15 comunidades peninsulares es, ante todo, la intensidad del turismo en la vivienda (viviendas turísticas y noches vendidas en plataformas, muy por encima de cualquier peninsular) y una economía en la que el comercio, el transporte y la hostelería pesan un tercio y la industria casi nada. En los indicadores que describen ese modelo, las dos islas están entre las parejas de comunidades que más se parecen: la `r ORDINAL[pi_("nuevos")$puesto]` de `r n_pares` con el criterio general y la primera`r ifelse(empate("nuevos", UMBRAL_PROPIO) == "", "", ", empatada,")` con el más exigente.
+
+2. **Ese perfil se nota en la vivienda de quienes viven en ellas.** Los rasgos de calidad de vida que comparten son, sobre todo, de vivienda: gasto elevado, falta de espacio, deficiencias, retrasos en los pagos. Junto con una población que ha crecido más que en ninguna otra comunidad en dos décadas y la compra de vivienda por no residentes, dibujan una presión sobre la vivienda que en la península solo se acerca en Madrid y Cataluña.
+
+3. **En el resto de la calidad de vida, cada isla va por su lado.** En empleo, renta, pobreza y salud, Canarias se parece sobre todo a `r socios(CAN, "icv")$otra[1]` y `r socios(CAN, "icv")$otra[2]`, e Illes Balears a `r socios(BAL, "icv")$otra[1]` y `r socios(BAL, "icv")$otra[2]`. Un mismo modelo económico convive con niveles de vida distintos: el turismo no da el mismo resultado en el empleo y en la renta de los hogares en una isla y en la otra.
+
+4. **Algunos rasgos que parecen insulares no lo son del todo.** La compra de vivienda por no residentes es igual de alta o más en la `r lider("Compras no residentes")` y en `r lider("Compras no residentes", 3)`, y el crecimiento reciente de la población es mayor en la `r lider("Crecimiento de la población")` y en `r lider("Crecimiento de la población", 2)` que en Canarias. La construcción de vivienda por habitante no es un rasgo común: alta en Illes Balears, baja en Canarias. Tampoco lo es el precio: el de compraventa es el más alto de España en Illes Balears, pero Canarias es la `r pc("Precio compraventa (€/m²)")`. La presión que comparten se nota en el gasto y en el espacio de los hogares, más que en el precio por metro cuadrado.
+
+<div class="nota">
+**Límites del estudio.**
+
+- **Dos casos.** Con dos islas no se puede distinguir lo que se debe a la insularidad de lo que se debe al turismo: son, a la vez, los dos territorios más turísticos de España. La comparación con las 136 parejas da una referencia de qué es mucho o poco, pero no es una prueba de causalidad.
+- **Lo que no se mide.** Algunos rasgos propios de la insularidad, como el sobrecoste del transporte o el nivel de precios de cada territorio, no están entre los indicadores. Como advierte el informe principal, el IPC regional corrige la inflación en el tiempo, pero no las diferencias de nivel de precios entre comunidades.
+- **Series cortas o recientes.** Las viviendas turísticas solo tienen datos desde 2021 y las noches en plataformas desde 2018; los años de la pandemia entran en la mediana de los últimos cinco años.
+- **Por residente.** Los indicadores por habitante se calculan sobre la población residente: en las islas, la población presente es mayor, y una parte de la diferencia refleja precisamente eso.
+</div>
+
+# Anexos {-}
+
+## Anexo A. Los indicadores nuevos: fuentes y cálculo {-}
+
+- **Crecimiento de la población.** INE, Estadística Continua de Población, serie desde 1971 (tabla 56940): población residente a 1 de enero. El crecimiento del año *t* es el cambio entre el 1 de enero de *t* y el de *t + 1*. Es una serie homogénea en todo el periodo, sin el salto metodológico de 2021.
+- **Viviendas iniciadas.** Ministerio de Vivienda y Agenda Urbana, estadísticas de vivienda libre (visados de dirección de obra nueva de los colegios de aparejadores) y de vivienda protegida (calificaciones provisionales), en la serie que republica el Instituto Canario de Estadística (ISTAC) para todas las comunidades. Desde 2008; el último año es provisional.
+- **Compras no residentes.** Ministerio de Vivienda y Agenda Urbana, estadística de transacciones inmobiliarias (datos de los notarios), tabla de compraventas de vivienda según la residencia del comprador. Se suman los cuatro trimestres de cada año. *No residente* se refiere a la residencia, no a la nacionalidad: un extranjero que vive en España es residente. Desde 2007.
+- **Viviendas turísticas.** INE, estadística experimental de viviendas turísticas (tabla 39364): viviendas anunciadas en Airbnb, Booking y Vrbo, sin duplicados. Es una foto en una fecha: agosto de 2020 y, después, dos o tres fotos al año. El valor anual es la media de las fotos del año; solo se usan los años con al menos dos (2021-2025).
+- **Noches en plataformas.** Eurostat, conjunto `tour_ce_omn12`: noches pasadas en alojamientos de corta estancia reservados a través de Airbnb, Booking, Expedia y Tripadvisor, por región (NUTS 2, que en España coincide con las comunidades autónomas). Desde 2018.
+- **Peso de cada rama en el VAB.** INE, Contabilidad Regional de España, valor añadido bruto a precios básicos por ramas de actividad, a precios corrientes: la misma tabla de la que sale el PIB por habitante del informe principal. Diez ramas (agregación A10 de la CNAE-2009) que suman el VAB total. Los dos últimos años son estimaciones provisional y de avance.
+- **Por habitante**: entre la población residente a 1 de enero del mismo año.
+
+## Anexo B. Los `r n_ind` indicadores, uno a uno {-}
+
+`r tab_cap(paste0("Los ", n_ind, " indicadores: valor típico (mediana de los últimos cinco años) de cada isla y de las peninsulares, distancia de cada isla a la media peninsular (z) y tipo de rasgo."))`
+
+```{r tabla-anexo}
+out_b <- rasgos %>%
+  mutate(bloque = factor(ifelse(bloque == "nuevo", "Indicadores nuevos", "Indicadores de calidad de vida"),
+                         levels = c("Indicadores de calidad de vida", "Indicadores nuevos")),
+         grupo = paste0(bloque, " · ", dimension)) %>%
+  arrange(bloque, dimension, indicador) %>%
+  transmute(grupo, Indicador = indicador, Unidad = unidad, Años = periodo,
+            `Illes Balears` = round(bal, 2), Canarias = round(can, 2),
+            `Pen. mediana` = round(pen_med, 2), `Pen. mín.` = round(pen_min, 2), `Pen. máx.` = round(pen_max, 2),
+            `z Illes Balears` = round(zB, 2), `z Canarias` = round(zC, 2), Rasgo = tipo)
+out_b %>%
+  gt(groupname_col = "grupo") %>%
+  colorear_z(out_b, c("z Illes Balears", "z Canarias")) %>%
+  colorear_polaridad(out_b) %>%
+  fmt_es() %>%
+  estilo_tabla() %>%
+  tab_source_note(paste0("«Años»: los cinco años de los que sale la mediana. «Pen.»: las 15 comunidades peninsulares. «No cuenta (redundante)»: indicador que se deduce de otros y no entra en los recuentos ni en el análisis de conjunto."))
+```
+
+## Anexo C. Datos y reproducibilidad {-}
+
+**Código y datos del estudio.** El código, los datos de origen y los datos elaborados a partir de ellos están en el repositorio [github.com/lalvarezmat/icv-illes-balears](https://github.com/lalvarezmat/icv-illes-balears), junto con los del informe principal. El código se distribuye con licencia MIT, y el texto, las figuras y los datos elaborados, con licencia CC BY 4.0, salvo los derivados del Colegio de Registradores (el precio de compraventa), que mantienen la licencia ODbL 1.0 de su origen. Los datos de cada fuente conservan sus propias condiciones de reutilización.
+
+**Fuentes de los indicadores nuevos.** Elaboración propia con datos del INE (www.ine.es); del Ministerio de Vivienda y Agenda Urbana; del Instituto Canario de Estadística (ISTAC), que republica la estadística de vivienda iniciada del Ministerio; y de Eurostat. Los cocientes por habitante y los porcentajes del VAB son cálculos propios a partir de esos datos.
+
+Los datos de los `r n_icv` indicadores de calidad de vida son los del informe principal (`INE_ICV_CCAA_Consolidado.xlsx`). Los `r n_nue` nuevos se descargan y se preparan con estos programas, en este orden (cada uno desde su carpeta):
+
+1. `PIB_CCAA/PIB_CCAA_VAB_Ramas.R`: peso de cada rama en el VAB, a partir del fichero de Contabilidad Regional que ya descarga `PIB_CCAA_DataExtraction.R`.
+2. `POBLACION_CCAA/POBLACION_CCAA_DataExtraction.R`: población a 1 de enero y su crecimiento.
+3. `MIVAU/MIVAU_DataExtraction.R`: viviendas iniciadas y compraventas según la residencia del comprador.
+4. `VIVIENDA_TURISTICA/VIVIENDA_TURISTICA_DataExtraction.R`: viviendas turísticas (INE) y noches en plataformas (Eurostat).
+5. `INE_ICV_CCAA/INE_ICV_CCAA_Insulares_Consolidar.R`: calcula los cocientes por habitante y escribe `INE_ICV_CCAA_Insulares_Indicadores.xlsx`, con el mismo formato que el consolidado del informe principal.
+
+Los cuatro primeros son independientes entre sí. Este documento lee los dos ficheros consolidados y la población, y calcula todo lo demás.
